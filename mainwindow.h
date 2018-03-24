@@ -34,7 +34,7 @@ class MainWindow : public QMainWindow
 
     void createMenu();
     void createStatusBar();
-    void addStackedWidgets();
+    void stackedWidgetSetup();
     void selectFirstFrame();
 
 

@@ -44,18 +44,21 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <layout class="QGridLayout" name="gridLayout_3">
+         <layout class="QGridLayout" name="gridLayout_3" columnstretch="1,4,0" columnminimumwidth="0,0,0">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
+          </property>
           <item row="3" column="0">
            <widget class="QLabel" name="iterationLabel">
             <property name="text">
-             <string>Итерации</string>
+             <string>Итерации :</string>
             </property>
            </widget>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="limitLabel">
             <property name="text">
-             <string>Пределы</string>
+             <string>Пределы :</string>
             </property>
            </widget>
           </item>
@@ -87,7 +90,7 @@
             <item>
              <widget class="QLabel" name="bLabel">
               <property name="text">
-               <string>a</string>
+               <string>a :</string>
               </property>
              </widget>
             </item>
@@ -101,7 +104,7 @@
             <item>
              <widget class="QLabel" name="aLabel">
               <property name="text">
-               <string>b</string>
+               <string>b :</string>
               </property>
              </widget>
             </item>
@@ -117,7 +120,7 @@
           <item row="2" column="0">
            <widget class="QLabel" name="functionLabel">
             <property name="text">
-             <string>Формула</string>
+             <string>Формула :</string>
             </property>
            </widget>
           </item>
@@ -130,21 +133,7 @@
              <bool>false</bool>
             </property>
             <layout class="QGridLayout" name="gridLayout_4">
-             <item row="0" column="0">
-              <widget class="QRadioButton" name="leftRectRadioButton">
-               <property name="text">
-                <string>Метод левых прямоугольников</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QRadioButton" name="parabolicRadioButton">
-               <property name="text">
-                <string>Метод парабол</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
+             <item row="3" column="0">
               <widget class="QRadioButton" name="rightRectRadioButton">
                <property name="text">
                 <string>Метод правых прямоугольников</string>
@@ -152,6 +141,27 @@
               </widget>
              </item>
              <item row="1" column="1">
+              <widget class="QRadioButton" name="parabolicRadioButton">
+               <property name="text">
+                <string>Метод парабол</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QRadioButton" name="leftRectRadioButton">
+               <property name="text">
+                <string>Метод левых прямоугольников</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QRadioButton" name="midRectRadioButton">
+               <property name="text">
+                <string>Метод серединных прямоугольников</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
               <widget class="QRadioButton" name="trapezoidRadioButton">
                <property name="text">
                 <string>Метод трапеций</string>
@@ -175,10 +185,17 @@
         <property name="topMargin">
          <number>9</number>
         </property>
-        <item row="0" column="0">
+        <item row="0" column="1">
          <widget class="QLineEdit" name="answerEdit">
           <property name="readOnly">
            <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>∫f(x) =</string>
           </property>
          </widget>
         </item>

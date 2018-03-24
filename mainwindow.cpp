@@ -10,9 +10,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     setMinimumWidth(ui->menu->minimumWidth() + layout()->margin());
 
     createMenu();
-    addStackedWidgets();
+    stackedWidgetSetup();
     selectFirstFrame();
-
 
     createStatusBar();
 }
@@ -114,11 +113,14 @@ void MainWindow::createStatusBar()
     helpButton = new QPushButton("Помощь");
     helpDialogFrame = new HelpDialogFrame;
     ui->statusBar->layout()->addWidget(helpButton);
+    ui->statusBar->layout()->setAlignment(Qt::AlignRight);
     connect(helpButton, SIGNAL(clicked(bool)), SLOT(onHelpButtonClicked()));
 }
 
-void MainWindow::addStackedWidgets()
+void MainWindow::stackedWidgetSetup()
 {
+    ui->stackedWidget->setMaximumHeight(400);
+
     QMap<QTreeWidgetItem*, QWidget*>::iterator iter = itemWidgetMapping->begin();
     while(iter != itemWidgetMapping->end()) {
         ui->stackedWidget->addWidget(iter.value());

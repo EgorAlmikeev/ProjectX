@@ -49,3 +49,11 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui \
     Frames/helpDialogFrame.ui \
     Frames/integralLeftRectFrame.ui
+
+RESOURCES += \
+    res/res.qrc
+
+DISTFILES += \
+    res/icon.icns
+
+macx:ICON = res/icon.icns
