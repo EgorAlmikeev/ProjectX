@@ -138,8 +138,8 @@ static void nextToken(void)
     }
 }
 
-double tryPow(void);
-double tryAdd(void);
+static double tryPow(void);
+static double tryAdd(void);
 
 static int factorial(int n)
 {
