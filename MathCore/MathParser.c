@@ -1,7 +1,5 @@
-//
+//  ProjectX
 //  MathParser.c
-//
-//
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -43,19 +41,19 @@ jmp_buf saveState;// используеться для восстановлен�
 double x = 0;
 int isSyntaxError;
 
-void error(int isSyntaxErr, const char *str)
+static void error(int isSyntaxErr, const char *str)
 {
-	isSyntaxError = isSyntaxErr;
+    isSyntaxError = isSyntaxErr;
     longjmp(saveState, 1);// восстанавливаем состояние
 }
 
-void nextToken(void)
+static void nextToken(void)
 {
     int i;
 
-	prevToken = p;
+    prevToken = p;
 
-	while(*p == ' ')
+    while(*p == ' ')
       p++;
 
     switch(*(p))
@@ -117,15 +115,15 @@ void nextToken(void)
                 i = 0;
                 stringValue[i] = *p;
                 for(; (('a' <= *p) && ('z' >= *p)) || (('A' <= *p) && ('Z' >= *p)) ||
-					  (*p == '_') || (('0' <= *p) && ('9' >= *p)); i++, p++)
-				{
-					stringValue[i] = *p;
-					if(i == 31)
-					{
-					  i++;
-					  break;
-					}
-				}
+                      (*p == '_') || (('0' <= *p) && ('9' >= *p)); i++, p++)
+                {
+                    stringValue[i] = *p;
+                    if(i == 31)
+                    {
+                        i++;
+                        break;
+                    }
+                }
                 stringValue[i] = 0;
                 token = tokenValue;
                 if(*p == '(')
@@ -135,7 +133,7 @@ void nextToken(void)
                 }
             }
             else
-			  error(1, "Unexpected symbol");
+                error(1, "Unexpected symbol");
             break;
     }
 }
@@ -143,20 +141,20 @@ void nextToken(void)
 double tryPow(void);
 double tryAdd(void);
 
-int factorial(int n)
+static int factorial(int n)
 {
     int r;
     for (r = 1; n > 1; r *= (n--));
     return r;
 }
 
-void bracketTest(void)
+static void bracketTest(void)
 {
     if(token == tokenLB)
-		error(1, "Unexpected symbol");
+        error(1, "Unexpected symbol");
 }
 
-boolean compStr(const char *s1, const char *s2)
+static boolean compStr(const char *s1, const char *s2)
 {
     char c1, c2;
     for(;;)
@@ -174,9 +172,9 @@ boolean compStr(const char *s1, const char *s2)
     return (*s1 == 0) && (*s2 == 0);
 }
 
-double tryPrim(void)
+static double tryPrim(void)
 {
-	double left, t;
+    double left, t;
     const char *temp;
 
     nextToken();
@@ -189,7 +187,7 @@ double tryPrim(void)
             nextToken();
             //prevToken = temp;
             if(token == tokenLB)
-				error(1, "Unexpected symbol");
+                error(1, "Unexpected symbol");
             return left;
 
         case tokenSub:
@@ -199,7 +197,7 @@ double tryPrim(void)
             //temp = prevToken;
             left = tryAdd();
             if(token != tokenRB)
-				error(1, "Expected right bracket");
+                error(1, "Expected right bracket");
             nextToken();
             //prevToken = temp;
             //if((token == tokenNumber) || (token == tokenLB) || (token == tokenValue) || (token == tokenFunction))
@@ -209,15 +207,17 @@ double tryPrim(void)
         case tokenValue:
             //temp = prevToken;
             if(compStr(stringValue, "pi"))
-				left = M_PI;
-			else if(compStr(stringValue, "x"))
-				left = x;
+                left = M_PI;
+            else if(compStr(stringValue, "e"))
+                left = M_E;
+            else if(compStr(stringValue, "x"))
+                left = x;
             else
-				error(1, "Identifier not found");
+                error(1, "Identifier not found");
             nextToken();
             //prevToken = temp;
             if((token == tokenNumber) || (token == tokenLB) || (token == tokenValue) || (token == tokenFunction))
-				error(1, "Unexpected symbol");
+                error(1, "Unexpected symbol");
             return left;
 
         case tokenFunction:
@@ -228,25 +228,25 @@ double tryPrim(void)
             else if(compStr(stringValue, "cos"))
             {
                 left = cos(tryAdd());
-			}
-			else if(compStr(stringValue, "asin"))
-			{
-				t = tryAdd();
-				if(fabs(t) > 1.0)
-					error(0, "Bad angle");
-				left = asin(t);
             }
-			else if(compStr(stringValue, "acos"))
-			{
-				t = tryAdd();
-				if(fabs(t) > 1.0)
-					error(0, "Bad angle");
-				left = acos(t);
-			}
-			else if(compStr(stringValue, "atan"))
-			{
-				left = atan(tryAdd());
-			}
+            else if(compStr(stringValue, "asin"))
+            {
+                t = tryAdd();
+                if(fabs(t) > 1.0)
+                    error(0, "Bad angle");
+                left = asin(t);
+            }
+            else if(compStr(stringValue, "acos"))
+            {
+                t = tryAdd();
+                if(fabs(t) > 1.0)
+                    error(0, "Bad angle");
+                left = acos(t);
+            }
+            else if(compStr(stringValue, "atan"))
+            {
+                left = atan(tryAdd());
+            }
             else if(compStr(stringValue, "abs"))
             {
                 left = fabs(tryAdd());
@@ -262,34 +262,34 @@ double tryPrim(void)
             else if(compStr(stringValue, "exp"))
             {
                 left = exp(tryAdd());
-			}
-			else if(compStr(stringValue, "sqrt"))
-			{
-				t = tryAdd();
-				if(t >= 0.0)
-					left = sqrt(t);
-				else
-					error(0, "Negative sqrt");
-			}
+            }
+            else if(compStr(stringValue, "sqrt"))
+            {
+                t = tryAdd();
+                if(t >= 0.0)
+                    left = sqrt(t);
+                else
+                    error(0, "Negative sqrt");
+            }
             else
-				error(1, "Identifier not found");
+                error(1, "Identifier not found");
             if(token != tokenRB)
-				error(1, "Expected right bracket");
+                error(1, "Expected right bracket");
             nextToken();
             if((token == tokenNumber) || (token == tokenLB) || (token == tokenValue) || (token == tokenFunction))
-				error(1, "Unexpected symbol");
+                error(1, "Unexpected symbol");
             return left;
 
         default:
             if(token == tokenEnd)
-				error(1, "Unexpected end");
+                error(1, "Unexpected end");
             else
-				error(1, "Unexpected symbol");
+                error(1, "Unexpected symbol");
             return left;
     }
 }
 
-double tryFact(void)
+static double tryFact(void)
 {
     double left;
 
@@ -301,7 +301,7 @@ double tryFact(void)
         {
             case tokenFactorial:
                 if(left < 0)
-					error(0, "Negative factorial");
+                    error(0, "Negative factorial");
                 left = factorial((int)left);
                 nextToken();
                 break;
@@ -312,7 +312,7 @@ double tryFact(void)
     }
 }
 
-double tryPow(void)
+static double tryPow(void)
 {
     double left;
 
@@ -332,7 +332,7 @@ double tryPow(void)
     }
 }
 
-double tryMul(void)
+static double tryMul(void)
 {
     double left, d;
 
@@ -351,7 +351,7 @@ double tryMul(void)
                 if(d != 0)
                     left = left / d;
                 else
-					error(0, "Division by zero");
+                    error(0, "Division by zero");
                 break;
 
             default:
@@ -360,7 +360,7 @@ double tryMul(void)
     }
 }
 
-double tryAdd(void)
+static double tryAdd(void)
 {
     double left;
 
@@ -388,7 +388,7 @@ double Expression(char *exp)
 {
     double result;
 
-	isSyntaxError = 0;
+    isSyntaxError = 0;
 
     eq = exp;
     p = exp;
@@ -399,7 +399,7 @@ double Expression(char *exp)
             error(1, "Empty String");
         result = tryAdd();
         if(token != tokenEnd)
-			error(1, "Unexpected symbol (end)");
+            error(1, "Unexpected symbol (end)");
         return result;
     }
     else
@@ -408,8 +408,8 @@ double Expression(char *exp)
 
 double FunctionX(char *exp, double x_val)
 {
-	x = x_val;
-	return Expression(exp);
+    x = x_val;
+    return Expression(exp);
 }
 
 int IsSyntaxError(void)
