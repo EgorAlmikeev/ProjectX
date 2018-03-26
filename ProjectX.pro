@@ -30,9 +30,9 @@ SOURCES += main.cpp\
     MathCore/Algorithms/Integral.c \
     Core/CalcThread.cpp \
     Core/Utils.cpp \
-    ThreadClasses/lntegalThreads.cpp \
     Frames/helpDialogFrame.cpp \
-    Frames/integralLeftRectFrame.cpp
+    ThreadClasses/lntegralThreads.cpp \
+    Frames/integralConstStepFrame.cpp
 
 HEADERS  += mainwindow.h \
     MathCore/MathParser.h \
@@ -41,14 +41,14 @@ HEADERS  += mainwindow.h \
     Core/CalcThread.h \
     Core/Utils.h \
     X.h \
-    ThreadClasses/InteralThreads.h \
     Frames/frames.h \
     Frames/helpDialogFrame.h \
-    Frames/integralLeftRectFrame.h
+    ThreadClasses/IntegralThreads.h \
+    Frames/integralConstStepFrame.h
 
 FORMS    += mainwindow.ui \
     Frames/helpDialogFrame.ui \
-    Frames/integralLeftRectFrame.ui
+    Frames/integralConstStepFrame.ui
 
 RESOURCES += \
     res/res.qrc

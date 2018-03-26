@@ -1,8 +1,8 @@
-#include "integralLeftRectFrame.h"
-#include "ui_integralleftrectframe.h"
-#include "ThreadClasses/InteralThreads.h"
+#include "integralConstStepFrame.h"
+#include "ui_integralconststepframe.h"
+#include "ThreadClasses/IntegralThreads.h"
 
-IntegralLeftRectFrame::IntegralLeftRectFrame(QWidget *parent) : FrameThreadHelper(parent), ui(new Ui::IntegralLeftRectFrame)
+IntegralConstStepFrame::IntegralConstStepFrame(QWidget *parent) : FrameThreadHelper(parent), ui(new Ui::IntegralConstStepFrame)
 {
     ui->setupUi(this);
 
@@ -11,12 +11,12 @@ IntegralLeftRectFrame::IntegralLeftRectFrame(QWidget *parent) : FrameThreadHelpe
     QWidget::setTabOrder(ui->functionEdit, ui->iterationSpinBox);
 }
 
-IntegralLeftRectFrame::~IntegralLeftRectFrame()
+IntegralConstStepFrame::~IntegralConstStepFrame()
 {
     delete ui;
 }
 
-void IntegralLeftRectFrame::change(void)
+void IntegralConstStepFrame::change(void)
 {
     int n;
     double a, b;
@@ -63,17 +63,17 @@ void IntegralLeftRectFrame::change(void)
     ui->answerEdit->setText("Calculating...");
 }
 
-void IntegralLeftRectFrame::SetAns(QString ans)
+void IntegralConstStepFrame::SetAns(QString ans)
 {
     ui->answerEdit->setText(ans);
 }
 
-void IntegralLeftRectFrame::onResult(double value)
+void IntegralConstStepFrame::onResult(double value)
 {
     SetAns(QString::number(value));
 }
 
-void IntegralLeftRectFrame::onError(int code)
+void IntegralConstStepFrame::onError(int code)
 {
     if(code == CalcError)
     {
@@ -81,22 +81,22 @@ void IntegralLeftRectFrame::onError(int code)
     }
 }
 
-void IntegralLeftRectFrame::on_functionEdit_textChanged(const QString &arg1)
+void IntegralConstStepFrame::on_functionEdit_textChanged(const QString &arg1)
 {
     change();
 }
 
-void IntegralLeftRectFrame::on_limitAEdit_textChanged(const QString &arg1)
+void IntegralConstStepFrame::on_limitAEdit_textChanged(const QString &arg1)
 {
     change();
 }
 
-void IntegralLeftRectFrame::on_limitBEdit_textChanged(const QString &arg1)
+void IntegralConstStepFrame::on_limitBEdit_textChanged(const QString &arg1)
 {
     change();
 }
 
-void IntegralLeftRectFrame::on_iterationSpinBox_valueChanged(const QString &arg1)
+void IntegralConstStepFrame::on_iterationSpinBox_valueChanged(const QString &arg1)
 {
     change();
 }

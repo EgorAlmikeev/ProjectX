@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>IntegralLeftRectFrame</class>
- <widget class="QWidget" name="IntegralLeftRectFrame">
+ <class>IntegralConstStepFrame</class>
+ <widget class="QWidget" name="IntegralConstStepFrame">
   <property name="geometry">
    <rect>
     <x>0</x>

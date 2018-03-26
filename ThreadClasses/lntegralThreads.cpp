@@ -1,4 +1,4 @@
-#include "InteralThreads.h"
+#include "IntegralThreads.h"
 
 IntLeftRectThread::IntLeftRectThread(QString func, double a, double b, int n)
 {

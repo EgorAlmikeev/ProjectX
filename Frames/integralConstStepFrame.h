@@ -1,22 +1,21 @@
-#ifndef INTEGRALLEFTRECTFRAME_H
-#define INTEGRALLEFTRECTFRAME_H
+#ifndef INTEGRALCONSTSTEPFRAME_H
+#define INTEGRALCONSTSTEPFRAME_H
 
 #include <QWidget>
 #include "X.h"
 
 namespace Ui {
-class IntegralLeftRectFrame;
+    class IntegralConstStepFrame;
 }
-
-class IntegralLeftRectFrame : public FrameThreadHelper
+class IntegralConstStepFrame : public FrameThreadHelper
 {
     Q_OBJECT
 
     void SetAns(QString ans);
 
 public:
-    explicit IntegralLeftRectFrame(QWidget *parent = 0);
-    ~IntegralLeftRectFrame();
+    explicit IntegralConstStepFrame(QWidget *parent = 0);
+    ~IntegralConstStepFrame();
 
 private slots:
     void on_iterationSpinBox_valueChanged(const QString &arg1);
@@ -29,9 +28,9 @@ private slots:
 
 
 private:
-    Ui::IntegralLeftRectFrame * ui;
+    Ui::IntegralConstStepFrame * ui;
 
     void change();
 };
 
-#endif // INTEGRALLEFTRECTFRAME_H
+#endif // INTEGRALCONSTSTEPFRAME_H

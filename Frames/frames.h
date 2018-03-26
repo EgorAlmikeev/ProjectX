@@ -2,7 +2,7 @@
 #define FRAMES_H
 
 //includes all frames
-#include "integralLeftRectFrame.h"
+#include "integralConstStepFrame.h"
 #include "helpDialogFrame.h"
 
 #endif // FRAMES_H
