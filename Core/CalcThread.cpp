@@ -86,3 +86,8 @@ void FrameThreadHelper::killThread()
 {
     end();
 }
+
+void FrameThreadHelper::inputChanged()
+{
+    change();
+}

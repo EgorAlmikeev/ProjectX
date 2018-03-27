@@ -181,6 +181,9 @@
            <property name="text">
             <string>Метод левых прямоугольников</string>
            </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
         </layout>
@@ -212,7 +215,7 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>27</height>
+            <height>0</height>
            </size>
           </property>
           <property name="autoFillBackground">
@@ -249,6 +252,9 @@
          <widget class="QLineEdit" name="functionEdit">
           <property name="autoFillBackground">
            <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>sin(x) * cos(x)</string>
           </property>
           <property name="frame">
            <bool>false</bool>
@@ -300,6 +306,9 @@
           <property name="autoFillBackground">
            <bool>false</bool>
           </property>
+          <property name="text">
+           <string>1</string>
+          </property>
           <property name="frame">
            <bool>false</bool>
           </property>
@@ -309,6 +318,9 @@
          <widget class="QLineEdit" name="limitBEdit">
           <property name="autoFillBackground">
            <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>2</string>
           </property>
           <property name="frame">
            <bool>false</bool>

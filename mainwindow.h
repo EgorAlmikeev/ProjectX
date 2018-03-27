@@ -18,8 +18,6 @@ class MainWindow : public QMainWindow
 
 
     QMap<QTreeWidgetItem*, QWidget *> * itemWidgetMapping;
-    QPalette * darkTheme;
-    QPalette * lightTheme;
 
     typedef struct
     {
@@ -37,10 +35,7 @@ class MainWindow : public QMainWindow
     void createMenu();
     void stackedWidgetSetup();
     void selectFirstFrame();
-    void createThemes();
     void createHelpDialog();
-
-    void setTheme(QPalette theme);
 
 
 public:
@@ -56,8 +51,6 @@ private slots:
     void on_menu_collapsed(const QModelIndex &index);
 
     void on_helpButton_clicked();
-
-    void changeTheme(int);
 
 private:
     Ui::MainWindow *ui;

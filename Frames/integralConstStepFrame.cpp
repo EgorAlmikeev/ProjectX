@@ -8,6 +8,14 @@ IntegralConstStepFrame::IntegralConstStepFrame(QWidget *parent) : FrameThreadHel
     QWidget::setTabOrder(ui->limitAEdit, ui->limitBEdit);
     QWidget::setTabOrder(ui->limitBEdit, ui->functionEdit);
     QWidget::setTabOrder(ui->functionEdit, ui->iterationSpinBox);
+
+    connect(ui->leftRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
+    connect(ui->rightRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
+    connect(ui->midRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
+    connect(ui->trapezoidRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
+    connect(ui->parabolicRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
+
+    change();
 }
 
 IntegralConstStepFrame::~IntegralConstStepFrame()
@@ -16,11 +24,11 @@ IntegralConstStepFrame::~IntegralConstStepFrame()
 }
 
 void IntegralConstStepFrame::change(void)
-{
+{    
     int n;
     double a, b;
     QString func;
-    ModeInt mode;
+    ModeInt mode = ModeIntLeftRect; //default mode
 
     cancel();
 

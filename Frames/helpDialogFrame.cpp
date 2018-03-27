@@ -6,8 +6,6 @@ HelpDialogFrame::HelpDialogFrame(QWidget *parent) :
     ui(new Ui::HelpDialogFrame)
 {
     ui->setupUi(this);
-
-    connect(ui->comboBox, SIGNAL(activated(int)), SIGNAL(themeChanged(int)));
 }
 
 HelpDialogFrame::~HelpDialogFrame()

@@ -12,8 +12,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     createMenu();
     stackedWidgetSetup();
     selectFirstFrame();
-
-    createThemes();
 }
 
 MainWindow::~MainWindow()
@@ -143,33 +141,6 @@ void MainWindow::on_menu_collapsed(const QModelIndex &index)
     ui->menu->resizeColumnToContents(index.column());
 }
 
-void MainWindow::createThemes()
-{
-    darkTheme = new QPalette;
-
-    QColor text = QColor(35, 92, 146);
-    QColor background = QColor(33, 33, 33);
-    QColor edit = QColor(40, 40, 40);
-
-    darkTheme->setColor(QPalette::Window, background);
-    darkTheme->setColor(QPalette::WindowText, text);
-    darkTheme->setColor(QPalette::Text, text);
-    darkTheme->setColor(QPalette::Foreground, text);
-    darkTheme->setColor(QPalette::Base, edit);
-    darkTheme->setColor(QPalette::Shadow, text);
-    darkTheme->setColor(QPalette::Midlight, text);
-    darkTheme->setColor(QPalette::Dark, text);
-    darkTheme->setColor(QPalette::Highlight, text);
-    darkTheme->setColor(QPalette::HighlightedText, background);
-    darkTheme->setColor(QPalette::Button, background);
-    darkTheme->setColor(QPalette::ButtonText, text);
-
-    text = QColor(0, 0, 0);
-    background = QColor(231, 231, 231);
-
-    lightTheme = new QPalette(this->palette());
-}
-
 void MainWindow::on_helpButton_clicked()
 {
     createHelpDialog();
@@ -183,19 +154,4 @@ void MainWindow::createHelpDialog()
         helpDialogFrame = new HelpDialogFrame;
 
     connect(helpDialogFrame, SIGNAL(themeChanged(int)), SLOT(changeTheme(int)));
-}
-
-void MainWindow::changeTheme(int index)
-{
-    switch(index)
-    {
-    case 0 : setTheme(*lightTheme); break;
-    case 1 : setTheme(*darkTheme); break;
-    }
-}
-
-void MainWindow::setTheme(QPalette theme)
-{
-    setPalette(theme);
-    helpDialogFrame->setPalette(theme);
 }

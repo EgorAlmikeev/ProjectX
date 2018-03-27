@@ -157,7 +157,7 @@
        <widget class="QPushButton" name="helpButton">
         <property name="maximumSize">
          <size>
-          <width>70</width>
+          <width>100</width>
           <height>16777215</height>
          </size>
         </property>
@@ -168,7 +168,7 @@
          <string>Помощь</string>
         </property>
         <property name="flat">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
        </widget>
       </item>
