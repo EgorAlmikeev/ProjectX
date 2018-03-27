@@ -24,20 +24,21 @@ void IntThread::run()
         case ModeIntRightRect:
             ans = IntRightRect(QStrToCStr(func), a, b, n);
             break;
-            
-        case ModeIntMidRect:
+
+        case ModeIntMedianRect:
             ans = IntMedianRect(QStrToCStr(func), a, b, n);
             break;
             
-        case ModeIntTrapezoid:
+        case ModeIntTrapeze:
             ans = IntTrapeze(QStrToCStr(func), a, b, n);
             break;
             
-        case ModeIntParabolic:
+        case ModeIntSimpson:
             ans = IntSimpson(QStrToCStr(func), a, b, n);
             break;
         
-        default:;
+        default:
+            ans = NAN;
     }
 
     if(IsErrorCalc())

@@ -5,9 +5,9 @@
 
 #define ModeIntLeftRect 0
 #define ModeIntRightRect 1
-#define ModeIntMidRect 2
-#define ModeIntTrapezoid 3
-#define ModeIntParabolic 4
+#define ModeIntMedianRect 2
+#define ModeIntTrapeze 3
+#define ModeIntSimpson 4
 
 typedef int ModeInt;
 

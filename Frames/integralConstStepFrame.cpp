@@ -91,11 +91,11 @@ ModeInt IntegralConstStepFrame::getMode()
     else if(ui->rightRectRadioButton->isChecked())
         return ModeIntRightRect;
     else if(ui->midRectRadioButton)
-        return ModeIntMidRect;
+        return ModeIntMedianRect;
     else if(ui->trapezoidRadioButton)
-        return ModeIntTrapezoid;
+        return ModeIntTrapeze;
     else if(ui->parabolicRadioButton)
-        return ModeIntParabolic;
+        return ModeIntSimpson;
 }
 
 void IntegralConstStepFrame::on_functionEdit_textChanged(const QString &arg1)

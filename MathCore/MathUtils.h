@@ -61,11 +61,26 @@
 
 #define ResultCode int
 
-//#ifndef NAN
-//    #define NAN (0.0/0.0)
-//#endif
+#ifndef NAN
+    #define NAN (0.0/0.0)
+#endif
 
 #define IsNan(v) ((v) != (v))
+
+#define CheckSyntax() \
+    do{ \
+        if(IsSyntaxError()) \
+        { \
+            ErrorCalc(); \
+            return NAN; \
+        } \
+    }while(0)
+
+#define CheckCancel() \
+    do{ \
+        if(IsCancel()) \
+            return NAN; \
+    }while(0)
 
 // начало вычисления, необходимо вызвать перед циклом вычислений
 void BeginCalc(void);
