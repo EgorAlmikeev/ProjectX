@@ -120,7 +120,7 @@ double IntTrapeze(char* func, double a, double b, int n)
             return NAN;
     }
 
-  return h * ((y1 + y2) / 2 + s);
+  return h * ((y1 + y2) / (double)2 + s);
 }
 
 double IntSimpson(char* func, double a, double b, int n)
@@ -149,5 +149,5 @@ double IntSimpson(char* func, double a, double b, int n)
             return NAN;
     }
 
-  return s * (h / 3);
+  return s * (h / (double)3);
 }
