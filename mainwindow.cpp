@@ -152,6 +152,4 @@ void MainWindow::createHelpDialog()
 {
     if(helpDialogFrame == nullptr)
         helpDialogFrame = new HelpDialogFrame;
-
-    connect(helpDialogFrame, SIGNAL(themeChanged(int)), SLOT(changeTheme(int)));
 }
