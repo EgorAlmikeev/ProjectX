@@ -11,7 +11,7 @@
 
 typedef int ModeInt;
 
-class IntLeftRectThread : public BaseCalcThread
+class IntThread : public BaseCalcThread
 {
     Q_OBJECT
 
