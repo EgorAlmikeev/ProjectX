@@ -255,6 +255,18 @@ static double tryPrim(void)
             {
                 left = tan(tryAdd());
             }
+            else if(compStr(stringValue, "ctan"))
+            {
+                t = tryAdd();
+                if(sin(t) == 0.0))
+                    error(0, "Bad angle");
+                left = cos(t) / sin(t);
+            }
+            else if(compStr(stringValue, "actan"))
+            {
+                t = tryAdd();
+                left = M_PI / 2.0 - atan(t);
+            }
             else if(compStr(stringValue, "log"))
             {
                 left = log(tryAdd());
