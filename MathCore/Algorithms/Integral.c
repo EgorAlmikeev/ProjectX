@@ -95,17 +95,17 @@ double IntTrapeze(char* func, double a, double b, int n)
 
     y1 = FunctionX(func, a);
     if(IsSyntaxError())
-        {
-            ErrorCalc();
-            return NAN;
-        }
+    {
+        ErrorCalc();
+        return NAN;
+    }
     
     y2 = FunctionX(func, b);
     if(IsSyntaxError())
-        {
-            ErrorCalc();
-            return NAN;
-        }
+    {
+        ErrorCalc();
+        return NAN;
+    }
 
     x = a + h;
 
