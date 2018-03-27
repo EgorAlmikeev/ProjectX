@@ -67,20 +67,20 @@
 
 #define IsNan(v) ((v) != (v))
 
-#CheckSyntax \
+#define CheckSyntax() \
     do{ \
         if(IsSyntaxError()) \
         { \
             ErrorCalc(); \
             return NAN; \
         } \
-    }while(0);
+    }while(0)
 
-#CheckCancel \
+#define CheckCancel() \
     do{ \
         if(IsCancel()) \
             return NAN; \
-    }while(0);
+    }while(0)
 
 // начало вычисления, необходимо вызвать перед циклом вычислений
 void BeginCalc(void);
