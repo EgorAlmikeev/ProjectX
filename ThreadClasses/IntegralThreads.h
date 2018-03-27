@@ -22,8 +22,7 @@ class IntLeftRectThread : public BaseCalcThread
     ModeInt mode;
 
 public :
-    // rename me and add "mode" before "n" 
-    IntLeftRectThread(QString func, double a, double b, int n);
+    IntThread(QString func, double a, double b, int n, ModeInt mode);
     void run();
 };
 #endif // INTEGRAL_THREADS_H
