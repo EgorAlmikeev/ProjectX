@@ -15,6 +15,10 @@ public:
     explicit HelpDialogFrame(QWidget *parent = 0);
     ~HelpDialogFrame();
 
+signals:
+
+    void themeChanged(int);
+
 private:
     Ui::HelpDialogFrame *ui;
 };

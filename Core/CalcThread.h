@@ -33,8 +33,6 @@ class FrameThreadHelper : public QWidget //от эого класса насле
 
 protected:
 
-    QPalette * errorPalette;
-    QPalette * normalPalette;
     QTimer * timeoutTimer;
 
 public:

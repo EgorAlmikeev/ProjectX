@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     stackedWidgetSetup();
     selectFirstFrame();
 
-    createStatusBar();
+    createThemes();
 }
 
 MainWindow::~MainWindow()
@@ -91,30 +91,20 @@ void MainWindow::createMenu()
 
     for(int i = 0; i < menuItemsCount; ++i)
     {
-        QTreeWidgetItem * nextHeader = new QTreeWidgetItem(ui->menu);
-        nextHeader->setText(0, menu[i].name);
-        nextHeader->setFlags(nextHeader->flags() & ~Qt::ItemIsSelectable);
+        QTreeWidgetItem * header = new QTreeWidgetItem(ui->menu);
+        header->setText(0, menu[i].name);
+        header->setFlags(header->flags() & ~Qt::ItemIsSelectable);
 
         PMember members = menu[i].members;
 
         for(int j = 0; j < menu[i].membersCount; ++j) {
-            QTreeWidgetItem * nextMember = new QTreeWidgetItem(nextHeader);
-            nextMember->setText(0, members[j].name);
-            itemWidgetMapping->insert(nextMember, members[j].widget);
+            QTreeWidgetItem * member = new QTreeWidgetItem(header);
+            member->setText(0, members[j].name);
+            itemWidgetMapping->insert(member, members[j].widget);
         }
     }
 
     ui->menu->expandAll();
-
-}
-
-void MainWindow::createStatusBar()
-{
-    helpButton = new QPushButton("Помощь");
-    helpDialogFrame = new HelpDialogFrame;
-    ui->statusBar->layout()->addWidget(helpButton);
-    ui->statusBar->layout()->setAlignment(Qt::AlignRight);
-    connect(helpButton, SIGNAL(clicked(bool)), SLOT(onHelpButtonClicked()));
 }
 
 void MainWindow::stackedWidgetSetup()
@@ -153,9 +143,59 @@ void MainWindow::on_menu_collapsed(const QModelIndex &index)
     ui->menu->resizeColumnToContents(index.column());
 }
 
-void MainWindow::onHelpButtonClicked()
+void MainWindow::createThemes()
 {
-    ui->statusBar->repaint();
+    darkTheme = new QPalette;
+
+    QColor text = QColor(35, 92, 146);
+    QColor background = QColor(33, 33, 33);
+    QColor edit = QColor(40, 40, 40);
+
+    darkTheme->setColor(QPalette::Window, background);
+    darkTheme->setColor(QPalette::WindowText, text);
+    darkTheme->setColor(QPalette::Text, text);
+    darkTheme->setColor(QPalette::Foreground, text);
+    darkTheme->setColor(QPalette::Base, edit);
+    darkTheme->setColor(QPalette::Shadow, text);
+    darkTheme->setColor(QPalette::Midlight, text);
+    darkTheme->setColor(QPalette::Dark, text);
+    darkTheme->setColor(QPalette::Highlight, text);
+    darkTheme->setColor(QPalette::HighlightedText, background);
+    darkTheme->setColor(QPalette::Button, background);
+    darkTheme->setColor(QPalette::ButtonText, text);
+
+    text = QColor(0, 0, 0);
+    background = QColor(231, 231, 231);
+
+    lightTheme = new QPalette(this->palette());
+}
+
+void MainWindow::on_helpButton_clicked()
+{
+    createHelpDialog();
     helpDialogFrame->show();
     helpDialogFrame->setFocus();
+}
+
+void MainWindow::createHelpDialog()
+{
+    if(helpDialogFrame == nullptr)
+        helpDialogFrame = new HelpDialogFrame;
+
+    connect(helpDialogFrame, SIGNAL(themeChanged(int)), SLOT(changeTheme(int)));
+}
+
+void MainWindow::changeTheme(int index)
+{
+    switch(index)
+    {
+    case 0 : setTheme(*lightTheme); break;
+    case 1 : setTheme(*darkTheme); break;
+    }
+}
+
+void MainWindow::setTheme(QPalette theme)
+{
+    setPalette(theme);
+    helpDialogFrame->setPalette(theme);
 }

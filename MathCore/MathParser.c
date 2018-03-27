@@ -258,7 +258,7 @@ static double tryPrim(void)
             else if(compStr(stringValue, "ctan"))
             {
                 t = tryAdd();
-                if(sin(t) == 0.0))
+                if((sin(t) == 0.0))
                     error(0, "Bad angle");
                 left = cos(t) / sin(t);
             }

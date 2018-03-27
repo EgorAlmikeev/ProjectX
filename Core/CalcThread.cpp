@@ -20,14 +20,7 @@ void BaseCalcThread::sendResult(double value)
 FrameThreadHelper::FrameThreadHelper(QWidget * parent) : QWidget(parent)
 {
     isTimeOutUse = false;
-
     thread = nullptr;
-
-    errorPalette = new QPalette;
-    normalPalette = new QPalette;
-
-    errorPalette->setColor(QPalette::Text, Qt::red);
-    normalPalette->setColor(QPalette::Text, Qt::black);
 
     timeoutTimer = new QTimer(this);
     connect(timeoutTimer, SIGNAL(timeout()), SLOT(onTimeout()));
