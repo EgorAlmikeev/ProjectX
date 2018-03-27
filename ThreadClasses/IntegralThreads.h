@@ -3,6 +3,14 @@
 
 #include "X.h"
 
+#define ModeIntLeftRect 0
+#define ModeIntRightRect 1
+#define ModeIntMedianRect 2
+#define ModeIntTrapeze 3
+#define ModeIntSimpson 4
+
+typedef int ModeInt;
+
 class IntLeftRectThread : public BaseCalcThread
 {
     Q_OBJECT
@@ -11,8 +19,10 @@ class IntLeftRectThread : public BaseCalcThread
     double  a;
     double  b;
     int     n;
+    ModeInt mode;
 
 public :
+    // rename me and add "mode" before "n" 
     IntLeftRectThread(QString func, double a, double b, int n);
     void run();
 };
