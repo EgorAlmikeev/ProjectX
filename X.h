@@ -7,9 +7,14 @@
 
 //  тут все C MathCore и Algorithms заголовки
 extern "C" {
-    #include "MathCore/Algorithms/Integral.h"
+    
+    // core math
     #include "MathCore/MathParser.h"
     #include "MathCore/MathUtils.h"
+    
+    // algorithms
+    // please add new algotithm there:
+    #include "MathCore/Algorithms/Integral.h"
 }
 
 #endif // X_H
