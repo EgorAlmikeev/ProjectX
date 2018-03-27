@@ -13,29 +13,32 @@ void IntThread::run()
 {
     BaseCalcThread::run();
     
+    double ans;
+    
     switch(mode)
     {
         case ModeIntLeftRect:
-            double ans = IntLeftRect(QStrToCStr(func), a, b, n);
+            ans = IntLeftRect(QStrToCStr(func), a, b, n);
             break;
        
         case ModeIntRightRect:
-            double ans = IntRightRect(QStrToCStr(func), a, b, n);
+            ans = IntRightRect(QStrToCStr(func), a, b, n);
             break;
             
         case ModeIntMedianRect:
-            double ans = IntMedianRect(QStrToCStr(func), a, b, n);
+            ans = IntMedianRect(QStrToCStr(func), a, b, n);
             break;
             
         case ModeIntTrapeze:
-            double ans = IntTrapeze(QStrToCStr(func), a, b, n);
+            ans = IntTrapeze(QStrToCStr(func), a, b, n);
             break;
             
         case ModeIntSimpson:
-            double ans = IntSimpson(QStrToCStr(func), a, b, n);
+            ans = IntSimpson(QStrToCStr(func), a, b, n);
             break;
         
-        default:;
+        default:
+            ans = NAN;
     }
 
     if(IsErrorCalc())
