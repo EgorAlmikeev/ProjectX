@@ -1,6 +1,6 @@
 #include "IntegralThreads.h"
 
-IntThread::IntThread(QString func, double a, double b, int n, IntMode mode)
+IntThread::IntThread(QString func, double a, double b, int n, ModeInt mode)
 {
     this->func = func;
     this->a = a;
@@ -13,26 +13,28 @@ void IntThread::run()
 {
     BaseCalcThread::run();
     
+    double ans;
+
     switch(mode)
     {
         case ModeIntLeftRect:
-            double ans = IntLeftRect(QStrToCStr(func), a, b, n);
+            ans = IntLeftRect(QStrToCStr(func), a, b, n);
             break;
        
         case ModeIntRightRect:
-            double ans = IntRightRect(QStrToCStr(func), a, b, n);
+            ans = IntRightRect(QStrToCStr(func), a, b, n);
             break;
             
-        case ModeIntMedianRect:
-            double ans = IntMedianRect(QStrToCStr(func), a, b, n);
+        case ModeIntMidRect:
+            ans = IntMedianRect(QStrToCStr(func), a, b, n);
             break;
             
-        case ModeIntTrapeze:
-            double ans = IntTrapeze(QStrToCStr(func), a, b, n);
+        case ModeIntTrapezoid:
+            ans = IntTrapeze(QStrToCStr(func), a, b, n);
             break;
             
-        case ModeIntSimpson:
-            double ans = IntSimpson(QStrToCStr(func), a, b, n);
+        case ModeIntParabolic:
+            ans = IntSimpson(QStrToCStr(func), a, b, n);
             break;
         
         default:;

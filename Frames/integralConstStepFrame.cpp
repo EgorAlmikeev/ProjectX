@@ -1,6 +1,5 @@
 #include "integralConstStepFrame.h"
 #include "ui_integralconststepframe.h"
-#include "ThreadClasses/IntegralThreads.h"
 
 IntegralConstStepFrame::IntegralConstStepFrame(QWidget *parent) : FrameThreadHelper(parent), ui(new Ui::IntegralConstStepFrame)
 {
@@ -21,26 +20,27 @@ void IntegralConstStepFrame::change(void)
     int n;
     double a, b;
     QString func;
+    ModeInt mode;
 
     cancel();
 
     a = Expression(QStrToCStr(ui->limitAEdit->text()));
     if(IsNan(a))
     {
-        SetAns("Неверный параметр a");
+        showAnswer("Неверный параметр a");
         return;
     }
 
     b = Expression(QStrToCStr(ui->limitBEdit->text()));
     if(IsNan(b))
     {
-        SetAns("Неверный параметр b");
+        showAnswer("Неверный параметр b");
         return;
     }
 
     if(a == b)
     {
-        SetAns("a не должна быть равна b");
+        showAnswer("a не должна быть равна b");
         return;
     }
 
@@ -48,12 +48,15 @@ void IntegralConstStepFrame::change(void)
 
     if(n <= 0)
     {
-        SetAns("n должна быть больше 0");
+        showAnswer("n должна быть больше 0");
         return;
     }
 
     func = ui->functionEdit->text();
-    setThread(new IntLeftRectThread(func, a, b, n));
+
+    mode = getMode();
+
+    setThread(new IntThread(func, a, b, n, mode));
 
     connect(getThread(), SIGNAL(sendResultSignal(double)), SLOT(onResult(double)));
     connect(getThread(), SIGNAL(sendErrorSignal(int)), SLOT(onError(int)));
@@ -63,22 +66,36 @@ void IntegralConstStepFrame::change(void)
     ui->answerEdit->setText("Calculating...");
 }
 
-void IntegralConstStepFrame::SetAns(QString ans)
+void IntegralConstStepFrame::showAnswer(QString ans)
 {
     ui->answerEdit->setText(ans);
 }
 
 void IntegralConstStepFrame::onResult(double value)
 {
-    SetAns(QString::number(value));
+    showAnswer(QString::number(value));
 }
 
 void IntegralConstStepFrame::onError(int code)
 {
     if(code == CalcError)
     {
-        SetAns("Ошибка в функции!");
+        showAnswer("Ошибка в функции!");
     }
+}
+
+ModeInt IntegralConstStepFrame::getMode()
+{
+    if(ui->leftRectRadioButton->isChecked())
+        return ModeIntLeftRect;
+    else if(ui->rightRectRadioButton->isChecked())
+        return ModeIntRightRect;
+    else if(ui->midRectRadioButton)
+        return ModeIntMidRect;
+    else if(ui->trapezoidRadioButton)
+        return ModeIntTrapezoid;
+    else if(ui->parabolicRadioButton)
+        return ModeIntParabolic;
 }
 
 void IntegralConstStepFrame::on_functionEdit_textChanged(const QString &arg1)

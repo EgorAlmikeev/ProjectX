@@ -1,6 +1,7 @@
 #ifndef INTEGRALCONSTSTEPFRAME_H
 #define INTEGRALCONSTSTEPFRAME_H
 
+#include "ThreadClasses/IntegralThreads.h"
 #include <QWidget>
 #include "X.h"
 
@@ -11,7 +12,9 @@ class IntegralConstStepFrame : public FrameThreadHelper
 {
     Q_OBJECT
 
-    void SetAns(QString ans);
+    void showAnswer(QString ans);
+    ModeInt getMode(void);
+
 
 public:
     explicit IntegralConstStepFrame(QWidget *parent = 0);
