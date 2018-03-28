@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>420</height>
+    <width>901</width>
+    <height>491</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -31,14 +31,14 @@
      <number>6</number>
     </property>
     <property name="bottomMargin">
-     <number>0</number>
+     <number>6</number>
     </property>
     <item row="0" column="1">
      <layout class="QGridLayout" name="gridLayout_3">
       <property name="verticalSpacing">
        <number>0</number>
       </property>
-      <item row="0" column="0">
+      <item row="2" column="0">
        <widget class="QTreeWidget" name="menu">
         <property name="enabled">
          <bool>true</bool>
@@ -140,7 +140,7 @@
         </column>
        </widget>
       </item>
-      <item row="0" column="1" alignment="Qt::AlignTop">
+      <item row="2" column="1" alignment="Qt::AlignTop">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="autoFillBackground">
          <bool>true</bool>
@@ -153,19 +153,19 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
+      <item row="0" column="0">
        <layout class="QGridLayout" name="gridLayout_2">
         <property name="leftMargin">
          <number>0</number>
         </property>
         <property name="topMargin">
-         <number>4</number>
+         <number>0</number>
         </property>
         <property name="rightMargin">
          <number>0</number>
         </property>
         <property name="bottomMargin">
-         <number>4</number>
+         <number>2</number>
         </property>
         <property name="spacing">
          <number>0</number>
@@ -197,6 +197,40 @@
         </item>
        </layout>
       </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="Line" name="line">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>7</height>
+         </size>
+        </property>
+        <property name="midLineWidth">
+         <number>0</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="frameName">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgba(0, 0, 0, 0.5)</string>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
    </layout>
@@ -206,7 +240,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>901</width>
      <height>17</height>
     </rect>
    </property>
