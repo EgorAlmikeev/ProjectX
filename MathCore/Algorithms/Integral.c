@@ -14,17 +14,12 @@ double IntLeftRect(char* func, double a, double b, int n)
     while(x < b)
     {
         fx = FunctionX(func, x);
-        if(IsSyntaxError())
-        {
-            ErrorCalc();
-            return NAN;
-        }
+        CheckSyntax();
 
         s = s + fx;
         x = x + h;
 
-        if(IsCancel())
-            return NAN;
+        CheckCancel();
     }
 
   return h * s;
@@ -42,17 +37,12 @@ double IntRightRect(char* func, double a, double b, int n)
     while(x < b + h)
     {
         fx = FunctionX(func, x);
-        if(IsSyntaxError())
-        {
-            ErrorCalc();
-            return NAN;
-        }
+        CheckSyntax();
 
         s = s + fx;
         x = x + h;
 
-        if(IsCancel())
-            return NAN;
+        CheckCancel();
     }
 
   return h * s;
@@ -70,17 +60,12 @@ double IntMedianRect(char* func, double a, double b, int n)
     while(x < b)
     {
         fx = FunctionX(func, x);
-        if(IsSyntaxError())
-        {
-            ErrorCalc();
-            return NAN;
-        }
+        CheckSyntax();
 
         s = s + fx;
         x = x + h;
 
-        if(IsCancel())
-            return NAN;
+        CheckCancel();
     }
 
   return h * s;
@@ -93,36 +78,24 @@ double IntTrapeze(char* func, double a, double b, int n)
 
     s = 0;
 
+    h = (b - a) / (double)n;
+
     y1 = FunctionX(func, a);
-    if(IsSyntaxError())
-    {
-        ErrorCalc();
-        return NAN;
-    }
+    CheckSyntax();
     
     y2 = FunctionX(func, b);
-    if(IsSyntaxError())
-    {
-        ErrorCalc();
-        return NAN;
-    }
+    CheckSyntax();
 
     x = a + h;
-
     while(x < b)
     {
         fx = FunctionX(func, x);
-        if(IsSyntaxError())
-        {
-            ErrorCalc();
-            return NAN;
-        }
+        CheckSyntax();
 
         s = s + fx;
         x = x + h;
 
-        if(IsCancel())
-            return NAN;
+        CheckCancel();
     }
 
   return h * ((y1 + y2) / (double)2 + s);
@@ -142,16 +115,10 @@ double IntSimpson(char* func, double a, double b, int n)
     {
         s = s + FunctionX(func, (a + (i + 1) * h)) + FunctionX(func, (a + (i - 1) * h));// s1
         s = s + 4 * FunctionX(func, (a + i * h));// s2
-
-        if(IsSyntaxError())
-        {
-            ErrorCalc();
-            return NAN;
-        }
+        CheckSyntax();
 
         i = i + 2;
-        if(IsCancel())
-            return NAN;
+        CheckCancel();
     }
 
   return s * (h / (double)3);

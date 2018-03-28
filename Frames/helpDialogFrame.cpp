@@ -1,5 +1,5 @@
 #include "helpDialogFrame.h"
-#include "ui_helpdialogframe.h"
+#include "ui_helpDialogFrame.h"
 
 HelpDialogFrame::HelpDialogFrame(QWidget *parent) :
     QDialog(parent),

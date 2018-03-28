@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>487</width>
-    <height>328</height>
+    <width>605</width>
+    <height>375</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -23,12 +23,6 @@
    <size>
     <width>0</width>
     <height>0</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>16777215</width>
-    <height>328</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -53,50 +47,6 @@
    <property name="verticalSpacing">
     <number>6</number>
    </property>
-   <item row="2" column="0">
-    <widget class="QGroupBox" name="outputGroupBox">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="autoFillBackground">
-      <bool>false</bool>
-     </property>
-     <property name="title">
-      <string>Ответ</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_2">
-      <property name="topMargin">
-       <number>9</number>
-      </property>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>∫f(x) =</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="answerEdit">
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="frame">
-         <bool>true</bool>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
    <item row="0" column="0">
     <widget class="QGroupBox" name="inputGroupBox">
      <property name="sizePolicy">
@@ -112,7 +62,7 @@
       <string>Входные данные</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
+      <item alignment="Qt::AlignTop">
        <widget class="QGroupBox" name="methodGroupBox">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -124,7 +74,7 @@
          <bool>false</bool>
         </property>
         <property name="title">
-         <string>Метод</string>
+         <string>Метод:</string>
         </property>
         <property name="flat">
          <bool>false</bool>
@@ -133,37 +83,7 @@
          <property name="leftMargin">
           <number>12</number>
          </property>
-         <item row="3" column="1">
-          <widget class="QRadioButton" name="trapezoidRadioButton">
-           <property name="autoFillBackground">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Метод трапеций</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QRadioButton" name="parabolicRadioButton">
-           <property name="autoFillBackground">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Метод парабол</string>
-           </property>
-          </widget>
-         </item>
          <item row="3" column="0">
-          <widget class="QRadioButton" name="rightRectRadioButton">
-           <property name="autoFillBackground">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Метод правых прямоугольников</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
           <widget class="QRadioButton" name="midRectRadioButton">
            <property name="autoFillBackground">
             <bool>false</bool>
@@ -173,7 +93,17 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="0">
+         <item row="4" column="0">
+          <widget class="QRadioButton" name="rightRectRadioButton">
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Метод правых прямоугольников</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
           <widget class="QRadioButton" name="leftRectRadioButton">
            <property name="autoFillBackground">
             <bool>false</bool>
@@ -183,6 +113,26 @@
            </property>
            <property name="checked">
             <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QRadioButton" name="parabolicRadioButton">
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Метод парабол</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QRadioButton" name="trapezoidRadioButton">
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Метод трапеций</string>
            </property>
           </widget>
          </item>
@@ -244,7 +194,7 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>Формула :</string>
+           <string>Формула:</string>
           </property>
          </widget>
         </item>
@@ -254,7 +204,7 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>sin(x) * cos(x)</string>
+           <string>sin(x)</string>
           </property>
           <property name="frame">
            <bool>true</bool>
@@ -267,7 +217,7 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>b :</string>
+           <string>b:</string>
           </property>
          </widget>
         </item>
@@ -277,7 +227,7 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>Итерации :</string>
+           <string>Итерации:</string>
           </property>
          </widget>
         </item>
@@ -287,7 +237,7 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>Пределы :</string>
+           <string>Пределы:</string>
           </property>
          </widget>
         </item>
@@ -297,7 +247,7 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>a :</string>
+           <string>a:</string>
           </property>
          </widget>
         </item>
@@ -307,7 +257,7 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>1</string>
+           <string>0</string>
           </property>
           <property name="frame">
            <bool>true</bool>
@@ -320,7 +270,7 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>2</string>
+           <string>pi</string>
           </property>
           <property name="frame">
            <bool>true</bool>
@@ -332,14 +282,56 @@
      </layout>
     </widget>
    </item>
+   <item row="2" column="0" alignment="Qt::AlignTop">
+    <widget class="QGroupBox" name="outputGroupBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="title">
+      <string>Ответ</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <property name="topMargin">
+       <number>9</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>∫f(x) =</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="answerEdit">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="frame">
+         <bool>true</bool>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
   </layout>
  </widget>
  <tabstops>
   <tabstop>leftRectRadioButton</tabstop>
   <tabstop>midRectRadioButton</tabstop>
   <tabstop>rightRectRadioButton</tabstop>
-  <tabstop>parabolicRadioButton</tabstop>
-  <tabstop>trapezoidRadioButton</tabstop>
   <tabstop>limitAEdit</tabstop>
   <tabstop>limitBEdit</tabstop>
   <tabstop>functionEdit</tabstop>

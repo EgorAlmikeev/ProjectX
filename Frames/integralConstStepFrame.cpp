@@ -1,5 +1,7 @@
 #include "integralConstStepFrame.h"
-#include "ui_integralconststepframe.h"
+#include "ui_integralConstStepFrame.h"
+
+#include "UIConsts.h"
 
 IntegralConstStepFrame::IntegralConstStepFrame(QWidget *parent) : FrameThreadHelper(parent), ui(new Ui::IntegralConstStepFrame)
 {
@@ -42,9 +44,9 @@ void IntegralConstStepFrame::change(void)
         return;
     }
 
-    if(a == b)
+    if(a >= b)
     {
-        showAnswer("a не должна быть равна b");
+        showAnswer("b должн быть больше a");
         return;
     }
 
@@ -52,7 +54,7 @@ void IntegralConstStepFrame::change(void)
 
     if(n <= 0)
     {
-        showAnswer("n должна быть больше 0");
+        showAnswer("n должн быть больше 10");
         return;
     }
 
@@ -67,7 +69,7 @@ void IntegralConstStepFrame::change(void)
 
     start();
 
-    ui->answerEdit->setText("Calculating...");
+    ui->answerEdit->setText(sCalculating);
 }
 
 void IntegralConstStepFrame::showAnswer(QString ans)
@@ -77,14 +79,17 @@ void IntegralConstStepFrame::showAnswer(QString ans)
 
 void IntegralConstStepFrame::onResult(double value)
 {
-    showAnswer(QString::number(value));
+    if(!IsNan(value))
+        showAnswer(QString::number(value));
+    else
+        showAnswer(sNanError);
 }
 
 void IntegralConstStepFrame::onError(int code)
 {
     if(code == CalcError)
     {
-        showAnswer("Ошибка в функции!");
+        showAnswer(sSyntaxError);
     }
 }
 

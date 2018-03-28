@@ -4,7 +4,7 @@
 #include <QtWidgets>
 
 extern "C" {
-    #include "MathCore/MathUtils.h"
+    #include "../MathCore/XMath.h"
 }
 
 class BaseCalcThread : public QThread //от этого класса наследуют все потоковые классы в ThreadClasses

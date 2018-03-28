@@ -1,9 +1,8 @@
 #ifndef INTEGRALCONSTSTEPFRAME_H
 #define INTEGRALCONSTSTEPFRAME_H
 
-#include "ThreadClasses/IntegralThreads.h"
 #include <QWidget>
-#include "X.h"
+#include "../X.h"
 
 namespace Ui {
     class IntegralConstStepFrame;

@@ -31,8 +31,8 @@ SOURCES += main.cpp\
     Core/CalcThread.cpp \
     Core/Utils.cpp \
     Frames/helpDialogFrame.cpp \
-    ThreadClasses/lntegralThreads.cpp \
-    Frames/integralConstStepFrame.cpp
+    Frames/integralConstStepFrame.cpp \
+    Core/lntegralThreads.cpp
 
 HEADERS  += mainwindow.h \
     MathCore/MathParser.h \
@@ -43,8 +43,11 @@ HEADERS  += mainwindow.h \
     X.h \
     Frames/frames.h \
     Frames/helpDialogFrame.h \
-    ThreadClasses/IntegralThreads.h \
-    Frames/integralConstStepFrame.h
+    Frames/integralConstStepFrame.h \
+    Core/IntegralThreads.h \
+    Core/XCore.h \
+    MathCore/XMath.h \
+    Frames/UIConsts.h
 
 FORMS    += mainwindow.ui \
     Frames/helpDialogFrame.ui \
@@ -55,5 +58,7 @@ RESOURCES += \
 
 DISTFILES += \
     res/icon.icns
+
+win32:RC_ICONS = $$PWD/res/icon.ico
 
 macx:ICON = res/icon.icns
