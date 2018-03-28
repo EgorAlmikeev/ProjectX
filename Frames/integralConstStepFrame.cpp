@@ -5,11 +5,6 @@ IntegralConstStepFrame::IntegralConstStepFrame(QWidget *parent) : FrameThreadHel
 {
     ui->setupUi(this);
 
-
-//    QWidget::setTabOrder(ui->limitAEdit, ui->limitBEdit);
-//    QWidget::setTabOrder(ui->limitBEdit, ui->functionEdit);
-//    QWidget::setTabOrder(ui->functionEdit, ui->iterationSpinBox);
-
     connect(ui->leftRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
     connect(ui->rightRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
     connect(ui->midRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
