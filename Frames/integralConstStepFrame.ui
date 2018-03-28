@@ -116,16 +116,6 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="1">
-          <widget class="QRadioButton" name="parabolicRadioButton">
-           <property name="autoFillBackground">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Метод парабол</string>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="1">
           <widget class="QRadioButton" name="trapezoidRadioButton">
            <property name="autoFillBackground">
@@ -133,6 +123,16 @@
            </property>
            <property name="text">
             <string>Метод трапеций</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QRadioButton" name="parabolicRadioButton">
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Метод парабол</string>
            </property>
           </widget>
          </item>
