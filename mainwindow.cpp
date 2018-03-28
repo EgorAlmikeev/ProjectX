@@ -132,7 +132,7 @@ void MainWindow::on_menu_itemClicked(QTreeWidgetItem *item, int column)
     QMap<QTreeWidgetItem*, QWidget *>::iterator currentWidgetIterator = itemWidgetMapping->find(item);
     if(currentWidgetIterator != itemWidgetMapping->end()){
         ui->stackedWidget->setCurrentWidget(currentWidgetIterator.value());
-        ui->frameName->setText(item->text(0));
+        ui->frameName->setText(item->parent()->text(0) + ": " + item->text(0));
     }
 }
 
