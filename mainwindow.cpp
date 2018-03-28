@@ -114,6 +114,8 @@ void MainWindow::stackedWidgetSetup()
         ui->stackedWidget->addWidget(iter.value());
         ++iter;
     }
+
+    ui->stackedWidget->setFocus();
 }
 
 void MainWindow::selectFirstFrame()

@@ -5,9 +5,10 @@ IntegralConstStepFrame::IntegralConstStepFrame(QWidget *parent) : FrameThreadHel
 {
     ui->setupUi(this);
 
-    QWidget::setTabOrder(ui->limitAEdit, ui->limitBEdit);
-    QWidget::setTabOrder(ui->limitBEdit, ui->functionEdit);
-    QWidget::setTabOrder(ui->functionEdit, ui->iterationSpinBox);
+
+//    QWidget::setTabOrder(ui->limitAEdit, ui->limitBEdit);
+//    QWidget::setTabOrder(ui->limitBEdit, ui->functionEdit);
+//    QWidget::setTabOrder(ui->functionEdit, ui->iterationSpinBox);
 
     connect(ui->leftRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
     connect(ui->rightRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
@@ -98,11 +99,11 @@ ModeInt IntegralConstStepFrame::getMode()
         return ModeIntLeftRect;
     else if(ui->rightRectRadioButton->isChecked())
         return ModeIntRightRect;
-    else if(ui->midRectRadioButton)
+    else if(ui->midRectRadioButton->isChecked())
         return ModeIntMedianRect;
-    else if(ui->trapezoidRadioButton)
+    else if(ui->trapezoidRadioButton->isChecked())
         return ModeIntTrapeze;
-    else if(ui->parabolicRadioButton)
+    else if(ui->parabolicRadioButton->isChecked())
         return ModeIntSimpson;
 }
 

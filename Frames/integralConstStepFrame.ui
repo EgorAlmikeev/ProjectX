@@ -87,7 +87,7 @@
          <bool>false</bool>
         </property>
         <property name="frame">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="readOnly">
          <bool>true</bool>
@@ -222,7 +222,7 @@
            <bool>false</bool>
           </property>
           <property name="frame">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="minimum">
            <number>10</number>
@@ -257,7 +257,7 @@
            <string>sin(x) * cos(x)</string>
           </property>
           <property name="frame">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -310,7 +310,7 @@
            <string>1</string>
           </property>
           <property name="frame">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -323,7 +323,7 @@
            <string>2</string>
           </property>
           <property name="frame">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -334,6 +334,18 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>leftRectRadioButton</tabstop>
+  <tabstop>midRectRadioButton</tabstop>
+  <tabstop>rightRectRadioButton</tabstop>
+  <tabstop>parabolicRadioButton</tabstop>
+  <tabstop>trapezoidRadioButton</tabstop>
+  <tabstop>limitAEdit</tabstop>
+  <tabstop>limitBEdit</tabstop>
+  <tabstop>functionEdit</tabstop>
+  <tabstop>iterationSpinBox</tabstop>
+  <tabstop>answerEdit</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
