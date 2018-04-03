@@ -5,6 +5,7 @@
 #include "MathUtils.h"
 
 /*
+ 
  Типичное использование библиотеки XMath:
  
  #include "XMath.h"
