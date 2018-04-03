@@ -10,7 +10,6 @@ static int isCancel = 0;
 
 void BeginCalc(void)
 {
-
     resultCode = CalcOk;
     isCancel = 0;
 }

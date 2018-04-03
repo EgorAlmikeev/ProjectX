@@ -7,47 +7,6 @@
 
 #include <math.h>
 
-/*
- пример работы в многопоточном окружении:
- 
- var calcThread = nil;
- 
- cancel()
- {
-    if(calcThread != nil)
-    {
-        CancelCalc();
-        while(!(calcThread.isEnd))
-            nop;
-    }
- }
- 
- change()
- {
-    cancel();
- 
-    output('please wait');
- 
-    calcThread = new Thread
-    {
-        mathCalc();
-        output(result);
-    }
- }
- 
- mathCalc()
- {
-    BeginCalc();
-    while(...)
-    {
-        if(IsCancel())
-            return NAN;
-    }
- }
- 
-*/
-
-
 // чем закончилось последнее вычисление
 // успешное завершение
 #define CalcOk  0
@@ -58,7 +17,6 @@
 // ошибка парсинга выражения/или другая ошибка
 #define CalcError 3
 // - calcError + n - пользовательские ошибки
-
 #define ResultCode int
 
 #ifndef NAN
@@ -100,9 +58,11 @@ void ErrorCalc(void);
 // данную функцию надо вызывать в основном цикле вычислений
 int IsCancel(void);
 
+// возвращает не 0, если есть ошибка в формуле,
+// данную функцию надо вызывать в основном цикле вычислений
 int IsErrorCalc(void);
 
-// возвращает результат вычисления
+// возвращает код, чем закончилось последнее вычисление
 ResultCode GetResultCode(void);
 
 
