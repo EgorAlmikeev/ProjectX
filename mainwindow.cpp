@@ -27,7 +27,7 @@ void MainWindow::createMenu()
     TMember integralItems[integralItemsCount] =
     {
         {"Постоянный шаг", new IntegralConstStepFrame},
-        {"Переменный шаг", new QLabel("Переменный шаг")},
+        {"Переменный шаг", new IntegralFloatingStepFrame},
         {"Кратное интегрирование", new QLabel("Кратное интегрирование")}
     };
 
