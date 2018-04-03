@@ -1,6 +1,9 @@
 #ifndef INTEGRAL_H
 #define INTEGRAL_H
 
+typedef double (*IntFuncRef) (char* func, double a, double b, int n);
+double IntDoubleCalc(IntFuncRef IntFunc, char* func, double a, double b, double epsilon);
+
 double IntLeftRect(char* func, double a, double b, int n);
 double IntRightRect(char* func, double a, double b, int n);
 double IntMedianRect(char* func, double a, double b, int n);
