@@ -38,7 +38,7 @@ tokens token;// тип текущего токена
 double doubleValue;// последнее считанное значение
 char stringValue[33];// последнее считанное значение
 jmp_buf saveState;// используеться для восстановления состояния после ошибки
-double x = 0;
+double x = 0, y = 0;
 int isSyntaxError;
 
 static void error(int isSyntaxErr, const char *str)
@@ -212,6 +212,8 @@ static double tryPrim(void)
                 left = M_E;
             else if(compStr(stringValue, "x"))
                 left = x;
+            else if(compStr(stringValue, "y"))
+                left = y;
             else
                 error(1, "Identifier not found");
             nextToken();
@@ -421,6 +423,13 @@ double Expression(char *exp)
 double FunctionX(char *exp, double x_val)
 {
     x = x_val;
+    return Expression(exp);
+}
+
+double FunctionXY(char *exp, double x_val, double y_val)
+{
+    x = x_val;
+    y = y_val;
     return Expression(exp);
 }
 
