@@ -1,5 +1,5 @@
-#include "integralFloatingStepFrame.h"
-#include "ui_integralFloatingStepFrame.h"
+#include "IntegralFloatingStepFrame.h"
+#include "ui_IntegralFloatingStepFrame.h"
 
 #include "UIConsts.h"
 
@@ -28,7 +28,7 @@ IntegralFloatingStepFrame::~IntegralFloatingStepFrame()
 
 void IntegralFloatingStepFrame::change(void)
 {
-    int n;
+    QString precision;
     double a, b;
     QString func;
     ModeInt mode = ModeIntLeftRect; //default mode
@@ -55,7 +55,7 @@ void IntegralFloatingStepFrame::change(void)
         return;
     }
 
-//    n = ui->iterationSpinBox->value();
+    precision = ui->precisionEdit->text();
 
     if(n <= 0)
     {
@@ -123,6 +123,11 @@ void IntegralFloatingStepFrame::on_limitAEdit_textChanged(const QString &arg1)
 }
 
 void IntegralFloatingStepFrame::on_limitBEdit_textChanged(const QString &arg1)
+{
+    change();
+}
+
+void IntegralFloatingStepFrame::on_precisionEdit_textChanged(const QString &arg1)
 {
     change();
 }

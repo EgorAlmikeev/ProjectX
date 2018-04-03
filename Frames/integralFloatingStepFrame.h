@@ -28,7 +28,6 @@ private slots:
     void onResult(double value);
     void onError(int code);
 
-
 private:
     Ui::IntegralFloatingStepFrame * ui;
 
