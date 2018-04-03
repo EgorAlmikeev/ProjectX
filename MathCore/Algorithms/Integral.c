@@ -123,3 +123,29 @@ double IntSimpson(char* func, double a, double b, int n)
 
   return s * (h / (double)3);
 }
+
+double IntDoubleCalc(IntFuncRef IntFunc, char* func, double a, double b, double epsilon)
+{
+    double s, s2, InterationCount, n;
+    n = 10;
+    InterationCount = n;
+    s2 = IntFunc(func, a, b, n);
+    CheckSyntax();
+    
+    do
+    {
+        s = s2;
+        n = n * 2;
+        s2 = IntFunc(func, a, b, n);
+        CheckSyntax();
+        
+        InterationCount += n;
+    
+        CheckCancel();
+    }
+    while (fabs(s - s2) <= epsilon);
+    
+    return s2;
+    
+}
+
