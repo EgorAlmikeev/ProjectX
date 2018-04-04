@@ -155,7 +155,7 @@ double IntDoubleCalc(IntFuncRef IntFunc, char* func, double a, double b, double 
     return s2;
 }
 
-double СalcDoubleInt(char* func, double a, double b, double c, double d, int xn, int yn) // а это - двойной интеграл
+double CalcDoubleInt(char* func, double a, double b, double c, double d, int xn, int yn) // а это - двойной интеграл
 {
     double x, y, xh, yh;
     double i = 0;
