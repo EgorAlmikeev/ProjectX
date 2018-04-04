@@ -21,7 +21,6 @@ int IsCancel(void)
 
 void CancelCalc(void)
 {
-
     isCancel = 1;
     resultCode = CalcCancel;
 }

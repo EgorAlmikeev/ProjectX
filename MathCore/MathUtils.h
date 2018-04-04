@@ -6,6 +6,7 @@
 #define MathUtils_h
 
 #include <math.h>
+#include <stddef.h>
 
 // чем закончилось последнее вычисление
 // успешное завершение

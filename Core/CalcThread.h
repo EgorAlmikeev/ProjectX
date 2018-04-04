@@ -48,8 +48,6 @@ public:
 
 protected slots:
 
-    void inputChanged();
-    void killThread();
     void onTimeout();
 };
 

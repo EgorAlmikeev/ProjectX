@@ -1,5 +1,5 @@
-#include "IntegralFloatingStepFrame.h"
-#include "ui_IntegralFloatingStepFrame.h"
+#include "integralFloatingStepFrame.h"
+#include "ui_integralFloatingStepFrame.h"
 
 #include "UIConsts.h"
 
@@ -7,15 +7,11 @@ IntegralFloatingStepFrame::IntegralFloatingStepFrame(QWidget *parent) : FrameThr
 {
     ui->setupUi(this);
 
-    connect(ui->leftRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
-    connect(ui->rightRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
-    connect(ui->midRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
-    connect(ui->trapezoidRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
-    connect(ui->parabolicRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
-
     QRegExpValidator * validator = new QRegExpValidator;
     validator->setRegExp(QRegExp("^[+-]?[\\d]+($|[\\.][\\d]+|([\\.][\\d]+[Ee]|[Ee])[+-]?\\d+)$"));
     ui->epsilonEdit->setValidator(validator);
+
+    this->setTimeOutUse(true);
 
     change();
 }
@@ -54,41 +50,53 @@ void IntegralFloatingStepFrame::change(void)
     }
 
     e = ui->epsilonEdit->text().toDouble();
+
+    if(e >= 1 || e <= 1e-10)
+    {
+        showAnswer("Точность должна быть в пределах (1..1e-99)");
+        return;
+    }
+
     func = ui->functionEdit->text();
     mode = getMode();
 
-    IntFloatingStepThread * floatingStepThread = new IntFloatingStepThread(func, a, b, e, mode);
-    setThread(floatingStepThread);
+    setThread(new IntFloatingStepThread(func, a, b, e, mode));
 
-    connect(floatingStepThread, SIGNAL(sendResultSignal(double,int)), SLOT(onResult(double,int)));
+    connect(getThread(), SIGNAL(sendResultSignal(double,int)), SLOT(onResult(double,int)));
     connect(getThread(), SIGNAL(sendErrorSignal(int)), SLOT(onError(int)));
 
     start();
 
-    ui->answerEdit->setText(sCalculating);
+    showAnswer(sCalculating);
 }
 
 void IntegralFloatingStepFrame::showAnswer(QString ans)
 {
     ui->answerEdit->setText(ans);
+    ui->interationCountLabel->setText("");
 }
 
 void IntegralFloatingStepFrame::onResult(double value, int iterations)
 {
+    end();
+
     if(!IsNan(value))
         showAnswer(QString::number(value));
     else
         showAnswer(sNanError);
 
-    ui->iterationEdit->setText( QString::number(iterations) );
+    ui->interationCountLabel->setText(sIterationsCountForAccuracy(QString::number(iterations)));
 }
 
 void IntegralFloatingStepFrame::onError(int code)
 {
+    end();
+
     if(code == CalcError)
     {
         showAnswer(sSyntaxError);
     }
+        else showAnswer("Таймаут, интеграл не сходиться!");
 }
 
 ModeInt IntegralFloatingStepFrame::getMode()
@@ -124,3 +132,29 @@ void IntegralFloatingStepFrame::on_epsilonEdit_textChanged(const QString &arg1)
 {
     change();
 }
+
+void IntegralFloatingStepFrame::on_leftRectRadioButton_clicked()
+{
+    change();
+}
+
+void IntegralFloatingStepFrame::on_midRectRadioButton_clicked()
+{
+    change();
+}
+
+void IntegralFloatingStepFrame::on_rightRectRadioButton_clicked()
+{
+    change();
+}
+
+void IntegralFloatingStepFrame::on_trapezoidRadioButton_clicked()
+{
+    change();
+}
+
+void IntegralFloatingStepFrame::on_parabolicRadioButton_clicked()
+{
+    change();
+}
+

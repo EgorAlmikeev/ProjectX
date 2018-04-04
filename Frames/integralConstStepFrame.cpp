@@ -7,12 +7,6 @@ IntegralConstStepFrame::IntegralConstStepFrame(QWidget *parent) : FrameThreadHel
 {
     ui->setupUi(this);
 
-    connect(ui->leftRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
-    connect(ui->rightRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
-    connect(ui->midRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
-    connect(ui->trapezoidRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
-    connect(ui->parabolicRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
-
     change();
 }
 
@@ -69,7 +63,7 @@ void IntegralConstStepFrame::change(void)
 
     start();
 
-    ui->answerEdit->setText(sCalculating);
+    showAnswer(sCalculating);
 }
 
 void IntegralConstStepFrame::showAnswer(QString ans)
@@ -79,6 +73,8 @@ void IntegralConstStepFrame::showAnswer(QString ans)
 
 void IntegralConstStepFrame::onResult(double value)
 {
+    end();
+
     if(!IsNan(value))
         showAnswer(QString::number(value));
     else
@@ -87,6 +83,8 @@ void IntegralConstStepFrame::onResult(double value)
 
 void IntegralConstStepFrame::onError(int code)
 {
+    end();
+
     if(code == CalcError)
     {
         showAnswer(sSyntaxError);
@@ -123,6 +121,31 @@ void IntegralConstStepFrame::on_limitBEdit_textChanged(const QString &arg1)
 }
 
 void IntegralConstStepFrame::on_iterationSpinBox_valueChanged(const QString &arg1)
+{
+    change();
+}
+
+void IntegralConstStepFrame::on_midRectRadioButton_clicked()
+{
+    change();
+}
+
+void IntegralConstStepFrame::on_leftRectRadioButton_clicked()
+{
+    change();
+}
+
+void IntegralConstStepFrame::on_rightRectRadioButton_clicked()
+{
+    change();
+}
+
+void IntegralConstStepFrame::on_trapezoidRadioButton_clicked()
+{
+    change();
+}
+
+void IntegralConstStepFrame::on_parabolicRadioButton_clicked()
 {
     change();
 }

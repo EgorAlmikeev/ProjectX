@@ -1,5 +1,7 @@
 #include "IntegralThreads.h"
 
+// IntConstStepThread
+
 IntConstStepThread::IntConstStepThread(QString func, double a, double b, int n, ModeInt mode)
 {
     this->func = func;
@@ -53,6 +55,8 @@ void IntConstStepThread::run()
     sendResult(ans);
 }
 
+// IntFloatingStepThread
+
 IntFloatingStepThread::IntFloatingStepThread(QString func, double a, double b, double e, ModeInt mode)
 {
     this->func = func;
@@ -67,9 +71,11 @@ void IntFloatingStepThread::sendResult(double value, int iterations)
 
 void IntFloatingStepThread::run()
 {
-    double ans = 0;
-    int * iterations = new int;
+    double ans;
+    int iterations;
     IntFuncRef funcRef;
+
+    BaseCalcThread::run();
 
     switch(mode)
     {
@@ -93,12 +99,10 @@ void IntFloatingStepThread::run()
             funcRef = IntSimpson;
             break;
 
-        default:
-            ans = NAN;
+        default:;
     }
 
-    if(!IsNan(ans))
-        ans = IntDoubleCalc(funcRef, QStrToCStr(func), a, b, e);
+    ans = IntDoubleCalc(funcRef, QStrToCStr(func), a, b, e, &iterations);
 
     if(IsErrorCalc())
     {
@@ -109,6 +113,5 @@ void IntFloatingStepThread::run()
     if(IsCancel())
         return;
 
-    ans = 1234; //затычка
-    sendResult(ans, *iterations);
+    sendResult(ans, iterations);
 }

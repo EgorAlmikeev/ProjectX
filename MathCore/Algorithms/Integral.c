@@ -124,10 +124,14 @@ double IntSimpson(char* func, double a, double b, int n)
   return s * (h / (double)3);
 }
 
-double IntDoubleCalc(IntFuncRef IntFunc, char* func, double a, double b, double epsilon)
+#define DefaultInterationCount 10
+
+double IntDoubleCalc(IntFuncRef IntFunc, char* func, double a, double b, double epsilon, int* count)
 {
-    double s, s2, InterationCount, n;
-    n = 10;
+    double s, s2;
+    int InterationCount, n;
+
+    n = DefaultInterationCount;
     InterationCount = n;
     s2 = IntFunc(func, a, b, n);
     CheckSyntax();
@@ -143,9 +147,11 @@ double IntDoubleCalc(IntFuncRef IntFunc, char* func, double a, double b, double 
     
         CheckCancel();
     }
-    while (fabs(s - s2) <= epsilon);
+    while (fabs(s - s2) > epsilon);
+    
+    if(count != NULL)
+        *count = InterationCount;
     
     return s2;
-    
 }
 

@@ -29,6 +29,16 @@ private slots:
     void onError(int code);
 
 
+    void on_midRectRadioButton_clicked();
+
+    void on_leftRectRadioButton_clicked();
+
+    void on_rightRectRadioButton_clicked();
+
+    void on_trapezoidRadioButton_clicked();
+
+    void on_parabolicRadioButton_clicked();
+
 private:
     Ui::IntegralConstStepFrame * ui;
 

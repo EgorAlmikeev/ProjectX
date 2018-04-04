@@ -24,7 +24,9 @@ void FrameThreadHelper::setTimeOutUse(bool isUse)
 { this->isTimeOutUse = isUse; }
 
 FrameThreadHelper::~FrameThreadHelper(void)
-{ cancel(); }
+{
+    cancel();
+}
 
 void FrameThreadHelper::cancel(void)
 {
@@ -32,31 +34,29 @@ void FrameThreadHelper::cancel(void)
     {
         CancelCalc();
 
-        while(!thread->wait(1))
+        while(thread->isRunning())
             QThread::msleep(1);
-
-        ResultCode  r = GetResultCode();
-
 
         thread = nullptr;
     }
 }
 
+#define TIME_OUT_MS 10000
 void FrameThreadHelper::start(void)
 {
-    timeoutTimer->start(50);
+    timeoutTimer->start(TIME_OUT_MS);
     thread->start();
 }
 
-void FrameThreadHelper::end(void)
-{ timeoutTimer->stop(); }
+//void FrameThreadHelper::end(void)
+//{ timeoutTimer->stop(); }
 
 void FrameThreadHelper::setThread(BaseCalcThread * thread)
 {
     this->thread = thread;
-    connect(thread, SIGNAL(sendErrorSignal(int)), SLOT(killThread()));
-    connect(thread, SIGNAL(sendResultSignal(double)), SLOT(killThread()));
-    connect(thread, SIGNAL(sendResultSignal(QString)), SLOT(killThread()));
+    //connect(thread, SIGNAL(sendErrorSignal(int)), SLOT(killThread()));
+    //connect(thread, SIGNAL(sendResultSignal(double)), SLOT(killThread()));
+    //connect(thread, SIGNAL(sendResultSignal(QString)), SLOT(killThread()));
 }
 
 BaseCalcThread * FrameThreadHelper::getThread(void)
@@ -64,12 +64,13 @@ BaseCalcThread * FrameThreadHelper::getThread(void)
 
 void FrameThreadHelper::onTimeout()
 {
-    if(isTimeOutUse)
+    if(isTimeOutUse && (thread != nullptr))
         TimeoutCalc();
 }
 
-void FrameThreadHelper::killThread()
-{ end(); }
-
-void FrameThreadHelper::inputChanged()
-{ change(); }
+//void FrameThreadHelper::killThread()
+//{ end(); }
+void FrameThreadHelper::end()
+{
+    this->thread = nullptr;
+}
