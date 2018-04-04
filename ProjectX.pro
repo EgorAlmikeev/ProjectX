@@ -34,7 +34,7 @@ SOURCES += main.cpp\
     Frames/integralConstStepFrame.cpp \
     Core/lntegralThreads.cpp \
     Frames/integralFloatingStepFrame.cpp \
-    Frames/multipleIntegralFrame.cpp
+    Frames/integralMultipleFrame.cpp
 
 HEADERS  += mainwindow.h \
     MathCore/MathParser.h \
@@ -51,13 +51,13 @@ HEADERS  += mainwindow.h \
     MathCore/XMath.h \
     Frames/UIConsts.h \
     Frames/integralFloatingStepFrame.h \
-    Frames/multipleIntegralFrame.h
+    Frames/integralMultipleFrame.h
 
 FORMS    += mainwindow.ui \
     Frames/helpDialogFrame.ui \
     Frames/integralConstStepFrame.ui \
     Frames/integralFloatingStepFrame.ui \
-    Frames/multipleIntegralFrame.ui
+    Frames/integralMultipleFrame.ui
 
 RESOURCES += \
     res/res.qrc

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MultipleIntegralFrame</class>
- <widget class="QWidget" name="MultipleIntegralFrame">
+ <class>IntegralMultipleFrame</class>
+ <widget class="QWidget" name="IntegralMultipleFrame">
   <property name="enabled">
    <bool>true</bool>
   </property>

@@ -28,7 +28,7 @@ void MainWindow::createMenu()
     {
         {"Постоянный шаг", new IntegralConstStepFrame},
         {"Переменный шаг", new IntegralFloatingStepFrame},
-        {"Кратное интегрирование", new MultipleIntegralFrame}
+        {"Кратное интегрирование", new IntegralMultipleFrame}
     };
 
     const int differentialEquationsItemsCount = 2;
