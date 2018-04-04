@@ -92,7 +92,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>Требуемая точность была достигнута за следующее количество итераций :</string>
+           <string>Требуемая точность была достигнута за следующее количество итераций:</string>
           </property>
          </widget>
         </item>
@@ -337,6 +337,9 @@
          <widget class="QLineEdit" name="epsilonEdit">
           <property name="text">
            <string>0.001</string>
+          </property>
+          <property name="maxLength">
+           <number>13</number>
           </property>
          </widget>
         </item>
