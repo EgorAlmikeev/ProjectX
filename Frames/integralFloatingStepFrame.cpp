@@ -7,6 +7,12 @@ IntegralFloatingStepFrame::IntegralFloatingStepFrame(QWidget *parent) : FrameThr
 {
     ui->setupUi(this);
 
+    connect(ui->leftRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
+    connect(ui->rightRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
+    connect(ui->midRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
+    connect(ui->trapezoidRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
+    connect(ui->parabolicRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
+
     QRegExpValidator * validator = new QRegExpValidator;
     validator->setRegExp(QRegExp("^[+-]?[\\d]+($|[\\.][\\d]+|([\\.][\\d]+[Ee]|[Ee])[+-]?\\d+)$"));
     ui->epsilonEdit->setValidator(validator);
@@ -23,7 +29,7 @@ void IntegralFloatingStepFrame::change(void)
 {
     double a, b, e;
     QString func;
-    ModeInt mode = ModeIntDoubleCalc; //default mode
+    ModeInt mode = ModeIntLeftRect; //default mode
 
     cancel();
 
@@ -69,10 +75,12 @@ void IntegralFloatingStepFrame::showAnswer(QString ans)
 
 void IntegralFloatingStepFrame::onResult(double value, int iterations)
 {
-//    if(!IsNan(value))
-//        showAnswer(QString::number(value));
-//    else
-//        showAnswer(sNanError);
+    if(!IsNan(value))
+        showAnswer(QString::number(value));
+    else
+        showAnswer(sNanError);
+
+    ui->iterationEdit->setText( QString::number(iterations) );
 }
 
 void IntegralFloatingStepFrame::onError(int code)
@@ -85,8 +93,16 @@ void IntegralFloatingStepFrame::onError(int code)
 
 ModeInt IntegralFloatingStepFrame::getMode()
 {
-    //ifelse по радиобаттонам
-    return ModeIntDoubleCalc;
+    if(ui->leftRectRadioButton->isChecked())
+        return ModeIntLeftRect;
+    else if(ui->rightRectRadioButton->isChecked())
+        return ModeIntRightRect;
+    else if(ui->midRectRadioButton->isChecked())
+        return ModeIntMedianRect;
+    else if(ui->trapezoidRadioButton->isChecked())
+        return ModeIntTrapeze;
+    else if(ui->parabolicRadioButton->isChecked())
+        return ModeIntSimpson;
 }
 
 void IntegralFloatingStepFrame::on_functionEdit_textChanged(const QString &arg1)

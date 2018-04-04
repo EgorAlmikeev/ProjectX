@@ -69,14 +69,36 @@ void IntFloatingStepThread::run()
 {
     double ans = 0;
     int * iterations = new int;
+    IntFuncRef funcRef;
 
-//свич понадобится если потом придется выбирать метод интегрирования с переменным шагом
-//    switch(mode)
-//    {
-//    case ModeIntDoubleCalc: IntDoubleCalc(..., iterations); break;
-//    case ModeIntМетодЕЗ: IntМетодЕЗ; break;
-//    default: ans = NAN;
-//    }
+    switch(mode)
+    {
+        case ModeIntLeftRect:
+            funcRef = IntLeftRect;
+            break;
+
+        case ModeIntRightRect:
+            funcRef = IntRightRect;
+            break;
+
+        case ModeIntMedianRect:
+            funcRef = IntMedianRect;
+            break;
+
+        case ModeIntTrapeze:
+            funcRef = IntTrapeze;
+            break;
+
+        case ModeIntSimpson:
+            funcRef = IntSimpson;
+            break;
+
+        default:
+            ans = NAN;
+    }
+
+    if(!IsNan(ans))
+        ans = IntDoubleCalc(funcRef, QStrToCStr(func), a, b, e);
 
     if(IsErrorCalc())
     {

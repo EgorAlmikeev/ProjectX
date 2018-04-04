@@ -8,7 +8,6 @@
 #define ModeIntMedianRect   2
 #define ModeIntTrapeze      3
 #define ModeIntSimpson      4
-#define ModeIntDoubleCalc   5
 
 typedef int ModeInt;
 
