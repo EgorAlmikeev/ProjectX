@@ -1,0 +1,21 @@
+
+<table align=center style="font-size: 12pt" width="100%" cellspacing="0" cellpadding="2" border="1">
+   <tr>
+   	<th colspan="2" align="center">Авторы проекта:</th>
+   </tr>
+   <tr align="center">
+   	<td>Соколов-Ширшов Пётр</td>
+   	<td>парсер формул, архитектура, графический дизайн, Qt разработка, алгоритмы.</td>
+   </tr>
+   <tr align="center">
+   	<td>Крамар София</td>
+   	<td>математические алгоритмы, документация, html, тестирование.</td>
+   </tr>
+   <tr align="center">
+   	<td>Альмикеев Егор</td>
+   	<td>графический дизайн, архитектура, Qt разработка, финальная сборка, тестирование.</td>
+   </tr>
+   <tr>
+   	<th colspan="2" align="center">ообщить об ошибке можно по адресу электронной почты: <a href="york.git@gmail.com">york.git@gmail.com</a></th>
+   </tr>
+</table>

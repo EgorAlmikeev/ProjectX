@@ -1,0 +1,88 @@
+
+<table align=center style="font-size: 12pt" width="80%" cellspacing="0" cellpadding="2" border="1">
+   <tr>
+   	<th colspan="2" align="center">Синтаксис функций и операций:</th>
+   </tr>
+   <tr align="center">
+   	<td>косинус</td>
+   	<td>cos(x)</td>
+   </tr>
+   <tr align="center">
+   	<td>синус</td>
+   	<td>sin(x)</td>
+   </tr>
+   <tr align="center">
+   	<td>тангенс</td>
+   	<td>tan(x)</td>
+   </tr>
+   <tr align="center">
+   	<td>котангенс</td>
+   	<td>ctan(x)</td>
+   </tr>
+   <tr align="center">
+   	<td>арксинус</td>
+   	<td>asin(x)</td>
+   </tr>
+   <tr align="center">
+   	<td>арккосинус</td>
+   	<td>acos(x)</td>
+   </tr>
+   <tr align="center">
+   	<td>арккотангенс</td>
+   	<td>aсtan(x)</td>
+   </tr>
+   <tr align="center">
+   	<td>арктангенс</td>
+   	<td>atan(x)</td>
+   </tr>
+   <tr align="center">
+   	<td>логарифм</td>
+   	<td>log(x)</td>
+   </tr>
+   <tr align="center">
+   	<td>экспонента</td>
+   	<td>exp(x)</td>
+   </tr>
+   <tr align="center">
+   	<td>корень</td>
+   	<td>sqrt(x)</td>
+   </tr>
+   <tr align="center">
+   	<td>факториал</td>
+   	<td>(x)!</td>
+   </tr>
+   <tr align="center">
+   	<td>n-степень</td>
+   	<td>x^n</td>
+   </tr>
+   <tr align="center">
+   	<td>модуль</td>
+   	<td>abs(x)</td>
+   </tr>
+
+   <tr>
+   	<th colspan="2" align="center">Константы:</th>
+   </tr>
+   <tr align="center">
+   	<td>Число Пи</td>
+   	<td>pi</td>
+   </tr>
+   <tr align="center">
+   	<td>Экспонента</td>
+   	<td>e</td>
+   </tr>
+
+   <tr>
+   	<th colspan="2" align="center">Пример формулы:</th>
+   </tr>
+   <tr>
+   	<td colspan="2" align="center">(sin(x)*cos(x*e))-(Pi/2)</td>
+   </tr>
+   <tr>
+   	<th colspan="2" align="center">Пример пределов:</th>
+   </tr>
+   <tr>
+   	<td colspan="2" align="center">От: Pi   До: 2*Pi</td>
+   </tr>
+   
+  </table>
