@@ -67,20 +67,26 @@
         <property name="spacing">
          <number>6</number>
         </property>
-        <item row="1" column="1">
-         <widget class="QLabel" name="xALabel">
+        <item row="1" column="5">
+         <widget class="QLineEdit" name="xLimitBEdit">
           <property name="autoFillBackground">
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>a:</string>
+           <string>pi</string>
+          </property>
+          <property name="frame">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="yLimitLabel">
+        <item row="1" column="4">
+         <widget class="QLabel" name="xBLabel">
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
           <property name="text">
-           <string>Пределы Y:</string>
+           <string>b:</string>
           </property>
          </widget>
         </item>
@@ -94,7 +100,14 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
+        <item row="4" column="0">
+         <widget class="QLabel" name="yIterationLabel">
+          <property name="text">
+           <string>Итерации Y:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
          <widget class="QLineEdit" name="xLimitAEdit">
           <property name="autoFillBackground">
            <bool>false</bool>
@@ -107,13 +120,17 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="3">
-         <widget class="QLabel" name="xBLabel">
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
+        <item row="0" column="2" colspan="4">
+         <widget class="QLineEdit" name="functionEdit">
           <property name="text">
-           <string>b:</string>
+           <string>sin(x)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3">
+         <widget class="QLineEdit" name="yLimitAEdt">
+          <property name="text">
+           <string>0</string>
           </property>
          </widget>
         </item>
@@ -121,26 +138,6 @@
          <widget class="QLabel" name="functionLabel">
           <property name="text">
            <string>Формула:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="4">
-         <widget class="QLineEdit" name="xLimitBEdit">
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>pi</string>
-          </property>
-          <property name="frame">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1" colspan="4">
-         <widget class="QLineEdit" name="functionEdit">
-          <property name="text">
-           <string>sin(x)</string>
           </property>
          </widget>
         </item>
@@ -154,7 +151,7 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="1" colspan="4">
+        <item row="2" column="2" colspan="4">
          <widget class="QSpinBox" name="xIterationSpinBox">
           <property name="minimumSize">
            <size>
@@ -182,42 +179,7 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="yIterationLabel">
-          <property name="text">
-           <string>Итерации Y:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QLabel" name="yALabel">
-          <property name="text">
-           <string>a:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="3">
-         <widget class="QLabel" name="yBLabel">
-          <property name="text">
-           <string>b:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="2">
-         <widget class="QLineEdit" name="yLimitAEdt">
-          <property name="text">
-           <string>0</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="4">
-         <widget class="QLineEdit" name="yLimitBEdit">
-          <property name="text">
-           <string>pi</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1" colspan="4">
+        <item row="4" column="2" colspan="4">
          <widget class="QSpinBox" name="yIterationSpinBox">
           <property name="minimum">
            <number>10</number>
@@ -226,6 +188,124 @@
            <number>100000</number>
           </property>
          </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QLabel" name="yALabel">
+          <property name="text">
+           <string>a:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4">
+         <widget class="QLabel" name="yBLabel">
+          <property name="text">
+           <string>b:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QLabel" name="xALabel">
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>a:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="yLimitLabel">
+          <property name="text">
+           <string>Пределы Y:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="5">
+         <widget class="QLineEdit" name="yLimitBEdit">
+          <property name="text">
+           <string>pi</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="1">
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="1">
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="3" column="1">
+         <spacer name="horizontalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="4" column="1">
+         <spacer name="horizontalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>
