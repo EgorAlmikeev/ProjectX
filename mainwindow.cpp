@@ -28,7 +28,7 @@ void MainWindow::createMenu()
     {
         {"Постоянный шаг", new IntegralConstStepFrame},
         {"Переменный шаг", new IntegralFloatingStepFrame},
-        {"Кратное интегрирование", new MultipleIntegralFrame}
+        {"Кратное интегрирование", new IntegralMultipleFrame}
     };
 
     const int differentialEquationsItemsCount = 2;
@@ -41,9 +41,9 @@ void MainWindow::createMenu()
     const int nolinearItemsCount = 3;
     TMember nolinearItems[nolinearItemsCount] =
     {
-        {"Метод Дихотомии", new QLabel("Метод Дихотомии")},
-        {"Метод касательных (Ньютона)", new QLabel("Метод касательных (Ньютона)")},
-        {"Метод хорд", new QLabel("Метод хорд")}
+        {"Метод Дихотомии", new NonlinearEquationsFrame},
+        {"Метод касательных (Ньютона)", new NonlinearEquationsFrame},
+        {"Метод хорд", new NonlinearEquationsFrame}
     };
 
     const int simpleFunctionsItemsCount = 2;

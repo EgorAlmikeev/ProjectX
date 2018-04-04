@@ -96,7 +96,7 @@ void IntegralFloatingStepFrame::onError(int code)
     {
         showAnswer(sSyntaxError);
     }
-        else showAnswer("Таймаут, интеграл не сходиться!");
+        else showAnswer(sIntTimeoutError);
 }
 
 ModeInt IntegralFloatingStepFrame::getMode()
