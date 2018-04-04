@@ -89,6 +89,7 @@ void IntegralConstStepFrame::onError(int code)
     {
         showAnswer(sSyntaxError);
     }
+        else showAnswer(sTimeoutError);
 }
 
 ModeInt IntegralConstStepFrame::getMode()
