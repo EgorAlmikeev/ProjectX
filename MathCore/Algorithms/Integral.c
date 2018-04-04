@@ -171,7 +171,7 @@ double СalcDoubleInt(char* func, double a, double b, double c, double d, int xn
             CheckSyntax();
             CheckCancel();
         }
-    CheckCancel();
+        CheckCancel();
     }
     
     return i * xh * yh;
