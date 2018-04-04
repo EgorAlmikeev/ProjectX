@@ -28,7 +28,7 @@ void MainWindow::createMenu()
     {
         {"Постоянный шаг", new IntegralConstStepFrame},
         {"Переменный шаг", new IntegralFloatingStepFrame},
-        {"Кратное интегрирование", new QLabel("Кратное интегрирование")}
+        {"Кратное интегрирование", new MultipleIntegralFrame}
     };
 
     const int differentialEquationsItemsCount = 2;

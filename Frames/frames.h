@@ -3,6 +3,7 @@
 
 //includes all frames
 #include "helpDialogFrame.h"
+#include "multipleIntegralFrame.h"
 #include "integralConstStepFrame.h"
 #include "integralFloatingStepFrame.h"
 

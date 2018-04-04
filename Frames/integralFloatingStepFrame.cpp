@@ -113,8 +113,11 @@ ModeInt IntegralFloatingStepFrame::getMode()
         return ModeIntSimpson;
 }
 
-void IntegralFloatingStepFrame::on_functionEdit_textChanged(const QString &arg1)
+void IntegralFloatingStepFrame::on_epsilonEdit_textChanged(const QString &arg1)
 {
+//    double  min = 0.1,
+//            max = 0.00000000001;
+
     change();
 }
 
@@ -128,7 +131,7 @@ void IntegralFloatingStepFrame::on_limitBEdit_textChanged(const QString &arg1)
     change();
 }
 
-void IntegralFloatingStepFrame::on_epsilonEdit_textChanged(const QString &arg1)
+void IntegralFloatingStepFrame::on_functionEdit_textChanged(const QString &arg1)
 {
     change();
 }
