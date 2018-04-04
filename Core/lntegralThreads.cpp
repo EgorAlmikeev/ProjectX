@@ -67,8 +67,10 @@ void IntFloatingStepThread::sendResult(double value, int iterations)
 
 void IntFloatingStepThread::run()
 {
+    BaseCalcThread::run();
+
     double ans = 0;
-    int * iterations = new int;
+    int iterations = 0;
     IntFuncRef funcRef;
 
     switch(mode)
@@ -109,6 +111,5 @@ void IntFloatingStepThread::run()
     if(IsCancel())
         return;
 
-    ans = 1234; //затычка
-    sendResult(ans, *iterations);
+    sendResult(ans, iterations);
 }

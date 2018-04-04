@@ -19,15 +19,16 @@ public:
     ~IntegralFloatingStepFrame();
 
 private slots:
-
-    void on_functionEdit_textChanged(const QString &arg1);
-    void on_limitAEdit_textChanged(const QString &arg1);
-    void on_limitBEdit_textChanged(const QString &arg1);
-
     void onResult(double value, int iterations);
     void onError(int code);
 
     void on_epsilonEdit_textChanged(const QString &arg1);
+
+    void on_limitAEdit_textChanged(const QString &arg1);
+
+    void on_limitBEdit_textChanged(const QString &arg1);
+
+    void on_functionEdit_textChanged(const QString &arg1);
 
 private:
     Ui::IntegralFloatingStepFrame * ui;
