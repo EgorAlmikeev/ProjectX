@@ -126,7 +126,7 @@ double IntSimpson(char* func, double a, double b, int n)
 
 #define DefaultInterationCount 10
 
-double IntDoubleCalc(IntFuncRef IntFunc, char* func, double a, double b, double epsilon, int* count)
+double IntDoubleCalc(IntFuncRef IntFunc, char* func, double a, double b, double epsilon, int* count) //это - двойной пересчёт шага
 {
     double s, s2;
     int InterationCount, n;
@@ -155,3 +155,24 @@ double IntDoubleCalc(IntFuncRef IntFunc, char* func, double a, double b, double 
     return s2;
 }
 
+double СalcDoubleInt(char* func, double a, double b, double c, double d, int xn, int yn) // а это - двойной интеграл
+{
+    double x, y, xh, yh;
+    double i = 0;
+    
+    xh = (b - a) / (float)xn;
+    yh = (d - c) / (float)yn;
+    
+    for(x = a + xh * 0.5; x < b; x += xh)
+    {
+        for(y = c + yh * 0.5; y < d; y += yh)
+        {
+            i += FunctionXY(func, x, y);
+            CheckSyntax();
+            CheckCancel();
+        }
+    CheckCancel();
+    }
+    
+    return i * xh * yh;
+}

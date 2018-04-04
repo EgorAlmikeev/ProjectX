@@ -3,7 +3,7 @@
 
 #define sCalculating "Вычисление..."
 #define sSyntaxError "Синтаксическая ошибка!"
-#define sTimeoutError "Интеграл не сходится!"
+#define sIntTimeoutError "Интеграл не сходится!"
 #define sNanError "x лежит вне допустимых значений!"
 #define sIterationsCountForAccuracy(count) ("Требуемая точность была достигнута за " + (count) + " итераций(и)")
 
