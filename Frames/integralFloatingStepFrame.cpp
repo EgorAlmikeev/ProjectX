@@ -51,7 +51,7 @@ void IntegralFloatingStepFrame::change(void)
 
     e = ui->epsilonEdit->text().toDouble();
 
-    if(e >= 1 || e <= 1e-10)
+    if(e >= 1 || e <= 1e-99)
     {
         showAnswer("Точность должна быть в пределах (1..1e-99)");
         return;
