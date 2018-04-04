@@ -4,7 +4,7 @@
 typedef double (*IntFuncRef) (char* func, double a, double b, int n);
 double IntDoubleCalc(IntFuncRef IntFunc, char* func, double a, double b, double epsilon, int* count);// это - двойной пересчёт шага
 
-double СalcDoubleInt(char* func, double a, double b, double c, double d, int xn, int yn); // а это - двойной интеграл
+double CalcDoubleInt(char* func, double a, double b, double c, double d, int xn, int yn); // а это - двойной интеграл
 
 double IntLeftRect(char* func, double a, double b, int n);
 double IntRightRect(char* func, double a, double b, int n);
