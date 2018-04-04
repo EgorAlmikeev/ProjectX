@@ -7,16 +7,9 @@ IntegralFloatingStepFrame::IntegralFloatingStepFrame(QWidget *parent) : FrameThr
 {
     ui->setupUi(this);
 
-    connect(ui->leftRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
-    connect(ui->rightRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
-    connect(ui->midRectRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
-    connect(ui->trapezoidRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
-    connect(ui->parabolicRadioButton, SIGNAL(toggled(bool)), SLOT(inputChanged()));
-
     QRegExpValidator * validator = new QRegExpValidator;
-    validator->setRegExp(QRegExp("^(?:\\+|\\-)?\\d+(?:\\.\\d+)?(?:e(?:\\+|\\-)?\\d+)?$"));
-
-    ui->precisionEdit->setValidator(validator);
+    validator->setRegExp(QRegExp("^[+-]?[\\d]+($|[\\.][\\d]+|([\\.][\\d]+[Ee]|[Ee])[+-]?\\d+)$"));
+    ui->epsilonEdit->setValidator(validator);
 
     change();
 }
@@ -28,10 +21,9 @@ IntegralFloatingStepFrame::~IntegralFloatingStepFrame()
 
 void IntegralFloatingStepFrame::change(void)
 {
-    QString precision;
-    double a, b;
+    double a, b, e;
     QString func;
-    ModeInt mode = ModeIntLeftRect; //default mode
+    ModeInt mode = ModeIntDoubleCalc; //default mode
 
     cancel();
 
@@ -55,26 +47,19 @@ void IntegralFloatingStepFrame::change(void)
         return;
     }
 
-    precision = ui->precisionEdit->text();
-
-    if(n <= 0)
-    {
-        showAnswer("n должн быть больше 10");
-        return;
-    }
-
+    e = ui->epsilonEdit->text().toDouble();
     func = ui->functionEdit->text();
-
     mode = getMode();
 
-//    setThread(new IntThread(func, a, b, n, mode));
+    IntFloatingStepThread * floatingStepThread = new IntFloatingStepThread(func, a, b, e, mode);
+    setThread(floatingStepThread);
 
-//    connect(getThread(), SIGNAL(sendResultSignal(double)), SLOT(onResult(double)));
-//    connect(getThread(), SIGNAL(sendErrorSignal(int)), SLOT(onError(int)));
+    connect(floatingStepThread, SIGNAL(sendResultSignal(double,int)), SLOT(onResult(double,int)));
+    connect(getThread(), SIGNAL(sendErrorSignal(int)), SLOT(onError(int)));
 
-//    start();
+    start();
 
-//    ui->answerEdit->setText(sCalculating);
+    ui->answerEdit->setText(sCalculating);
 }
 
 void IntegralFloatingStepFrame::showAnswer(QString ans)
@@ -82,12 +67,12 @@ void IntegralFloatingStepFrame::showAnswer(QString ans)
     ui->answerEdit->setText(ans);
 }
 
-void IntegralFloatingStepFrame::onResult(double value)
+void IntegralFloatingStepFrame::onResult(double value, int iterations)
 {
-    if(!IsNan(value))
-        showAnswer(QString::number(value));
-    else
-        showAnswer(sNanError);
+//    if(!IsNan(value))
+//        showAnswer(QString::number(value));
+//    else
+//        showAnswer(sNanError);
 }
 
 void IntegralFloatingStepFrame::onError(int code)
@@ -100,16 +85,8 @@ void IntegralFloatingStepFrame::onError(int code)
 
 ModeInt IntegralFloatingStepFrame::getMode()
 {
-    if(ui->leftRectRadioButton->isChecked())
-        return ModeIntLeftRect;
-    else if(ui->rightRectRadioButton->isChecked())
-        return ModeIntRightRect;
-    else if(ui->midRectRadioButton->isChecked())
-        return ModeIntMedianRect;
-    else if(ui->trapezoidRadioButton->isChecked())
-        return ModeIntTrapeze;
-    else if(ui->parabolicRadioButton->isChecked())
-        return ModeIntSimpson;
+    //ifelse по радиобаттонам
+    return ModeIntDoubleCalc;
 }
 
 void IntegralFloatingStepFrame::on_functionEdit_textChanged(const QString &arg1)
@@ -127,7 +104,7 @@ void IntegralFloatingStepFrame::on_limitBEdit_textChanged(const QString &arg1)
     change();
 }
 
-void IntegralFloatingStepFrame::on_precisionEdit_textChanged(const QString &arg1)
+void IntegralFloatingStepFrame::on_epsilonEdit_textChanged(const QString &arg1)
 {
     change();
 }

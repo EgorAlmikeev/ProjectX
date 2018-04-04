@@ -1,19 +1,13 @@
 #include "CalcThread.h"
 
 void BaseCalcThread::run()
-{
-    BeginCalc();
-}
+{ BeginCalc(); }
 
 void BaseCalcThread::sendError(ResultCode error)
-{
-    emit sendErrorSignal(error);
-}
+{ emit sendErrorSignal(error); }
 
 void BaseCalcThread::sendResult(double value)
-{
-    emit sendResultSignal(value);
-}
+{ emit sendResultSignal(value); }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -27,14 +21,10 @@ FrameThreadHelper::FrameThreadHelper(QWidget * parent) : QWidget(parent)
 }
 
 void FrameThreadHelper::setTimeOutUse(bool isUse)
-{
-    this->isTimeOutUse = isUse;
-}
+{ this->isTimeOutUse = isUse; }
 
 FrameThreadHelper::~FrameThreadHelper(void)
-{
-    cancel();
-}
+{ cancel(); }
 
 void FrameThreadHelper::cancel(void)
 {
@@ -59,9 +49,7 @@ void FrameThreadHelper::start(void)
 }
 
 void FrameThreadHelper::end(void)
-{
-    timeoutTimer->stop();
-}
+{ timeoutTimer->stop(); }
 
 void FrameThreadHelper::setThread(BaseCalcThread * thread)
 {
@@ -72,9 +60,7 @@ void FrameThreadHelper::setThread(BaseCalcThread * thread)
 }
 
 BaseCalcThread * FrameThreadHelper::getThread(void)
-{
-    return this->thread;
-}
+{ return this->thread; }
 
 void FrameThreadHelper::onTimeout()
 {
@@ -83,11 +69,7 @@ void FrameThreadHelper::onTimeout()
 }
 
 void FrameThreadHelper::killThread()
-{
-    end();
-}
+{ end(); }
 
 void FrameThreadHelper::inputChanged()
-{
-    change();
-}
+{ change(); }

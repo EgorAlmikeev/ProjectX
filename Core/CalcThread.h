@@ -7,7 +7,7 @@ extern "C" {
     #include "../MathCore/XMath.h"
 }
 
-class BaseCalcThread : public QThread //от этого класса наследуют все потоковые классы в ThreadClasses
+class BaseCalcThread : public QThread //от этого класса наследуют все классы вычислительных потоков
 {
    Q_OBJECT    
 
@@ -18,9 +18,9 @@ public:
     void sendResult(double value);
 
 signals :
-    void sendErrorSignal    (int/* error code */);
-    void sendResultSignal   (double/* value */);
-    void sendResultSignal   (QString/* value */);
+    void sendErrorSignal    (int /*error code*/);
+    void sendResultSignal   (double /*value*/);
+    void sendResultSignal   (QString /*value*/);
 };
 
 class FrameThreadHelper : public QWidget //от эого класса наследуют все фреймы
@@ -28,7 +28,6 @@ class FrameThreadHelper : public QWidget //от эого класса насле
     Q_OBJECT
 
     BaseCalcThread * thread;
-
     bool isTimeOutUse;
 
 protected:

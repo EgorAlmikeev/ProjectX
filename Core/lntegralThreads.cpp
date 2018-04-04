@@ -1,6 +1,6 @@
 #include "IntegralThreads.h"
 
-IntThread::IntThread(QString func, double a, double b, int n, ModeInt mode)
+IntConstStepThread::IntConstStepThread(QString func, double a, double b, int n, ModeInt mode)
 {
     this->func = func;
     this->a = a;
@@ -9,7 +9,7 @@ IntThread::IntThread(QString func, double a, double b, int n, ModeInt mode)
     this->mode = mode;
 }
 
-void IntThread::run()
+void IntConstStepThread::run()
 {
     BaseCalcThread::run();
     
@@ -51,4 +51,42 @@ void IntThread::run()
         return;
 
     sendResult(ans);
+}
+
+IntFloatingStepThread::IntFloatingStepThread(QString func, double a, double b, double e, ModeInt mode)
+{
+    this->func = func;
+    this->a = a;
+    this->b = b;
+    this->e = e;
+    this->mode = mode;
+}
+
+void IntFloatingStepThread::sendResult(double value, int iterations)
+{ emit sendResultSignal(value, iterations); }
+
+void IntFloatingStepThread::run()
+{
+    double ans = 0;
+    int * iterations = new int;
+
+//свич понадобится если потом придется выбирать метод интегрирования с переменным шагом
+//    switch(mode)
+//    {
+//    case ModeIntDoubleCalc: IntDoubleCalc(..., iterations); break;
+//    case ModeIntМетодЕЗ: IntМетодЕЗ; break;
+//    default: ans = NAN;
+//    }
+
+    if(IsErrorCalc())
+    {
+        sendError(GetResultCode());
+        return;
+    }
+
+    if(IsCancel())
+        return;
+
+    ans = 1234; //затычка
+    sendResult(ans, *iterations);
 }

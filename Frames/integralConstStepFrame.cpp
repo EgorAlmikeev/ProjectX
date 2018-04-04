@@ -62,7 +62,7 @@ void IntegralConstStepFrame::change(void)
 
     mode = getMode();
 
-    setThread(new IntThread(func, a, b, n, mode));
+    setThread(new IntConstStepThread(func, a, b, n, mode));
 
     connect(getThread(), SIGNAL(sendResultSignal(double)), SLOT(onResult(double)));
     connect(getThread(), SIGNAL(sendErrorSignal(int)), SLOT(onError(int)));
