@@ -35,7 +35,9 @@ SOURCES += main.cpp\
     Core/lntegralThreads.cpp \
     Frames/integralFloatingStepFrame.cpp \
     Frames/integralMultipleFrame.cpp \
-    Frames/nonlinearEquationsFrame.cpp
+    Frames/nonlinearEquationsFrame.cpp \
+    MathCore/Algorithms/Equation.c \
+    Core/EquationThread.cpp
 
 HEADERS  += mainwindow.h \
     MathCore/MathParser.h \
@@ -53,7 +55,9 @@ HEADERS  += mainwindow.h \
     Frames/UIConsts.h \
     Frames/integralFloatingStepFrame.h \
     Frames/integralMultipleFrame.h \
-    Frames/nonlinearEquationsFrame.h
+    Frames/nonlinearEquationsFrame.h \
+    MathCore/Algorithms/Equation.h \
+    Core/EquationThread.h
 
 FORMS    += mainwindow.ui \
     Frames/helpDialogFrame.ui \

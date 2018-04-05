@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QtWidgets>
 #include "Frames/frames.h"
+#include "MathCore/XMath.h"
 
 namespace Ui
 {

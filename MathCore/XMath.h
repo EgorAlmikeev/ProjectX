@@ -37,5 +37,6 @@
 
 // Сишные алгоритмы ложить только сюда
 #include "Algorithms/Integral.h"
+#include "Algorithms/Equation.h"
 
 #endif // XMATH_H
