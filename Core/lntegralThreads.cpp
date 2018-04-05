@@ -116,6 +116,9 @@ void IntFloatingStepThread::run()
     sendResult(ans, iterations);
 }
 
+
+// IntMultipleThread
+
 IntMultipleThread::IntMultipleThread(QString func, double a, double b, double c, double d, int xn, int yn)
 {
     this-> func = func;
