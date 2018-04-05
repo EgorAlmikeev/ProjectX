@@ -42,14 +42,14 @@ void IntegralMultipleFrame::change()
     }
 
     c = Expression(QStrToCStr(ui->yLimitAEdit->text()));
-    if(IsNan(a))
+    if(IsNan(c))
     {
         showAnswer("Пределы Y: Неверный параметр a");
         return;
     }
 
     d = Expression(QStrToCStr(ui->yLimitBEdit->text()));
-    if(IsNan(b))
+    if(IsNan(d))
     {
         showAnswer("Пределы Y: Неверный параметр b");
         return;
