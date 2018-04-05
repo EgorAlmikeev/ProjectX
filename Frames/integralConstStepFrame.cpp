@@ -40,7 +40,7 @@ void IntegralConstStepFrame::change(void)
 
     if(a >= b)
     {
-        showAnswer("b должн быть больше a");
+        showAnswer("b должен быть больше a");
         return;
     }
 
@@ -48,7 +48,7 @@ void IntegralConstStepFrame::change(void)
 
     if(n <= 0)
     {
-        showAnswer("n должн быть больше 10");
+        showAnswer("n должен быть больше 0");
         return;
     }
 

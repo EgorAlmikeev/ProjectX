@@ -21,7 +21,7 @@ class IntConstStepThread : public BaseCalcThread
     int     n;
     ModeInt mode;
 
-public :
+public:
     IntConstStepThread(QString func, double a, double b, int n, ModeInt mode);
     void run();
 };
@@ -43,8 +43,25 @@ public:
 signals:
     void sendResultSignal(double /*value*/, int /*iterations*/);
 
-public :
+public:
     IntFloatingStepThread(QString func, double a, double b, double e, ModeInt mode);
+    void run();
+};
+
+class IntMultipleThread : public BaseCalcThread
+{
+    Q_OBJECT
+
+    QString func;
+    double  a;
+    double  b;
+    double  c;
+    double  d;
+    int     xn;
+    int     yn;
+
+public:
+    IntMultipleThread(QString func, double a, double b, double c, double d, int xn, int yn);
     void run();
 };
 

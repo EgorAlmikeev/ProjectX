@@ -115,3 +115,34 @@ void IntFloatingStepThread::run()
 
     sendResult(ans, iterations);
 }
+
+IntMultipleThread::IntMultipleThread(QString func, double a, double b, double c, double d, int xn, int yn)
+{
+    this-> func = func;
+    this-> a = a;
+    this-> b = b;
+    this-> c = c;
+    this-> d = d;
+    this-> xn = xn;
+    this-> yn = yn;
+}
+
+void IntMultipleThread::run()
+{
+    BaseCalcThread::run();
+
+    double ans;
+
+    ans = CalcDoubleInt(QStrToCStr(func), a, b, c, d, xn, yn);
+
+    if(IsErrorCalc())
+    {
+        sendError(GetResultCode());
+        return;
+    }
+
+    if(IsCancel())
+        return;
+
+    sendResult(ans);
+}

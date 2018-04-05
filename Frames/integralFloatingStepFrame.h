@@ -2,7 +2,7 @@
 #define INTEGRALFLOATINGSTEPFRAME_H
 
 #include <QWidget>
-#include "../X.h"
+#include "X.h"
 
 namespace Ui {
     class IntegralFloatingStepFrame;
