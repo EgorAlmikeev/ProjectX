@@ -12,42 +12,41 @@ class BaseCalcThread : public QThread //от этого класса насле�
    Q_OBJECT    
 
 public:
-
     void run();
     void sendError(ResultCode error);
     void sendResult(double value);
 
 signals :
-    void sendErrorSignal    (int /*error code*/);
-    void sendResultSignal   (double /*value*/);
-    void sendResultSignal   (QString /*value*/);
+    void sendResultSignal(double /*value*/);
+    void sendResultSignal(QString /*value*/);
+    void sendErrorSignal(int /*error code*/);
 };
 
 class FrameThreadHelper : public QWidget //от эого класса наследуют все фреймы
 {
     Q_OBJECT
 
-    BaseCalcThread * thread;
+    BaseCalcThread *thread;
     bool isTimeOutUse;
 
 protected:
-
-    QTimer * timeoutTimer;
+    QTimer *timeoutTimer;
 
 public:
-    FrameThreadHelper(QWidget * parent = 0);
+    FrameThreadHelper(QWidget *parent = 0);
     ~FrameThreadHelper(void);
 
-    void cancel(void);
-    void start(void);
     void end(void);
+    void start(void);
+    void cancel(void);
+
     virtual void change(void) = 0;
-    void setThread(BaseCalcThread * thread);
-    BaseCalcThread * getThread(void);
+    BaseCalcThread *getThread(void);
+
     void setTimeOutUse(bool isUse);
+    void setThread(BaseCalcThread *thread);
 
 protected slots:
-
     void onTimeout();
 };
 

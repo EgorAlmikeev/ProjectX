@@ -8,9 +8,7 @@ IntegralMultipleFrame::IntegralMultipleFrame(QWidget *parent) :
     ui(new Ui::IntegralMultipleFrame)
 {
     ui->setupUi(this);
-
-    this->setTimeOutUse(true);
-
+    setTimeOutUse(true);
     change();
 }
 
@@ -115,10 +113,8 @@ void IntegralMultipleFrame::onError(int code)
     end();
 
     if(code == CalcError)
-    {
         showAnswer(sSyntaxError);
-    }
-        else showAnswer(sIntTimeoutError);
+    else showAnswer(sIntTimeoutError);
 }
 
 void IntegralMultipleFrame::on_functionEdit_textChanged(const QString &arg1)

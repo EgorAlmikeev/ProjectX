@@ -6,7 +6,6 @@
 IntegralConstStepFrame::IntegralConstStepFrame(QWidget *parent) : FrameThreadHelper(parent), ui(new Ui::IntegralConstStepFrame)
 {
     ui->setupUi(this);
-
     change();
 }
 
@@ -86,10 +85,8 @@ void IntegralConstStepFrame::onError(int code)
     end();
 
     if(code == CalcError)
-    {
         showAnswer(sSyntaxError);
-    }
-        else showAnswer(sIntTimeoutError);
+    else showAnswer(sIntTimeoutError);
 }
 
 ModeInt IntegralConstStepFrame::getMode()

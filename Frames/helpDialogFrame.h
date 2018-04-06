@@ -16,7 +16,6 @@ public:
     ~HelpDialogFrame();
 
 signals:
-
     void themeChanged(int);
 
 private:

@@ -19,19 +19,13 @@ public:
     ~IntegralMultipleFrame();
 
 private slots:
-    void on_functionEdit_textChanged(const QString &arg1);
-
-    void on_xLimitAEdit_textChanged(const QString &arg1);
-
-    void on_xLimitBEdit_textChanged(const QString &arg1);
-
     void on_xIterationSpinBox_valueChanged(const QString &arg1);
-
-    void on_yLimitAEdit_textChanged(const QString &arg1);
-
-    void on_yLimitBEdit_textChanged(const QString &arg1);
-
     void on_yIterationSpinBox_valueChanged(const QString &arg1);
+    void on_functionEdit_textChanged(const QString &arg1);
+    void on_xLimitAEdit_textChanged(const QString &arg1);
+    void on_xLimitBEdit_textChanged(const QString &arg1);
+    void on_yLimitAEdit_textChanged(const QString &arg1);
+    void on_yLimitBEdit_textChanged(const QString &arg1);
 
     void onResult(double value);
     void onError(int code);

@@ -6,13 +6,8 @@
 IntegralFloatingStepFrame::IntegralFloatingStepFrame(QWidget *parent) : FrameThreadHelper(parent), ui(new Ui::IntegralFloatingStepFrame)
 {
     ui->setupUi(this);
-
-    QRegExpValidator * validator = new QRegExpValidator;
-    validator->setRegExp(QRegExp("^[+-]?[\\d]+($|[\\.][\\d]+|([\\.][\\d]+[Ee]|[Ee])[+-]?\\d+)$"));
-    ui->epsilonEdit->setValidator(validator);
-
-    this->setTimeOutUse(true);
-
+    setValidator();
+    setTimeOutUse(true);
     change();
 }
 
@@ -93,10 +88,8 @@ void IntegralFloatingStepFrame::onError(int code)
     end();
 
     if(code == CalcError)
-    {
         showAnswer(sSyntaxError);
-    }
-        else showAnswer(sIntTimeoutError);
+    else showAnswer(sIntTimeoutError);
 }
 
 ModeInt IntegralFloatingStepFrame::getMode()
@@ -113,11 +106,15 @@ ModeInt IntegralFloatingStepFrame::getMode()
         return ModeIntSimpson;
 }
 
+void IntegralFloatingStepFrame::setValidator()
+{
+    QRegExpValidator *validator = new QRegExpValidator;
+    validator->setRegExp(QRegExp("^[+-]?[\\d]+($|[\\.][\\d]+|([\\.][\\d]+[Ee]|[Ee])[+-]?\\d+)$"));
+    ui->epsilonEdit->setValidator(validator);
+}
+
 void IntegralFloatingStepFrame::on_epsilonEdit_textChanged(const QString &arg1)
 {
-//    double  min = 0.1,
-//            max = 0.00000000001;
-
     change();
 }
 

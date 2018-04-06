@@ -41,4 +41,6 @@ void EquationThread::run()
 }
 
 void EquationThread::sendResult(double value, int iterations)
-{ emit sendResultSignal(value, iterations); }
+{
+    emit sendResultSignal(value, iterations);
+}

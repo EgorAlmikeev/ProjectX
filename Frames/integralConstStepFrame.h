@@ -24,23 +24,17 @@ private slots:
     void on_functionEdit_textChanged(const QString &arg1);
     void on_limitAEdit_textChanged(const QString &arg1);
     void on_limitBEdit_textChanged(const QString &arg1);
+    void on_rightRectRadioButton_clicked();
+    void on_trapezoidRadioButton_clicked();
+    void on_parabolicRadioButton_clicked();
+    void on_leftRectRadioButton_clicked();
+    void on_midRectRadioButton_clicked();
 
     void onResult(double value);
     void onError(int code);
 
-
-    void on_midRectRadioButton_clicked();
-
-    void on_leftRectRadioButton_clicked();
-
-    void on_rightRectRadioButton_clicked();
-
-    void on_trapezoidRadioButton_clicked();
-
-    void on_parabolicRadioButton_clicked();
-
 private:
-    Ui::IntegralConstStepFrame * ui;
+    Ui::IntegralConstStepFrame *ui;
 
     void change();
 };

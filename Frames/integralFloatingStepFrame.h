@@ -14,33 +14,28 @@ class IntegralFloatingStepFrame : public FrameThreadHelper
     void showAnswer(QString ans);
     ModeInt getMode(void);
 
+    void setValidator();
+
 public:
     explicit IntegralFloatingStepFrame(QWidget *parent = 0);
     ~IntegralFloatingStepFrame();
 
 private slots:
-
     void on_functionEdit_textChanged(const QString &arg1);
+    void on_epsilonEdit_textChanged(const QString &arg1);
     void on_limitAEdit_textChanged(const QString &arg1);
     void on_limitBEdit_textChanged(const QString &arg1);
+    void on_rightRectRadioButton_clicked();
+    void on_trapezoidRadioButton_clicked();
+    void on_parabolicRadioButton_clicked();
+    void on_leftRectRadioButton_clicked();
+    void on_midRectRadioButton_clicked();
 
     void onResult(double value, int iterations);
     void onError(int code);
 
-    void on_epsilonEdit_textChanged(const QString &arg1);
-
-    void on_leftRectRadioButton_clicked();
-
-    void on_midRectRadioButton_clicked();
-
-    void on_rightRectRadioButton_clicked();
-
-    void on_trapezoidRadioButton_clicked();
-
-    void on_parabolicRadioButton_clicked();
-
 private:
-    Ui::IntegralFloatingStepFrame * ui;
+    Ui::IntegralFloatingStepFrame *ui;
 
     void change();
 };

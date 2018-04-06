@@ -18,12 +18,12 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 
-    QMap<QTreeWidgetItem*, QWidget *> * itemWidgetMapping;
+    QMap<QTreeWidgetItem *, QWidget *> *itemWidgetMapping;
 
     typedef struct
     {
         QString name;
-        QWidget* widget;
+        QWidget *widget;
     } TMember, *PMember;
 
     typedef struct
@@ -44,19 +44,14 @@ public:
     ~MainWindow();
 
 private slots:
-
     void on_menu_itemClicked(QTreeWidgetItem *item, int column);
-
     void on_menu_expanded(const QModelIndex &index);
-
     void on_menu_collapsed(const QModelIndex &index);
-
     void on_helpButton_clicked();
 
 private:
     Ui::MainWindow *ui;
-
-    HelpDialogFrame * helpDialogFrame = nullptr;
+    HelpDialogFrame *helpDialogFrame = nullptr;
 };
 
 #endif // MAINWINDOW_H
