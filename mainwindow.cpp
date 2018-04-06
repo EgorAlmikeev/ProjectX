@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "QLabel"
 #include "QTreeWidget"
+#include "Core/CalcThread.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -41,7 +42,7 @@ void MainWindow::createMenu()
     const int nolinearItemsCount = 2;
     TMember nolinearItems[nolinearItemsCount] =
     {
-        {"Метод Дихотомии", new NonlinearEquationsFrame(this, ModeEqDich)},
+        {"Метод Дихотомии", new NonlinearEquationsFrame(this, ModeEqHalfDiv)},
         {"Метод хорд",      new NonlinearEquationsFrame(this, ModeEqChord)}
     };
 
@@ -143,6 +144,7 @@ void MainWindow::on_menu_itemClicked(QTreeWidgetItem *item, int column)
     {
         ui->stackedWidget->setCurrentWidget(currentWidgetIterator.value());
         ui->frameName->setText(item->parent()->text(0) + ": " + item->text(0));
+        static_cast<FrameThreadHelper*>(currentWidgetIterator.value())->change();
     }
 }
 

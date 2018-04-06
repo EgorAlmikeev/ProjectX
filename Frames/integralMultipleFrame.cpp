@@ -9,7 +9,7 @@ IntegralMultipleFrame::IntegralMultipleFrame(QWidget *parent) :
 {
     ui->setupUi(this);
     setTimeOutUse(true);
-    change();
+    //change();
 }
 
 IntegralMultipleFrame::~IntegralMultipleFrame()

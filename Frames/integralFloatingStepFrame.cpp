@@ -8,7 +8,7 @@ IntegralFloatingStepFrame::IntegralFloatingStepFrame(QWidget *parent) : FrameThr
     ui->setupUi(this);
     validatorSetup();
     setTimeOutUse(true);
-    change();
+    //change();
 }
 
 IntegralFloatingStepFrame::~IntegralFloatingStepFrame()

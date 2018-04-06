@@ -6,7 +6,7 @@
 IntegralConstStepFrame::IntegralConstStepFrame(QWidget *parent) : FrameThreadHelper(parent), ui(new Ui::IntegralConstStepFrame)
 {
     ui->setupUi(this);
-    change();
+    //change();
 }
 
 IntegralConstStepFrame::~IntegralConstStepFrame()

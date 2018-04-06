@@ -18,7 +18,7 @@ class NonlinearEquationsFrame : public FrameThreadHelper
     void validatorSetup();
 
 public:
-    explicit NonlinearEquationsFrame(QWidget *parent = 0, ModeEq mode = ModeEqDich);
+    explicit NonlinearEquationsFrame(QWidget *parent, ModeEq mode);
     ~NonlinearEquationsFrame();
 
 private slots:

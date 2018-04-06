@@ -3,8 +3,8 @@
 
 #include "XCore.h"
 
-#define ModeEqDich      0
-#define ModeEqChord     1
+#define ModeEqHalfDiv 1
+#define ModeEqChord 2
 
 typedef int ModeEq;
 

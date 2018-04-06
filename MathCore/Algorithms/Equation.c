@@ -2,7 +2,7 @@
 #include "../MathParser.h"
 #include "../MathUtils.h"
 
-int Sign(double v)
+static int Sign(double v)
 {
     if(v < 0)
         return -1;
@@ -11,7 +11,7 @@ int Sign(double v)
     else return 0;
 }
 
-double HalfDiv(char* func, double a, double b, double epsilon, int* countRef)
+double EqHalfDiv(char* func, double a, double b, double epsilon, int* countRef)
 {
     double c = 0;
     int count;
@@ -53,7 +53,7 @@ double HalfDiv(char* func, double a, double b, double epsilon, int* countRef)
     return c;
 }
 
-double Chord(char* func, double a, double b, double epsilon, int* countRef)
+double EqChord(char* func, double a, double b, double epsilon, int* countRef)
 {
     double t, aOld;
     int count;

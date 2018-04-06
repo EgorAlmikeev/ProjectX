@@ -11,7 +11,7 @@ NonlinearEquationsFrame::NonlinearEquationsFrame(QWidget *parent, ModeEq mode) :
     this->mode = mode;
     validatorSetup();
     setTimeOutUse(true);
-    change();
+    //change();
 }
 
 NonlinearEquationsFrame::~NonlinearEquationsFrame()
@@ -26,44 +26,44 @@ void NonlinearEquationsFrame::change()
 
     cancel();
 
-//    a = Expression(QStrToCStr(ui->limitAEdit->text()));
-//    if(IsNan(a))
-//    {
-//        showAnswer("Неверный параметр a");
-//        return;
-//    }
+    a = Expression(QStrToCStr(ui->limitAEdit->text()));
+    if(IsNan(a))
+    {
+        showAnswer("Неверный параметр a");
+        return;
+    }
 
-//    b = Expression(QStrToCStr(ui->limitBEdit->text()));
-//    if(IsNan(b))
-//    {
-//        showAnswer("Неверный параметр b");
-//        return;
-//    }
+    b = Expression(QStrToCStr(ui->limitBEdit->text()));
+    if(IsNan(b))
+    {
+        showAnswer("Неверный параметр b");
+        return;
+    }
 
-//    if(a >= b)
-//    {
-//        showAnswer("b должн быть больше a");
-//        return;
-//    }
+    if(a >= b)
+    {
+        showAnswer("b должн быть больше a");
+        return;
+    }
 
-//    e = ui->epsilonEdit->text().toDouble();
+    e = ui->epsilonEdit->text().toDouble();
 
-//    if(e >= 1 || e <= 1e-99)
-//    {
-//        showAnswer("Точность должна быть в пределах (1..1e-99)");
-//        return;
-//    }
+    if(e >= 1 || e <= 1e-99)
+    {
+        showAnswer("Точность должна быть в пределах (1..1e-99)");
+        return;
+    }
 
-//    func = ui->equationEdit->text();
+    func = ui->equationEdit->text();
 
-//    setThread(new EquationThread(func, a, b, e, mode));
+    setThread(new EquationThread(func, a, b, e, mode));
 
-//    connect(getThread(), SIGNAL(sendResultSignal(double, int)), SLOT(onResult(double,int)));
-//    connect(getThread(), SIGNAL(sendErrorSignal(int)), SLOT(onError(int)));
+    connect(getThread(), SIGNAL(sendResultSignal(double, int)), SLOT(onResult(double,int)));
+    connect(getThread(), SIGNAL(sendErrorSignal(int)), SLOT(onError(int)));
 
-//    start();
+    start();
 
-//    showAnswer(sCalculating);
+    showAnswer(sCalculating);
 }
 
 void NonlinearEquationsFrame::showAnswer(QString ans)

@@ -16,13 +16,16 @@ void EquationThread::run()
     double ans;
 
     switch (mode) {
-    case ModeEqDich:
-        ans = HalfDiv(QStrToCStr(func), a, b, e, &iterations);
-        break;
-    case ModeEqChord:
-        ans = Chord(QStrToCStr(func), a, b, e, &iterations);
-        break;
-    default:;
+        case ModeEqHalfDiv:
+            ans = EqHalfDiv(QStrToCStr(func), a, b, e, &iterations);
+            break;
+
+        case ModeEqChord:
+            ans = EqChord(QStrToCStr(func), a, b, e, &iterations);
+            break;
+
+        default:
+            ans = 0;
     }
 
     if(IsErrorCalc())
