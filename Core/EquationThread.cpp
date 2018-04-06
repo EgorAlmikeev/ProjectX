@@ -17,13 +17,10 @@ void EquationThread::run()
 
     switch (mode) {
     case ModeEqDich:
-        ans = HalfDiv(QStrToCStr(func), a, b, &iterations, e);
+        ans = HalfDiv(QStrToCStr(func), a, b, e, &iterations);
         break;
     case ModeEqChord:
-//        ans = метод хорд;
-        break;
-    case ModeEqNewton:
-//        ans = метод ньютона;
+        ans = Chord(QStrToCStr(func), a, b, e, &iterations);
         break;
     default:;
     }

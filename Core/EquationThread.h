@@ -5,7 +5,6 @@
 
 #define ModeEqDich      0
 #define ModeEqChord     1
-#define ModeEqNewton    2
 
 typedef int ModeEq;
 
