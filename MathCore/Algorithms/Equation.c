@@ -11,23 +11,27 @@ int Sign(double v)
     else return 0;
 }
 
-double HalfDiv(char* func, double a, double b, int* count, double epsilon)
+double HalfDiv(char* func, double a, double b, double epsilon, int* countRef)
 {
-    double c;
+    double c = 0;
+    int count;
     
     count = 0;
     
     if (fabs(FunctionX(func, a)) < epsilon)
     {
         CheckSyntax();
-        CheckCancel();
+        
+        if(countRef != NULL)
+            *countRef = count;
         return a;
     }
     
     if (fabs(FunctionX(func,b)) < epsilon)
     {
         CheckSyntax();
-        CheckCancel();
+        if(countRef != NULL)
+            *countRef = count;
         return b;
     }
     while (fabs(b - a) > epsilon)
@@ -41,9 +45,43 @@ double HalfDiv(char* func, double a, double b, int* count, double epsilon)
         else
             a = c;
         CheckSyntax();
+        CheckCancel();
     }
-    CheckCancel();
     
+    if(countRef != NULL)
+        *countRef = count;
     return c;
 }
 
+double Corde(char* func, double a, double b, double epsilon, int* countRef)
+{
+    double t, aOld;
+    int count;
+    
+    count = 0;
+    
+    if (a > b)
+    {
+        t = b;
+        b = a;
+        a = t;
+    }
+    
+    a = a - (FunctionX(func, a) * (b - a)) / (float)(FunctionX(func, b) - FunctionX(func, a));
+    CheckSyntax();
+    do
+    {
+        count = count + 1;
+    
+        aOld = a;
+        a = a - (FunctionX(func, a) * (b - a)) / (float)(FunctionX(func, b) - FunctionX(func, a));
+        CheckSyntax();
+        CheckCancel();
+
+    }
+    while (fabs(a - aOld) > epsilon);
+    
+    if(countRef != NULL)
+        *countRef = count;
+    return a;
+}
