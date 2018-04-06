@@ -9,5 +9,6 @@ extern "C" {
 
 // Тут все ссылки на все вычислительные треды
 #include "Core/IntegralThreads.h"
+#include "Core/EquationThread.h"
 
 #endif // X_H

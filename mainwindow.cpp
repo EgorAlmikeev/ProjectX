@@ -38,12 +38,11 @@ void MainWindow::createMenu()
         {"Метод Рунге-Кутты",   new QLabel("Метод Рунге-Кутты")}
     };
 
-    const int nolinearItemsCount = 3;
+    const int nolinearItemsCount = 2;
     TMember nolinearItems[nolinearItemsCount] =
     {
-        {"Метод Дихотомии",             new NonlinearEquationsFrame},
-        {"Метод касательных (Ньютона)", new NonlinearEquationsFrame},
-        {"Метод хорд",                  new NonlinearEquationsFrame}
+        {"Метод Дихотомии", new NonlinearEquationsFrame(this, ModeEqDich)},
+        {"Метод хорд",      new NonlinearEquationsFrame(this, ModeEqChord)}
     };
 
     const int simpleFunctionsItemsCount = 2;

@@ -6,7 +6,7 @@
 IntegralFloatingStepFrame::IntegralFloatingStepFrame(QWidget *parent) : FrameThreadHelper(parent), ui(new Ui::IntegralFloatingStepFrame)
 {
     ui->setupUi(this);
-    setValidator();
+    validatorSetup();
     setTimeOutUse(true);
     change();
 }
@@ -18,8 +18,8 @@ IntegralFloatingStepFrame::~IntegralFloatingStepFrame()
 
 void IntegralFloatingStepFrame::change(void)
 {
-    double a, b, e;
     QString func;
+    double a, b, e;
     ModeInt mode = ModeIntLeftRect; //default mode
 
     cancel();
@@ -106,7 +106,7 @@ ModeInt IntegralFloatingStepFrame::getMode()
         return ModeIntSimpson;
 }
 
-void IntegralFloatingStepFrame::setValidator()
+void IntegralFloatingStepFrame::validatorSetup()
 {
     QRegExpValidator *validator = new QRegExpValidator;
     validator->setRegExp(QRegExp("^[+-]?[\\d]+($|[\\.][\\d]+|([\\.][\\d]+[Ee]|[Ee])[+-]?\\d+)$"));

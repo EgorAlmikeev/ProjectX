@@ -14,7 +14,7 @@ class IntegralFloatingStepFrame : public FrameThreadHelper
     void showAnswer(QString ans);
     ModeInt getMode(void);
 
-    void setValidator();
+    void validatorSetup();
 
 public:
     explicit IntegralFloatingStepFrame(QWidget *parent = 0);
