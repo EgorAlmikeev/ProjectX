@@ -15,9 +15,16 @@ double EqHalfDiv(char* func, double a, double b, double epsilon, int* countRef)
 {
     double c = 0;
     int count;
+
+    if(Sign(FunctionX(func, a)) == Sign(FunctionX(func, b)))
+    {
+        if(countRef != NULL)
+            *countRef = 0;
+        return NAN;
+    }
     
     count = 0;
-    
+
     if (fabs(FunctionX(func, a)) < epsilon)
     {
         CheckSyntax();
@@ -27,20 +34,22 @@ double EqHalfDiv(char* func, double a, double b, double epsilon, int* countRef)
         return a;
     }
     
-    if (fabs(FunctionX(func,b)) < epsilon)
+    if (fabs(FunctionX(func, b)) < epsilon)
     {
         CheckSyntax();
+
         if(countRef != NULL)
             *countRef = count;
         return b;
     }
+
     while (fabs(b - a) > epsilon)
     {
-        count += 1;
+        count++;
     
         c = a + (b - a) / (float)2;
     
-        if (Sign(FunctionX(func,a)) != Sign(FunctionX(func,c)))
+        if (Sign(FunctionX(func, a)) != Sign(FunctionX(func, c)))
             b = c;
         else
             a = c;
@@ -55,31 +64,27 @@ double EqHalfDiv(char* func, double a, double b, double epsilon, int* countRef)
 
 double EqChord(char* func, double a, double b, double epsilon, int* countRef)
 {
-    double t, aOld;
     int count;
     
-    count = 0;
-    
-    if (a > b)
+    if(fabs(b - a) < epsilon)
     {
-        t = b;
-        b = a;
-        a = t;
+        if(countRef != NULL)
+            *countRef = 0;
+        return NAN;
     }
+
+    count = 0;   
     
-    a = a - (FunctionX(func, a) * (b - a)) / (float)(FunctionX(func, b) - FunctionX(func, a));
-    CheckSyntax();
-    do
+    while(fabs(b - a) > epsilon)
     {
-        count = count + 1;
-    
-        aOld = a;
-        a = a - (FunctionX(func, a) * (b - a)) / (float)(FunctionX(func, b) - FunctionX(func, a));
+        count++;
+
+        a = b - (b - a) * FunctionX(func, b) / (FunctionX(func, b) - FunctionX(func, a));
+        b = a + (a - b) * FunctionX(func, a) / (FunctionX(func, a) - FunctionX(func, b));
+
         CheckSyntax();
         CheckCancel();
-
     }
-    while (fabs(a - aOld) > epsilon);
     
     if(countRef != NULL)
         *countRef = count;

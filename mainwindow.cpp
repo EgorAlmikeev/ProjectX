@@ -43,7 +43,7 @@ void MainWindow::createMenu()
     TMember nolinearItems[nolinearItemsCount] =
     {
         {"Метод Дихотомии", new NonlinearEquationsFrame(this, ModeEqHalfDiv)},
-        {"Метод хорд",      new NonlinearEquationsFrame(this, ModeEqChord)}
+        {"Метод Хорд",      new NonlinearEquationsFrame(this, ModeEqChord)}
     };
 
     const int simpleFunctionsItemsCount = 2;

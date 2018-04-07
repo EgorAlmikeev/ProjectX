@@ -29,28 +29,21 @@ void NonlinearEquationsFrame::change()
     a = Expression(QStrToCStr(ui->limitAEdit->text()));
     if(IsNan(a))
     {
-        showAnswer("Неверный параметр a");
+        showAnswer("Неверный параметр ""от""");
         return;
     }
 
     b = Expression(QStrToCStr(ui->limitBEdit->text()));
     if(IsNan(b))
     {
-        showAnswer("Неверный параметр b");
-        return;
-    }
-
-    if(a >= b)
-    {
-        showAnswer("b должн быть больше a");
+        showAnswer("Неверный параметр ""до""");
         return;
     }
 
     e = ui->epsilonEdit->text().toDouble();
-
-    if(e >= 1 || e <= 1e-99)
+    if(e > 1 || e < 1e-99)
     {
-        showAnswer("Точность должна быть в пределах (1..1e-99)");
+        showAnswer("Точность должна быть в пределах [1..1e-99]");
         return;
     }
 
@@ -79,7 +72,10 @@ void NonlinearEquationsFrame::onResult(double value, int iterations)
     if(!IsNan(value))
         showAnswer(QString::number(value));
     else
-        showAnswer(sNanError);
+    {
+        showAnswer(sSpanError);
+        return;
+    }
 
     ui->interationCountLabel->setText(sIterationsCountForAccuracy(QString::number(iterations)));
 }
@@ -90,7 +86,7 @@ void NonlinearEquationsFrame::onError(int code)
 
     if(code == CalcError)
         showAnswer(sSyntaxError);
-    else showAnswer(sIntTimeoutError);
+    else showAnswer(sEqTimeoutError);
 }
 
 void NonlinearEquationsFrame::validatorSetup()

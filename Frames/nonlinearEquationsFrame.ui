@@ -123,7 +123,7 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>0</string>
+           <string>-100</string>
           </property>
           <property name="frame">
            <bool>true</bool>
@@ -136,7 +136,7 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>sin(x)</string>
+           <string>x^3-6*x^2+12*x-35</string>
           </property>
           <property name="frame">
            <bool>true</bool>
@@ -172,7 +172,7 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>pi</string>
+           <string>100</string>
           </property>
           <property name="frame">
            <bool>true</bool>
@@ -182,7 +182,7 @@
         <item row="3" column="2" colspan="4">
          <widget class="QLineEdit" name="epsilonEdit">
           <property name="text">
-           <string>0.001</string>
+           <string>0.00001</string>
           </property>
           <property name="maxLength">
            <number>13</number>
