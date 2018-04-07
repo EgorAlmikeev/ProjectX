@@ -144,7 +144,8 @@ void MainWindow::on_menu_itemClicked(QTreeWidgetItem *item, int column)
     {
         ui->stackedWidget->setCurrentWidget(currentWidgetIterator.value());
         ui->frameName->setText(item->parent()->text(0) + ": " + item->text(0));
-        static_cast<FrameThreadHelper*>(currentWidgetIterator.value())->change();
+        if(dynamic_cast<FrameThreadHelper*>(currentWidgetIterator.value()))
+            static_cast<FrameThreadHelper*>(currentWidgetIterator.value())->change();
     }
 }
 
