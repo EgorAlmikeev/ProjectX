@@ -37,7 +37,8 @@ SOURCES += main.cpp\
     Frames/integralMultipleFrame.cpp \
     Frames/nonlinearEquationsFrame.cpp \
     MathCore/Algorithms/Equation.c \
-    Core/EquationThread.cpp
+    Core/EquationThread.cpp \
+    Frames/diffEqEulerMethodFrame.cpp
 
 HEADERS  += mainwindow.h \
     MathCore/MathParser.h \
@@ -57,14 +58,16 @@ HEADERS  += mainwindow.h \
     Frames/integralMultipleFrame.h \
     Frames/nonlinearEquationsFrame.h \
     MathCore/Algorithms/Equation.h \
-    Core/EquationThread.h
+    Core/EquationThread.h \
+    Frames/diffEqEulerMethodFrame.h
 
 FORMS    += mainwindow.ui \
     Frames/helpDialogFrame.ui \
     Frames/integralConstStepFrame.ui \
     Frames/integralFloatingStepFrame.ui \
     Frames/integralMultipleFrame.ui \
-    Frames/nonlinearEquationsFrame.ui
+    Frames/nonlinearEquationsFrame.ui \
+    Frames/diffEqEulerMethodFrame.ui
 
 RESOURCES += \
     res/res.qrc

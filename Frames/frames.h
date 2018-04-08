@@ -10,4 +10,6 @@
 
 #include "nonlinearEquationsFrame.h"
 
+#include "diffEqEulerMethodFrame.h"
+
 #endif // FRAMES_H
