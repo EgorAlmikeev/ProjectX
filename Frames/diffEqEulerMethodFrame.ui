@@ -214,6 +214,11 @@ x = 2.4; y = 33;</string>
  </widget>
  <tabstops>
   <tabstop>functionEdit</tabstop>
+  <tabstop>xEdit</tabstop>
+  <tabstop>yEdit</tabstop>
+  <tabstop>stepEdit</tabstop>
+  <tabstop>iterationSpinBox</tabstop>
+  <tabstop>answerEdit</tabstop>
  </tabstops>
  <resources/>
  <connections/>

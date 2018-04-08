@@ -362,6 +362,8 @@
   <tabstop>leftRectRadioButton</tabstop>
   <tabstop>midRectRadioButton</tabstop>
   <tabstop>rightRectRadioButton</tabstop>
+  <tabstop>trapezoidRadioButton</tabstop>
+  <tabstop>parabolicRadioButton</tabstop>
   <tabstop>limitAEdit</tabstop>
   <tabstop>limitBEdit</tabstop>
   <tabstop>functionEdit</tabstop>
