@@ -38,7 +38,8 @@ SOURCES += main.cpp\
     Frames/nonlinearEquationsFrame.cpp \
     MathCore/Algorithms/Equation.c \
     Core/EquationThread.cpp \
-    Frames/diffEqEulerMethodFrame.cpp
+    Frames/diffEqEulerMethodFrame.cpp \
+    Core/diffEqEulerMethodThread.cpp
 
 HEADERS  += mainwindow.h \
     MathCore/MathParser.h \
@@ -59,7 +60,8 @@ HEADERS  += mainwindow.h \
     Frames/nonlinearEquationsFrame.h \
     MathCore/Algorithms/Equation.h \
     Core/EquationThread.h \
-    Frames/diffEqEulerMethodFrame.h
+    Frames/diffEqEulerMethodFrame.h \
+    Core/diffEqEulerMethodThread.h
 
 FORMS    += mainwindow.ui \
     Frames/helpDialogFrame.ui \

@@ -12,6 +12,8 @@ class DiffEqEulerMethodFrame : public FrameThreadHelper
 {
     Q_OBJECT
 
+    void showAnswer(QString ans);
+
 public:
     explicit DiffEqEulerMethodFrame(QWidget *parent = 0);
     ~DiffEqEulerMethodFrame();
@@ -23,8 +25,8 @@ private slots:
     void on_stepEdit_textChanged(const QString &arg1);
     void on_iterationSpinBox_valueChanged(int arg1);
 
-    void onResult(double value);
-    void onError(double code);
+    void onResult();
+    void onError(int code);
 
 private:
     Ui::DiffEqEulerMethodFrame *ui;

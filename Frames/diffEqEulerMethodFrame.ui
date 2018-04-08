@@ -108,10 +108,10 @@
            <bool>true</bool>
           </property>
           <property name="minimum">
-           <number>100</number>
+           <number>5</number>
           </property>
           <property name="maximum">
-           <number>10000000</number>
+           <number>1000</number>
           </property>
           <property name="singleStep">
            <number>100</number>
