@@ -114,7 +114,7 @@
            <number>1000</number>
           </property>
           <property name="singleStep">
-           <number>100</number>
+           <number>10</number>
           </property>
           <property name="displayIntegerBase">
            <number>10</number>
