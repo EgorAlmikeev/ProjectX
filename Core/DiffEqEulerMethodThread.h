@@ -12,6 +12,7 @@ class DiffEqEulerMethodThread : public BaseCalcThread
     double h;
     double x0;
     double y0;
+    PointFArray XYArray = nullptr;
 
 public:
     void sendResult();
@@ -20,7 +21,7 @@ signals:
     void sendResultSignal();
 
 public:
-    DiffEqEulerMethodThread(QString func, double x0, double y0, int n, double h);
+    DiffEqEulerMethodThread(QString func, double x0, double y0, int n, double h, PointFArray XYArray);
     void run();
 };
 

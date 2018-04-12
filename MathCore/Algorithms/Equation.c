@@ -90,20 +90,3 @@ double EqChord(char* func, double a, double b, double epsilon, int* countRef)
         *countRef = count;
     return a;
 }
-
-double DifferentialEuler(char* func, double x0, double y0, int n, double h, PointFArray m)
-{
-    int i;
-    
-    for (i = 0; i <= n; i++)
-    {
-        m[i].x = x0; //передаю в массив
-        m[i].y = y0;
-        y0 += h * FunctionXY(func, x0, y0);
-        x0 += h;
-        CheckSyntax();
-        CheckCancel();
-    }
-    
-    return 0; //пока так
-}

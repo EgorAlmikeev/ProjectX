@@ -17,7 +17,7 @@ DiffEqEulerMethodFrame::~DiffEqEulerMethodFrame()
 
 void DiffEqEulerMethodFrame::change()
 {
-    int n;
+    qDebug() << "\n\n\nchange";
     double h, x0, y0;
     QString func;
 
@@ -44,9 +44,9 @@ void DiffEqEulerMethodFrame::change()
         return;
     }
 
-    n = ui->iterationSpinBox->value();
+    XYArrayLength = ui->iterationSpinBox->value();
 
-    if(n < 5 || n > 1000)
+    if(XYArrayLength < 5 || XYArrayLength > 1000)
     {
         showAnswer("n должен быть от 5 до 1000");
         return;
@@ -54,10 +54,24 @@ void DiffEqEulerMethodFrame::change()
 
     func = ui->functionEdit->text();
 
-//    setThread(new DiffEqEulerMethodThread(func, x0, y0, n, h));
-//    connect(getThread(), SIGNAL(sendResultSignal()), SLOT(onResult(double)));
-//    connect(getThread(), SIGNAL(sendErrorSignal(int)), SLOT(onError(int)));
-//    start();
+    if(XYArray == nullptr)
+    {
+        qDebug() << "try to malloc";
+        XYArray = (PointFArray) malloc(sizeof(TPointF) * XYArrayLength);
+        qDebug() << "success malloc";
+    }
+    else
+    {
+        qDebug() << "try to free";
+        free(XYArray);
+        qDebug() << "success free";
+        XYArray = (PointFArray) malloc(sizeof(TPointF) * XYArrayLength);
+    }
+
+    setThread(new DiffEqEulerMethodThread(func, x0, y0, XYArrayLength, h, XYArray));
+    connect(getThread(), SIGNAL(sendResultSignal()), SLOT(onResult()));
+    connect(getThread(), SIGNAL(sendErrorSignal(int)), SLOT(onError(int)));
+    start();
 
     showAnswer(sCalculating);
 }
@@ -71,6 +85,28 @@ void DiffEqEulerMethodFrame::showAnswer(QString ans)
 void DiffEqEulerMethodFrame::onResult()
 {
     end();
+
+    qDebug() << "onResult";
+
+    ui->answerEdit->clear();
+
+    if(XYArray != nullptr)
+    {
+        for(int i = 0; i < XYArrayLength; ++i)
+        {
+            ui->answerEdit->appendPlainText(QString::number(i) +
+                                            " : x=" + QString::number(XYArray[i].x) +
+                                            "; y=" + QString::number(XYArray[i].y));
+            qDebug() << QString::number(i) +
+                        " : x=" + QString::number(XYArray[i].x) +
+                        "; y=" + QString::number(XYArray[i].y);
+        }
+
+        qDebug() << "try to free";
+        free(XYArray);
+        XYArray = nullptr;
+        qDebug() << "success free";
+    }
 
 //    if(!IsNan(value))
 //        showAnswer(QString::number(value));
@@ -110,4 +146,10 @@ void DiffEqEulerMethodFrame::on_stepEdit_textChanged(const QString &arg1)
 void DiffEqEulerMethodFrame::on_iterationSpinBox_valueChanged(int arg1)
 {
     change();
+}
+
+void DiffEqEulerMethodFrame::hideEvent(QHideEvent *event)
+{
+    if(XYArray != nullptr)
+        free(XYArray);
 }
