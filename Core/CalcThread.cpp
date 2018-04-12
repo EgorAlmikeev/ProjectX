@@ -81,6 +81,6 @@ void FrameThreadHelper::end()
 
 void FrameThreadHelper::hideEvent(QHideEvent *event)
 {
-    end();
     cancel();
+    end();
 }
