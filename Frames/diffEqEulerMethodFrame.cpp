@@ -54,26 +54,30 @@ void DiffEqEulerMethodFrame::change()
 
     func = ui->functionEdit->text();
 
-    if(XYArray == nullptr)
+    try
     {
-        qDebug() << "try to malloc";
-        XYArray = (PointFArray) malloc(sizeof(TPointF) * XYArrayLength);
-        qDebug() << "success malloc";
+        if(XYArray == nullptr)
+        {
+            XYArray = (PointFArray) malloc(sizeof(TPointF) * XYArrayLength);
+        }
+        else
+        {
+            free(XYArray);
+            XYArray = (PointFArray) malloc(sizeof(TPointF) * XYArrayLength);
+        }
+
+        setThread(new DiffEqEulerMethodThread(func, x0, y0, XYArrayLength, h, XYArray));
+        connect(getThread(), SIGNAL(sendResultSignal()), SLOT(onResult()));
+        connect(getThread(), SIGNAL(sendErrorSignal(int)), SLOT(onError(int)));
+        start();
+
+        showAnswer(sCalculating);
     }
-    else
+    catch(std::bad_alloc)
     {
-        qDebug() << "try to free";
-        free(XYArray);
-        qDebug() << "success free";
-        XYArray = (PointFArray) malloc(sizeof(TPointF) * XYArrayLength);
+        qDebug() << "change:bad_alloc";
+        return;
     }
-
-    setThread(new DiffEqEulerMethodThread(func, x0, y0, XYArrayLength, h, XYArray));
-    connect(getThread(), SIGNAL(sendResultSignal()), SLOT(onResult()));
-    connect(getThread(), SIGNAL(sendErrorSignal(int)), SLOT(onError(int)));
-    start();
-
-    showAnswer(sCalculating);
 }
 
 void DiffEqEulerMethodFrame::showAnswer(QString ans)
@@ -86,26 +90,30 @@ void DiffEqEulerMethodFrame::onResult()
 {
     end();
 
-    qDebug() << "onResult";
-
     ui->answerEdit->clear();
 
-    if(XYArray != nullptr)
+    try
     {
-        for(int i = 0; i < XYArrayLength; ++i)
+        if(XYArray != nullptr)
         {
-            ui->answerEdit->appendPlainText(QString::number(i) +
-                                            " : x=" + QString::number(XYArray[i].x) +
-                                            "; y=" + QString::number(XYArray[i].y));
-            qDebug() << QString::number(i) +
-                        " : x=" + QString::number(XYArray[i].x) +
-                        "; y=" + QString::number(XYArray[i].y);
-        }
+            for(int i = 0; i < XYArrayLength; ++i)
+            {
+                ui->answerEdit->appendPlainText(QString::number(i) +
+                                                " : x=" + QString::number(XYArray[i].x) +
+                                                "; y=" + QString::number(XYArray[i].y));
+                qDebug() << QString::number(i) +
+                            " : x=" + QString::number(XYArray[i].x) +
+                            "; y=" + QString::number(XYArray[i].y);
+            }
 
-        qDebug() << "try to free";
-        free(XYArray);
-        XYArray = nullptr;
-        qDebug() << "success free";
+            free(XYArray);
+            XYArray = nullptr;
+        }
+    }
+    catch(std::bad_alloc)
+    {
+        qDebug() << "onResult:bad_alloc";
+        return;
     }
 
 //    if(!IsNan(value))
@@ -153,5 +161,8 @@ void DiffEqEulerMethodFrame::hideEvent(QHideEvent *event)
     FrameThreadHelper::hideEvent(event);
 
     if(XYArray != nullptr)
+    {
         free(XYArray);
+        XYArray = nullptr;
+    }
 }
