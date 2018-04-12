@@ -25,7 +25,7 @@ void EquationThread::run()
             break;
 
         default:
-            ans = 0;
+            return;
     }
 
     if(IsErrorCalc())

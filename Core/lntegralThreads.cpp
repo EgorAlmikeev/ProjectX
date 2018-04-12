@@ -99,7 +99,8 @@ void IntFloatingStepThread::run()
             funcRef = IntSimpson;
             break;
 
-        default:;
+        default:
+            return;
     }
 
     ans = IntDoubleCalc(funcRef, QStrToCStr(func), a, b, e, &iterations);
