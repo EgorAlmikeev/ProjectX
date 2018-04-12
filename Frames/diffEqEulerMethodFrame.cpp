@@ -150,6 +150,8 @@ void DiffEqEulerMethodFrame::on_iterationSpinBox_valueChanged(int arg1)
 
 void DiffEqEulerMethodFrame::hideEvent(QHideEvent *event)
 {
+    FrameThreadHelper::hideEvent(event);
+
     if(XYArray != nullptr)
         free(XYArray);
 }

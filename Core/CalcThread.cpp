@@ -78,3 +78,9 @@ void FrameThreadHelper::end()
 {
     this->thread = nullptr;
 }
+
+void FrameThreadHelper::hideEvent(QHideEvent *event)
+{
+    end();
+    cancel();
+}

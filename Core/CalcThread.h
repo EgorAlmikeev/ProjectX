@@ -31,6 +31,7 @@ class FrameThreadHelper : public QWidget //от эого класса насле
 
 protected:
     QTimer *timeoutTimer;
+    void hideEvent(QHideEvent *event);
 
 public:
     FrameThreadHelper(QWidget *parent = 0);
