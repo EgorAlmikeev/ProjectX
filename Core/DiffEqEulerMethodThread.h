@@ -7,21 +7,20 @@ class DiffEqEulerMethodThread : public BaseCalcThread
 {
     Q_OBJECT
 
-    QString func;
-    int n;
-    double h;
-    double x0;
-    double y0;
-    PointFArray XYArray = nullptr;
+    QString     func;
+    double      x0;
+    double      y0;
+    int         n;
+    double      h;
 
 public:
-    void sendResult();
+    void sendResult(PointFArray value);
 
 signals:
-    void sendResultSignal();
+    void sendResultSignal(PointFArray, int);
 
 public:
-    DiffEqEulerMethodThread(QString func, double x0, double y0, int n, double h, PointFArray XYArray);
+    DiffEqEulerMethodThread(QString func, double x0, double y0, int n, double h);
     void run();
 };
 

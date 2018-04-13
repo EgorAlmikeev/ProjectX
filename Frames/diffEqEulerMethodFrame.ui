@@ -204,6 +204,9 @@
      <property name="title">
       <string>Ответ</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <property name="topMargin">
        <number>9</number>

@@ -13,8 +13,6 @@ class DiffEqEulerMethodFrame : public FrameThreadHelper
     Q_OBJECT
 
     void showAnswer(QString ans);
-    PointFArray XYArray = nullptr;
-    int XYArrayLength;
 
 public:
     explicit DiffEqEulerMethodFrame(QWidget *parent = 0);
@@ -27,13 +25,12 @@ private slots:
     void on_stepEdit_textChanged(const QString &arg1);
     void on_iterationSpinBox_valueChanged(int arg1);
 
-    void onResult();
+    void onResult(PointFArray value, int n);
     void onError(int code);
 
 private:
     Ui::DiffEqEulerMethodFrame *ui;
     void change();
-    void hideEvent(QHideEvent *event);
 };
 
 #endif // DIFFEQEULERMETHODFRAME_H

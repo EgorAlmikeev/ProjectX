@@ -1,5 +1,6 @@
 #include "diffEqEulerMethodFrame.h"
 #include "ui_diffEqEulerMethodFrame.h"
+#include <QMetaType>
 
 #include "UIConsts.h"
 
@@ -8,6 +9,8 @@ DiffEqEulerMethodFrame::DiffEqEulerMethodFrame(QWidget *parent) :
     ui(new Ui::DiffEqEulerMethodFrame)
 {
     ui->setupUi(this);
+
+    qRegisterMetaType<PointFArray>("PointFArray");
 }
 
 DiffEqEulerMethodFrame::~DiffEqEulerMethodFrame()
@@ -20,6 +23,7 @@ void DiffEqEulerMethodFrame::change()
     qDebug() << "\n\n\nchange";
     double h, x0, y0;
     QString func;
+    int n;
 
     cancel();
 
@@ -44,9 +48,9 @@ void DiffEqEulerMethodFrame::change()
         return;
     }
 
-    XYArrayLength = ui->iterationSpinBox->value();
+    n = ui->iterationSpinBox->value();
 
-    if(XYArrayLength < 5 || XYArrayLength > 1000)
+    if(n < 5 || n > 1000)
     {
         showAnswer("n должен быть от 5 до 1000");
         return;
@@ -54,30 +58,12 @@ void DiffEqEulerMethodFrame::change()
 
     func = ui->functionEdit->text();
 
-    try
-    {
-        if(XYArray == nullptr)
-        {
-            XYArray = (PointFArray) malloc(sizeof(TPointF) * XYArrayLength);
-        }
-        else
-        {
-            free(XYArray);
-            XYArray = (PointFArray) malloc(sizeof(TPointF) * XYArrayLength);
-        }
+    setThread(new DiffEqEulerMethodThread(func, x0, y0, n, h));
+    connect(getThread(), SIGNAL(sendResultSignal(PointFArray, int)), SLOT(onResult(PointFArray, int)));
+    connect(getThread(), SIGNAL(sendErrorSignal(int)), SLOT(onError(int)));
+    start();
 
-        setThread(new DiffEqEulerMethodThread(func, x0, y0, XYArrayLength, h, XYArray));
-        connect(getThread(), SIGNAL(sendResultSignal()), SLOT(onResult()));
-        connect(getThread(), SIGNAL(sendErrorSignal(int)), SLOT(onError(int)));
-        start();
-
-        showAnswer(sCalculating);
-    }
-    catch(std::bad_alloc)
-    {
-        qDebug() << "change:bad_alloc";
-        return;
-    }
+    showAnswer(sCalculating);
 }
 
 void DiffEqEulerMethodFrame::showAnswer(QString ans)
@@ -86,35 +72,25 @@ void DiffEqEulerMethodFrame::showAnswer(QString ans)
     ui->answerEdit->appendPlainText(ans);
 }
 
-void DiffEqEulerMethodFrame::onResult()
+void DiffEqEulerMethodFrame::onResult(PointFArray value, int n)
 {
     end();
 
     ui->answerEdit->clear();
 
-    try
-    {
-        if(XYArray != nullptr)
-        {
-            for(int i = 0; i < XYArrayLength; ++i)
-            {
-                ui->answerEdit->appendPlainText(QString::number(i) +
-                                                " : x=" + QString::number(XYArray[i].x) +
-                                                "; y=" + QString::number(XYArray[i].y));
-                qDebug() << QString::number(i) +
-                            " : x=" + QString::number(XYArray[i].x) +
-                            "; y=" + QString::number(XYArray[i].y);
-            }
+    PointFArray result_array = (PointFArray) value;
 
-            free(XYArray);
-            XYArray = nullptr;
-        }
-    }
-    catch(std::bad_alloc)
+    for(int i = 0; i < n; ++i)
     {
-        qDebug() << "onResult:bad_alloc";
-        return;
+        QString result_string = QString::number(i) +
+                " : x=" + QString::number(result_array[i].x) +
+                "; y=" + QString::number(result_array[i].y);
+
+        ui->answerEdit->appendPlainText(result_string);
+        qDebug() << result_string;
     }
+
+    free(value);
 
 //    if(!IsNan(value))
 //        showAnswer(QString::number(value));
@@ -156,13 +132,4 @@ void DiffEqEulerMethodFrame::on_iterationSpinBox_valueChanged(int arg1)
     change();
 }
 
-void DiffEqEulerMethodFrame::hideEvent(QHideEvent *event)
-{
-    FrameThreadHelper::hideEvent(event);
-
-    if(XYArray != nullptr)
-    {
-        free(XYArray);
-        XYArray = nullptr;
-    }
-}
+//Q_DECLARE_METATYPE(PointFArray);

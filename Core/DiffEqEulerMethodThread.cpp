@@ -1,34 +1,39 @@
 #include "DiffEqEulerMethodThread.h"
 
-DiffEqEulerMethodThread::DiffEqEulerMethodThread(QString func, double x0, double y0, int n, double h, PointFArray XYArray)
+DiffEqEulerMethodThread::DiffEqEulerMethodThread(QString func, double x0, double y0, int n, double h)
 {
     this->func = func;
     this->x0 = x0;
     this->y0 = y0;
     this->n = n;
     this->h = h;
-    this->XYArray = XYArray;
 }
 
 void DiffEqEulerMethodThread::run()
 {
     BaseCalcThread::run();
 
-    DifferentialEuler(QStrToCStr(func), x0, y0, n, h, XYArray);
+    PointFArray result = (PointFArray) malloc(sizeof(TPointF) * n);
+
+    DifferentialEuler(QStrToCStr(func), x0, y0, n, h, result);
 
     if(IsErrorCalc())
     {
+//        free(result);
         sendError(GetResultCode());
         return;
     }
 
     if(IsCancel())
+    {
+//        free(result);
         return;
+    }
 
-    sendResult();
+    sendResult(result);
 }
 
-void DiffEqEulerMethodThread::sendResult()
+void DiffEqEulerMethodThread::sendResult(PointFArray value)
 {
-    emit sendResultSignal();
+    emit sendResultSignal(value, n);
 }
