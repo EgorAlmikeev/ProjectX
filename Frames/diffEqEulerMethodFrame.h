@@ -12,10 +12,12 @@ class DiffEqEulerMethodFrame : public FrameThreadHelper
 {
     Q_OBJECT
 
+    ModeDiff mode;
+
     void showAnswer(QString ans);
 
 public:
-    explicit DiffEqEulerMethodFrame(QWidget *parent = 0);
+    explicit DiffEqEulerMethodFrame(QWidget *parent, ModeDiff mode);
     ~DiffEqEulerMethodFrame();
 
 private slots:

@@ -35,8 +35,8 @@ void MainWindow::createMenu()
     const int differentialEquationsItemsCount = 2;
     TMember differentialEquationsItems[differentialEquationsItemsCount] =
     {
-        {"Метод Эйлера",        new DiffEqEulerMethodFrame},
-        {"Метод Рунге-Кутты",   new QLabel("Метод Рунге-Кутты")}
+        {"Метод Эйлера",        new DiffEqEulerMethodFrame(this, ModeDiffEuler)},
+        {"Метод Рунге-Кутты",   new DiffEqEulerMethodFrame(this, ModeDiffRunge)}
     };
 
     const int nolinearItemsCount = 2;

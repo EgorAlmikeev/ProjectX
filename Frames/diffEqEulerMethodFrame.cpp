@@ -4,11 +4,13 @@
 
 #include "UIConsts.h"
 
-DiffEqEulerMethodFrame::DiffEqEulerMethodFrame(QWidget *parent) :
+DiffEqEulerMethodFrame::DiffEqEulerMethodFrame(QWidget *parent, ModeDiff mode) :
     FrameThreadHelper(parent),
     ui(new Ui::DiffEqEulerMethodFrame)
 {
     ui->setupUi(this);
+
+    this->mode = mode;
 
     qRegisterMetaType<PointFArray>("PointFArray");
 }
@@ -58,7 +60,7 @@ void DiffEqEulerMethodFrame::change()
 
     func = ui->functionEdit->text();
 
-    setThread(new DiffEqEulerMethodThread(func, x0, y0, n, h));
+    setThread(new DiffEqEulerMethodThread(func, x0, y0, n, h, mode));
     connect(getThread(), SIGNAL(sendResultSignal(PointFArray, int)), SLOT(onResult(PointFArray, int)));
     connect(getThread(), SIGNAL(sendErrorSignal(int)), SLOT(onError(int)));
     start();
