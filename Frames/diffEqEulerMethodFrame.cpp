@@ -76,20 +76,22 @@ void DiffEqEulerMethodFrame::onResult(PointFArray value, int n)
 {
     end();
 
+    qDebug() << "on res " << n;
+
     ui->answerEdit->clear();
 
-    PointFArray result_array = (PointFArray) value;
-
+    QString result_string;
     for(int i = 0; i < n; ++i)
     {
-        QString result_string = QString::number(i) +
-                " : x=" + QString::number(result_array[i].x) +
-                "; y=" + QString::number(result_array[i].y);
+        result_string = QString::number(i) +
+                " : x=" + QString::number(value[i].x) +
+                "; y=" + QString::number(value[i].y);
 
         ui->answerEdit->appendPlainText(result_string);
-        qDebug() << result_string;
     }
 
+    //qDebug() << result_string;
+    qDebug() << "free mem (ui)" << value;
     free(value);
 
 //    if(!IsNan(value))

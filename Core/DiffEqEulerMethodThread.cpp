@@ -13,20 +13,24 @@ void DiffEqEulerMethodThread::run()
 {
     BaseCalcThread::run();
 
-    PointFArray result = (PointFArray) malloc(sizeof(TPointF) * n);
+    qDebug()<<"malloc mem " << n;
+    PointFArray result = (PointFArray)malloc(sizeof(TPointF) * n);
+    qDebug()<<"malloc mem - ok " << result;
 
     DifferentialEuler(QStrToCStr(func), x0, y0, n, h, result);
 
     if(IsErrorCalc())
     {
-//        free(result);
+        free(result);
+        qDebug()<<"free mem (error)";
         sendError(GetResultCode());
         return;
     }
 
     if(IsCancel())
     {
-//        free(result);
+        qDebug()<<"free mem (cancel)";
+        free(result);
         return;
     }
 

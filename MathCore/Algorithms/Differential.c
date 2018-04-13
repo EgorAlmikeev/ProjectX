@@ -6,7 +6,7 @@ double DifferentialEuler(char* func, double x0, double y0, int n, double h, Poin
 {
     int i;
     
-    for (i = 0; i <= n; i++)
+    for (i = 0; i < n; i++)
     {
         m[i].x = x0; //передаю в массив
         m[i].y = y0;
@@ -24,7 +24,7 @@ double DifferentialRungeKutt(char* func, double x0, double y0, int n, double h, 
     int i;
     double k1,k2,k3,k4;
     
-    for (i = 0; i <= n; i++)
+    for (i = 0; i < n; i++)
     {
         m[i].x = x0;
         m[i].y = y0;
