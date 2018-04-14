@@ -56,11 +56,11 @@ void MainWindow::createMenu()
     const int equationsSystemsItemsCount = 5;
     TMember equationsSystemsItems[equationsSystemsItemsCount] =
     {
-        {"Метод Гаусса",                        new QLabel("Метод Гаусса")},
-        {"Гаусса-Жордана",                      new QLabel("Гаусса-Жордана")},
-        {"Метод Гаусса с распараллеливаниями",  new QLabel("Метод Гаусса с распараллеливаниями")},
-        {"Метод Вращения",                      new QLabel("Метод Вращения")},
-        {"Метод наименьших квадратов",          new QLabel("Метод наименьших квадратов")}
+        {"Метод Гаусса",                        new EquationsSystemsFrame},
+        {"Гаусса-Жордана",                      new EquationsSystemsFrame},
+        {"Метод Гаусса с распараллеливаниями",  new EquationsSystemsFrame},
+        {"Метод Вращения",                      new EquationsSystemsFrame},
+        {"Метод наименьших квадратов",          new EquationsSystemsFrame},
     };
 
     const int menuItemsCount = 5;

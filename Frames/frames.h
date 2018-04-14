@@ -12,4 +12,6 @@
 
 #include "diffEqEulerMethodFrame.h"
 
+#include "equationsSystemsFrame.h"
+
 #endif // FRAMES_H
