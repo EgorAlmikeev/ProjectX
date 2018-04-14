@@ -30,6 +30,7 @@ void EquationsSystemsFrame::on_rowsSpin_valueChanged(int arg1)
         for(int i = 0; i < columns; ++i)
         {
             QLineEdit *newItem = new QLineEdit;
+            newItem->setMinimumHeight(24);
             newItem->setObjectName("item" + QString::number(rows) + "_" + QString::number(i));
             ui->matrixGrid->addWidget(newItem, rows - 1, i);
         }
@@ -57,6 +58,7 @@ void EquationsSystemsFrame::on_columnsSpin_valueChanged(int arg1)
         for(int i = 0; i < rows; ++i)
         {
             QLineEdit *newItem = new QLineEdit;
+            newItem->setMinimumHeight(24);
             newItem->setObjectName("item" + QString::number(columns) + "_" + QString::number(i));
             ui->matrixGrid->addWidget(newItem, i, columns - 1);
         }

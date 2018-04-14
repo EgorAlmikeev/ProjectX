@@ -139,7 +139,14 @@
            <number>6</number>
           </property>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="item1_1"/>
+           <widget class="QLineEdit" name="item1_1">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item row="0" column="1">
            <widget class="QLineEdit" name="item0_1">
@@ -152,10 +159,24 @@
            </widget>
           </item>
           <item row="0" column="0">
-           <widget class="QLineEdit" name="item0_0"/>
+           <widget class="QLineEdit" name="item0_0">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QLineEdit" name="item1_0"/>
+           <widget class="QLineEdit" name="item1_0">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>24</height>
+             </size>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
