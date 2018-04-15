@@ -12,8 +12,8 @@ class EquationsSystemsFrame : public FrameThreadHelper
 {
     Q_OBJECT
 
-    short rows = 2;
-    short columns = 2;
+    short rows = 1;
+    short columns = 1;
 
 public:
     explicit EquationsSystemsFrame(QWidget *parent = 0);
