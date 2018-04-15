@@ -22,13 +22,15 @@ public:
 
 private slots:
     void on_functionEdit_textChanged(const QString &arg1);
-    void on_xEdit_textChanged(const QString &arg1);
     void on_yEdit_textChanged(const QString &arg1);
     void on_stepEdit_textChanged(const QString &arg1);
-    void on_iterationSpinBox_valueChanged(int arg1);
 
     void onResult(PointFArray value, int n);
     void onError(int code);
+
+    void on_xStartEdit_textChanged(const QString &arg1);
+
+    void on_xEndEdit_textChanged(const QString &arg1);
 
 private:
     Ui::DiffEqEulerMethodFrame *ui;

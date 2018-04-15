@@ -70,19 +70,48 @@
         <item row="3" column="1">
          <widget class="QLineEdit" name="stepEdit">
           <property name="text">
-           <string>1</string>
+           <string>0.1</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>Формула:</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
+        <item row="1" column="1">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>[</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="xStartEdit">
+            <property name="text">
+             <string>0</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>,</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="xEndEdit">
+            <property name="text">
+             <string>1</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>]</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="aLabel">
@@ -90,45 +119,17 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>y0:</string>
+           <string>y(0):</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
-        <item row="4" column="1">
-         <widget class="QSpinBox" name="iterationSpinBox">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
-          <property name="frame">
-           <bool>true</bool>
-          </property>
-          <property name="minimum">
-           <number>5</number>
-          </property>
-          <property name="maximum">
-           <number>1000</number>
-          </property>
-          <property name="singleStep">
-           <number>10</number>
-          </property>
-          <property name="displayIntegerBase">
-           <number>10</number>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="1">
          <widget class="QLineEdit" name="yEdit">
           <property name="text">
-           <string>2</string>
+           <string>1</string>
           </property>
          </widget>
         </item>
@@ -142,10 +143,10 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_3">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>Количество n:</string>
+           <string>Формула:</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -153,12 +154,9 @@
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QLabel" name="bLabel">
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
+         <widget class="QLabel" name="label_3">
           <property name="text">
-           <string>x0:</string>
+           <string>Отрезок:</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -171,17 +169,10 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>x</string>
+           <string>2*x*y</string>
           </property>
           <property name="frame">
            <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="xEdit">
-          <property name="text">
-           <string>1</string>
           </property>
          </widget>
         </item>
@@ -213,12 +204,16 @@
       </property>
       <item row="0" column="0">
        <widget class="QPlainTextEdit" name="answerEdit">
+        <property name="font">
+         <font>
+          <family>Courier New</family>
+         </font>
+        </property>
         <property name="readOnly">
          <bool>true</bool>
         </property>
         <property name="plainText">
-         <string>x = 2; y = 3;
-x = 2.4; y = 33;</string>
+         <string>...</string>
         </property>
        </widget>
       </item>
@@ -229,10 +224,6 @@ x = 2.4; y = 33;</string>
  </widget>
  <tabstops>
   <tabstop>functionEdit</tabstop>
-  <tabstop>xEdit</tabstop>
-  <tabstop>yEdit</tabstop>
-  <tabstop>stepEdit</tabstop>
-  <tabstop>iterationSpinBox</tabstop>
   <tabstop>answerEdit</tabstop>
  </tabstops>
  <resources/>

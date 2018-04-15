@@ -6,6 +6,8 @@
 #define ModeDiffEuler 0
 #define ModeDiffRunge 1
 
+#define ErrorTooLongN 1000
+
 typedef int ModeDiff;
 
 class DiffEqEulerMethodThread : public BaseCalcThread
@@ -13,10 +15,11 @@ class DiffEqEulerMethodThread : public BaseCalcThread
     Q_OBJECT
 
     QString  func;
-    double   x0;
+    double   xStart;
+    double   xEnd;
     double   y0;
-    int      n;
     double   h;
+    int n;
     ModeDiff mode;
 
 public:
@@ -26,7 +29,7 @@ signals:
     void sendResultSignal(PointFArray, int);
 
 public:
-    DiffEqEulerMethodThread(QString func, double x0, double y0, int n, double h, ModeDiff mode);
+    DiffEqEulerMethodThread(QString func, double xStart, double xEnd, double y0, double h, ModeDiff mode);
     void run();
 };
 

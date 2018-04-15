@@ -22,16 +22,23 @@ DiffEqEulerMethodFrame::~DiffEqEulerMethodFrame()
 
 void DiffEqEulerMethodFrame::change()
 {
-    double h, x0, y0;
+    double h, xStart, xEnd, y0;
     QString func;
     int n;
 
     cancel();
 
-    x0 = Expression(QStrToCStr(ui->xEdit->text()));
-    if(IsNan(x0))
+    xStart = Expression(QStrToCStr(ui->xStartEdit->text()));
+    if(IsNan(xStart))
     {
-        showAnswer("Неверный параметр x0");
+        showAnswer("Неверный параметр Отрезок(начальная точка)");
+        return;
+    }
+
+    xEnd = Expression(QStrToCStr(ui->xEndEdit->text()));
+    if(IsNan(xEnd))
+    {
+        showAnswer("Неверный параметр Отрезок(конечная точка)");
         return;
     }
 
@@ -49,17 +56,15 @@ void DiffEqEulerMethodFrame::change()
         return;
     }
 
-    n = ui->iterationSpinBox->value();
-
-    if(n < 5 || n > 1000)
+    if(h < 1e-10 || h > 1)
     {
-        showAnswer("n должен быть от 5 до 1000");
+        showAnswer("n должен быть от 1e-10 до 1");
         return;
     }
 
     func = ui->functionEdit->text();
 
-    setThread(new DiffEqEulerMethodThread(func, x0, y0, n, h, mode));
+    setThread(new DiffEqEulerMethodThread(func, xStart, xEnd, y0, h, mode));
     connect(getThread(), SIGNAL(sendResultSignal(PointFArray, int)), SLOT(onResult(PointFArray, int)));
     connect(getThread(), SIGNAL(sendErrorSignal(int)), SLOT(onError(int)));
     start();
@@ -75,16 +80,17 @@ void DiffEqEulerMethodFrame::showAnswer(QString ans)
 
 void DiffEqEulerMethodFrame::onResult(PointFArray value, int n)
 {
+    // todo: добавить исключения!
     end();
 
     ui->answerEdit->clear();
 
     QString result_string;
-    for(int i = 0; i < n; ++i)
+    for(int i = 0; i < n; i++)
     {
-        result_string = QString::number(i) +
-                " : x=" + QString::number(value[i].x) +
-                "; y=" + QString::number(value[i].y);
+        QString nStr = QString::number(i).append(":").leftJustified(5);
+        QString xStr = QString::number(value[i].x).append(",").leftJustified(8);
+        result_string = QString("%1 x = %2 y = %3").arg(nStr).arg(xStr).arg(value[i].y);
 
         ui->answerEdit->appendPlainText(result_string);
     }
@@ -99,15 +105,13 @@ void DiffEqEulerMethodFrame::onError(int code)
 
     if(code == CalcError)
         showAnswer(sSyntaxError);
-    else showAnswer(sEqTimeoutError);
+    else if(code == ErrorTooLongN)
+        showAnswer(sTooFewH);
+    else
+        showAnswer(sEqTimeoutError);
 }
 
 void DiffEqEulerMethodFrame::on_functionEdit_textChanged(const QString &arg1)
-{
-    change();
-}
-
-void DiffEqEulerMethodFrame::on_xEdit_textChanged(const QString &arg1)
 {
     change();
 }
@@ -122,9 +126,12 @@ void DiffEqEulerMethodFrame::on_stepEdit_textChanged(const QString &arg1)
     change();
 }
 
-void DiffEqEulerMethodFrame::on_iterationSpinBox_valueChanged(int arg1)
+void DiffEqEulerMethodFrame::on_xStartEdit_textChanged(const QString &arg1)
 {
     change();
 }
 
-//Q_DECLARE_METATYPE(PointFArray);
+void DiffEqEulerMethodFrame::on_xEndEdit_textChanged(const QString &arg1)
+{
+    change();
+}

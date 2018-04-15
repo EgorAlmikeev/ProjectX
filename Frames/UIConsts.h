@@ -8,5 +8,6 @@
 #define sNanError "x лежит вне допустимых значений!"
 #define sSpanError "Неверно задан отрезок поиска x!"
 #define sIterationsCountForAccuracy(count) ("Требуемая точность была достигнута за " + (count) + " итераций(и)")
+#define sTooFewH "Слишком маленький шаг h!"
 
 #endif // UICONSTS_H
