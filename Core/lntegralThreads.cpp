@@ -4,6 +4,7 @@
 
 IntConstStepThread::IntConstStepThread(QString func, double a, double b, int n, ModeInt mode)
 {
+    this->setObjectName("IntConstStepThread");
     this->func = func;
     this->a = a;
     this->b = b;
@@ -59,6 +60,7 @@ void IntConstStepThread::run()
 
 IntFloatingStepThread::IntFloatingStepThread(QString func, double a, double b, double e, ModeInt mode)
 {
+    this->setObjectName("IntFloatingStepThread");
     this->func = func;
     this->a = a;
     this->b = b;
@@ -122,6 +124,7 @@ void IntFloatingStepThread::run()
 
 IntMultipleThread::IntMultipleThread(QString func, double a, double b, double c, double d, int xn, int yn)
 {
+    this->setObjectName("IntMultipleThread");
     this->func = func;
     this->a = a;
     this->b = b;

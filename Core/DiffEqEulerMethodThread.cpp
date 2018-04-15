@@ -2,6 +2,7 @@
 
 DiffEqEulerMethodThread::DiffEqEulerMethodThread(QString func, double x0, double y0, int n, double h, ModeDiff mode)
 {
+    this->setObjectName("DiffEqEulerMethodThread");
     this->func = func;
     this->x0 = x0;
     this->y0 = y0;
@@ -14,9 +15,7 @@ void DiffEqEulerMethodThread::run()
 {
     BaseCalcThread::run();
 
-    qDebug()<<"malloc mem " << n;
     PointFArray result = (PointFArray)malloc(sizeof(TPointF) * n);
-    qDebug()<<"malloc mem - ok " << result;
 
     switch(mode)
     {
@@ -35,14 +34,12 @@ void DiffEqEulerMethodThread::run()
     if(IsErrorCalc())
     {
         free(result);
-        qDebug()<<"free mem (error)";
         sendError(GetResultCode());
         return;
     }
 
     if(IsCancel())
     {
-        qDebug()<<"free mem (cancel)";
         free(result);
         return;
     }

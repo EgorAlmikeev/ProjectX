@@ -21,7 +21,6 @@ void EquationsSystemsFrame::change()
 void EquationsSystemsFrame::on_rowsSpin_valueChanged(int arg1)
 {
     //TODO: сделать tabOrder для элементов матрицы
-    //TODO: сделать удаление по разности
 
     arg1--;
 
@@ -43,7 +42,7 @@ void EquationsSystemsFrame::on_rowsSpin_valueChanged(int arg1)
             {
                 QLayoutItem *itemToRemove = ui->matrixGrid->itemAtPosition(i, j);
                 ui->matrixGrid->removeWidget(itemToRemove->widget());
-                delete itemToRemove->widget();
+                itemToRemove->widget()->deleteLater();
             }
     }
 
@@ -72,16 +71,9 @@ void EquationsSystemsFrame::on_columnsSpin_valueChanged(int arg1)
             {
                 QLayoutItem *itemToRemove = ui->matrixGrid->itemAtPosition(i, j);
                 ui->matrixGrid->removeWidget(itemToRemove->widget());
-                delete itemToRemove->widget();
+                itemToRemove->widget()->deleteLater();
             }
     }
 
     columns = arg1;
 }
-
-/*
- * [][][][]
- * [][][][]
- * [][][][]
- * [][][][]
- */

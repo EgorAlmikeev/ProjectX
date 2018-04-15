@@ -2,6 +2,7 @@
 
 EquationThread::EquationThread(QString func, double a, double b, double e, ModeEq mode)
 {
+    this->setObjectName("EquationThread");
     this->func = func;
     this->a = a;
     this->b = b;

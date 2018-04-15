@@ -22,7 +22,6 @@ DiffEqEulerMethodFrame::~DiffEqEulerMethodFrame()
 
 void DiffEqEulerMethodFrame::change()
 {
-    qDebug() << "\n\n\nchange";
     double h, x0, y0;
     QString func;
     int n;
@@ -78,8 +77,6 @@ void DiffEqEulerMethodFrame::onResult(PointFArray value, int n)
 {
     end();
 
-    qDebug() << "on res " << n;
-
     ui->answerEdit->clear();
 
     QString result_string;
@@ -92,14 +89,8 @@ void DiffEqEulerMethodFrame::onResult(PointFArray value, int n)
         ui->answerEdit->appendPlainText(result_string);
     }
 
-    //qDebug() << result_string;
-    qDebug() << "free mem (ui)" << value;
     free(value);
-
-//    if(!IsNan(value))
-//        showAnswer(QString::number(value));
-//    else
-//        showAnswer(sNanError);
+    ui->answerEdit->moveCursor(QTextCursor::Start);
 }
 
 void DiffEqEulerMethodFrame::onError(int code)
