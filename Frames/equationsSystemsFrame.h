@@ -26,6 +26,7 @@ private slots:
 private:
     Ui::EquationsSystemsFrame *ui;
     void change();
+    void setMatrixTabOrder();
 };
 
 #endif // EQUATIONSSYSTEMSFRAME_H

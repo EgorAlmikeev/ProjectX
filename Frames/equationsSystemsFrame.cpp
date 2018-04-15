@@ -6,6 +6,7 @@ EquationsSystemsFrame::EquationsSystemsFrame(QWidget *parent) :
     ui(new Ui::EquationsSystemsFrame)
 {
     ui->setupUi(this);
+    setMatrixTabOrder();
 }
 
 EquationsSystemsFrame::~EquationsSystemsFrame()
@@ -20,8 +21,6 @@ void EquationsSystemsFrame::change()
 
 void EquationsSystemsFrame::on_rowsSpin_valueChanged(int arg1)
 {
-    //TODO: сделать tabOrder для элементов матрицы
-
     arg1--;
 
     if(arg1 > rows)
@@ -47,6 +46,7 @@ void EquationsSystemsFrame::on_rowsSpin_valueChanged(int arg1)
     }
 
     rows = arg1;
+    setMatrixTabOrder();
 }
 
 void EquationsSystemsFrame::on_columnsSpin_valueChanged(int arg1)
@@ -76,4 +76,16 @@ void EquationsSystemsFrame::on_columnsSpin_valueChanged(int arg1)
     }
 
     columns = arg1;
+    setMatrixTabOrder();
+}
+
+void EquationsSystemsFrame::setMatrixTabOrder()
+{
+    QGridLayout *matrix = ui->matrixGrid;
+
+    for(int i = 0; i < matrix->rowCount() - 1; ++i)
+    {
+        for(int j = 0; j < matrix->columnCount() - 1; ++j)
+            QWidget::setTabOrder(matrix->itemAtPosition(i, j)->widget(), matrix->itemAtPosition(i, j + 1)->widget());
+    }
 }
