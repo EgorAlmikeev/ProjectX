@@ -118,8 +118,6 @@ void MainWindow::createMenu()
 
 void MainWindow::stackedWidgetSetup()
 {
-    ui->stackedWidget->setMaximumHeight(400);
-
     QMap<QTreeWidgetItem *, QWidget *>::iterator iter = itemWidgetMapping->begin();
     while(iter != itemWidgetMapping->end())
     {
