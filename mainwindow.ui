@@ -149,10 +149,10 @@
          </sizepolicy>
         </property>
         <property name="autoFillBackground">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">background: rgb(63, 63, 63)</string>
+         <string notr="true"/>
         </property>
         <property name="lineWidth">
          <number>0</number>
