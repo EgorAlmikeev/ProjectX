@@ -36,13 +36,19 @@ void EquationsSystemsFrame::on_rowsSpin_valueChanged(int arg1)
     }
     else
     {
+        QList<QWidget*> remove_list;
+
         for(int i = rows; i > arg1; --i)
             for(int j = 0; j <= columns; ++j)
             {
                 QLayoutItem *itemToRemove = ui->matrixGrid->itemAtPosition(i, j);
-                ui->matrixGrid->removeWidget(itemToRemove->widget());
-                delete itemToRemove->widget();
+                remove_list.append(itemToRemove->widget());
             }
+
+        foreach (QWidget *item, remove_list) {
+            ui->matrixGrid->removeWidget(item);
+            delete item;
+        }
     }
 
     rows = arg1;
@@ -66,13 +72,19 @@ void EquationsSystemsFrame::on_columnsSpin_valueChanged(int arg1)
     }
     else
     {
+        QList<QWidget*> remove_list;
+
         for(int i = 0; i <= rows; ++i)
             for(int j = columns; j > arg1; --j)
             {
                 QLayoutItem *itemToRemove = ui->matrixGrid->itemAtPosition(i, j);
-                ui->matrixGrid->removeWidget(itemToRemove->widget());
-                delete itemToRemove->widget();
+                remove_list.append(itemToRemove->widget());
             }
+
+        foreach (QWidget *item, remove_list) {
+            ui->matrixGrid->removeWidget(item);
+            delete item;
+        }
     }
 
     columns = arg1;
