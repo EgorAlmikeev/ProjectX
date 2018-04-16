@@ -49,6 +49,8 @@ private slots:
     void on_menu_collapsed(const QModelIndex &index);
     void on_helpButton_clicked();
 
+    void on_menu_itemSelectionChanged();
+
 private:
     Ui::MainWindow *ui;
     HelpDialogFrame *helpDialogFrame = nullptr;

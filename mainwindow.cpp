@@ -169,3 +169,16 @@ void MainWindow::createHelpDialog()
         helpDialogFrame = new HelpDialogFrame;
 }
 
+void MainWindow::on_menu_itemSelectionChanged()
+{
+    QTreeWidgetItem *item = ui->menu->currentItem();
+
+    QMap<QTreeWidgetItem *, QWidget *>::iterator currentWidgetIterator = itemWidgetMapping->find(item);
+    if(currentWidgetIterator != itemWidgetMapping->end())
+    {
+        ui->stackedWidget->setCurrentWidget(currentWidgetIterator.value());
+        ui->frameName->setText(item->parent()->text(0) + ": " + item->text(0));
+        if(dynamic_cast<FrameThreadHelper*>(currentWidgetIterator.value()))
+            static_cast<FrameThreadHelper*>(currentWidgetIterator.value())->change();
+    }
+}
