@@ -14,4 +14,6 @@
 
 #include "equationsSystemsFrame.h"
 
+#include "sinCosFrame.h"
+
 #endif // FRAMES_H

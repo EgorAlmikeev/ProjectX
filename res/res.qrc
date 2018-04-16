@@ -2,4 +2,7 @@
     <qresource prefix="/icons">
         <file>icon.icns</file>
     </qresource>
+    <qresource prefix="/img">
+        <file>Maclaurin.png</file>
+    </qresource>
 </RCC>

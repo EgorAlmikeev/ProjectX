@@ -41,7 +41,9 @@ SOURCES += main.cpp\
     Frames/diffEqEulerMethodFrame.cpp \
     MathCore/Algorithms/Differential.c \
     Core/DiffEqEulerMethodThread.cpp \
-    Frames/equationsSystemsFrame.cpp
+    Frames/equationsSystemsFrame.cpp \
+    Frames/sinCosFrame.cpp \
+    MathCore/Algorithms/Maclaurin.c
 
 HEADERS  += mainwindow.h \
     MathCore/MathParser.h \
@@ -65,7 +67,9 @@ HEADERS  += mainwindow.h \
     MathCore/Algorithms/Differential.h \
     Frames/diffEqEulerMethodFrame.h \
     Core/DiffEqEulerMethodThread.h \
-    Frames/equationsSystemsFrame.h
+    Frames/equationsSystemsFrame.h \
+    Frames/sinCosFrame.h \
+    MathCore/Algorithms/Maclarin.h
 
 FORMS    += mainwindow.ui \
     Frames/helpDialogFrame.ui \
@@ -74,7 +78,8 @@ FORMS    += mainwindow.ui \
     Frames/integralMultipleFrame.ui \
     Frames/nonlinearEquationsFrame.ui \
     Frames/diffEqEulerMethodFrame.ui \
-    Frames/equationsSystemsFrame.ui
+    Frames/equationsSystemsFrame.ui \
+    Frames/sinCosFrame.ui
 
 RESOURCES += \
     res/res.qrc

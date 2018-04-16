@@ -49,8 +49,8 @@ void MainWindow::createMenu()
     const int simpleFunctionsItemsCount = 2;
     TMember simpleFunctionsItems[simpleFunctionsItemsCount] =
     {
-        {"Метод Маклорена",         new QLabel("Метод Маклорена")},
-        {"Метод Цифра за цифрой",   new QLabel("Метод Цифра за цифрой")}
+        {"Метод Маклорена",         new SinCosFrame(this, MaclaurinMode)},
+        {"Метод Цифра за цифрой",   new SinCosFrame(this, CordicMode)}
     };
 
     const int equationsSystemsItemsCount = 4;
