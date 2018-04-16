@@ -41,7 +41,7 @@ void EquationsSystemsFrame::on_rowsSpin_valueChanged(int arg1)
             {
                 QLayoutItem *itemToRemove = ui->matrixGrid->itemAtPosition(i, j);
                 ui->matrixGrid->removeWidget(itemToRemove->widget());
-                itemToRemove->widget()->deleteLater();
+                delete itemToRemove->widget();
             }
     }
 
@@ -71,7 +71,7 @@ void EquationsSystemsFrame::on_columnsSpin_valueChanged(int arg1)
             {
                 QLayoutItem *itemToRemove = ui->matrixGrid->itemAtPosition(i, j);
                 ui->matrixGrid->removeWidget(itemToRemove->widget());
-                itemToRemove->widget()->deleteLater();
+                delete itemToRemove->widget();
             }
     }
 
