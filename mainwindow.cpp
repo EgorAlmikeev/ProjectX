@@ -53,13 +53,12 @@ void MainWindow::createMenu()
         {"Метод Цифра за цифрой",   new QLabel("Метод Цифра за цифрой")}
     };
 
-    const int equationsSystemsItemsCount = 5;
+    const int equationsSystemsItemsCount = 4;
     TMember equationsSystemsItems[equationsSystemsItemsCount] =
     {
         {"Метод Гаусса",                        new EquationsSystemsFrame},
+        {"Метод оптимальных исключений",  new EquationsSystemsFrame},
         {"Гаусса-Жордана",                      new EquationsSystemsFrame},
-        {"Метод Гаусса с распараллеливаниями",  new EquationsSystemsFrame},
-        {"Метод Вращения",                      new EquationsSystemsFrame},
         {"Метод наименьших квадратов",          new EquationsSystemsFrame},
     };
 

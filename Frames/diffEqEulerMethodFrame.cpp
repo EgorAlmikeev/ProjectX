@@ -86,6 +86,7 @@ void DiffEqEulerMethodFrame::onResult(PointFArray value, int n)
     ui->answerEdit->clear();
     ui->answerEdit->appendPlainText(QString("n = %1").arg(n - 1));
     QString result_string;
+
     for(int i = 0; i < n; i++)
     {
         QString nStr = QString::number(i).append(":").leftJustified(5);
@@ -93,6 +94,7 @@ void DiffEqEulerMethodFrame::onResult(PointFArray value, int n)
         result_string = result_string.append(
                     QString("%1 x = %2 y = %3").arg(nStr).arg(xStr).arg(value[i].y)).append("\n");
     }
+
     ui->answerEdit->appendPlainText(result_string);
 
     free(value);

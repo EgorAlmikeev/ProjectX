@@ -81,11 +81,11 @@ void EquationsSystemsFrame::on_columnsSpin_valueChanged(int arg1)
 
 void EquationsSystemsFrame::setMatrixTabOrder()
 {
-//    QGridLayout *matrix = ui->matrixGrid;
+    QGridLayout *matrix = ui->matrixGrid;
 
-//    for(int i = 0; i < matrix->rowCount() - 1; ++i)
-//    {
-//        for(int j = 0; j < matrix->columnCount() - 1; ++j)
-//            QWidget::setTabOrder(matrix->itemAtPosition(i, j)->widget(), matrix->itemAtPosition(i, j + 1)->widget());
-//    }
+    for(int i = 0; i < rows; ++i)
+    {
+        for(int j = 0; j < columns; ++j)
+            QWidget::setTabOrder(matrix->itemAtPosition(i, j)->widget(), matrix->itemAtPosition(i, j + 1)->widget());
+    }
 }
