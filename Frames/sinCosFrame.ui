@@ -286,6 +286,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>xEdit</tabstop>
+  <tabstop>epsilonEdit</tabstop>
+  <tabstop>sinEdit</tabstop>
+  <tabstop>cosEdit</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
