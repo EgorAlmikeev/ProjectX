@@ -84,7 +84,7 @@ void DiffEqEulerMethodFrame::onResult(PointFArray value, int n)
     end();
 
     ui->answerEdit->clear();
-
+    ui->answerEdit->appendPlainText(QString("n = %1").arg(n - 1));
     QString result_string;
     for(int i = 0; i < n; i++)
     {
