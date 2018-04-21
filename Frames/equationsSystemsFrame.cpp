@@ -6,7 +6,7 @@ EquationsSystemsFrame::EquationsSystemsFrame(QWidget *parent) :
     ui(new Ui::EquationsSystemsFrame)
 {
     ui->setupUi(this);
-    setMatrixTabOrder();
+//    setMatrixTabOrder();
 }
 
 EquationsSystemsFrame::~EquationsSystemsFrame()
@@ -19,55 +19,63 @@ void EquationsSystemsFrame::change()
 
 }
 
-void EquationsSystemsFrame::on_rowsSpin_valueChanged(int arg1)
+void EquationsSystemsFrame::setRows(int count)
 {
-    arg1--;
+    QGridLayout *matrixGrid = ui->matrixGrid;
+    count--;
 
-    if(arg1 > rows)
+    if(count > rows)
     {
-        for(int i = rows + 1; i <= arg1; ++i)
+        for(int i = rows + 1; i <= count; ++i)
             for(int j = 0; j <= columns; ++j)
             {
                 QLineEdit *newItem = new QLineEdit;
                 newItem->setMinimumHeight(24);
+                newItem->setMaximumWidth(40);
                 newItem->setObjectName("item" + QString::number(i) + "_" + QString::number(j));
-                ui->matrixGrid->addWidget(newItem, i, j);
+                matrixGrid->addWidget(newItem, i, j);
+
+                if(j != 0)
+                    QWidget::setTabOrder(matrixGrid->itemAtPosition(i, j - 1)->widget(), newItem);
             }
     }
     else
     {
         QList<QWidget*> remove_list;
 
-        for(int i = rows; i > arg1; --i)
+        for(int i = rows; i > count; --i)
             for(int j = 0; j <= columns; ++j)
             {
-                QLayoutItem *itemToRemove = ui->matrixGrid->itemAtPosition(i, j);
+                QLayoutItem *itemToRemove = matrixGrid->itemAtPosition(i, j);
                 remove_list.append(itemToRemove->widget());
             }
 
         foreach (QWidget *item, remove_list) {
-            ui->matrixGrid->removeWidget(item);
+            matrixGrid->removeWidget(item);
             delete item;
         }
     }
 
-    rows = arg1;
-    setMatrixTabOrder();
+    rows = count;
 }
 
-void EquationsSystemsFrame::on_columnsSpin_valueChanged(int arg1)
+void EquationsSystemsFrame::setColumns(int count)
 {
-    arg1--;
+    QGridLayout *matrixGrid = ui->matrixGrid;
+    count--;
 
-    if(arg1 > columns)
+    if(count > columns)
     {
         for(int i = 0; i <= rows; ++i)
-            for(int j = columns + 1; j <= arg1; ++j)
+            for(int j = columns + 1; j <= count; ++j)
             {
                 QLineEdit *newItem = new QLineEdit;
                 newItem->setMinimumHeight(24);
+                newItem->setMaximumWidth(40);
                 newItem->setObjectName("item" + QString::number(i) + "_" + QString::number(j));
-                ui->matrixGrid->addWidget(newItem, i, j);
+                matrixGrid->addWidget(newItem, i, j);
+
+                QWidget::setTabOrder(matrixGrid->itemAtPosition(i, j - 1)->widget(), newItem);
             }
     }
     else
@@ -75,29 +83,64 @@ void EquationsSystemsFrame::on_columnsSpin_valueChanged(int arg1)
         QList<QWidget*> remove_list;
 
         for(int i = 0; i <= rows; ++i)
-            for(int j = columns; j > arg1; --j)
+            for(int j = columns; j > count; --j)
             {
-                QLayoutItem *itemToRemove = ui->matrixGrid->itemAtPosition(i, j);
+                QLayoutItem *itemToRemove = matrixGrid->itemAtPosition(i, j);
                 remove_list.append(itemToRemove->widget());
             }
 
         foreach (QWidget *item, remove_list) {
-            ui->matrixGrid->removeWidget(item);
+            matrixGrid->removeWidget(item);
             delete item;
         }
     }
 
-    columns = arg1;
-    setMatrixTabOrder();
+    columns = count;
+
+    //TODO:пофиксить баг с таб ордером последнего элемента второй строки
 }
 
-void EquationsSystemsFrame::setMatrixTabOrder()
+void EquationsSystemsFrame::setParams(int count)
 {
-    QGridLayout *matrix = ui->matrixGrid;
+    QGridLayout *paramsGrid = ui->parameterGrid;
+    count--;
 
-    for(int i = 0; i < rows; ++i)
+    if(count > params)
     {
-        for(int j = 0; j < columns; ++j)
-            QWidget::setTabOrder(matrix->itemAtPosition(i, j)->widget(), matrix->itemAtPosition(i, j + 1)->widget());
+        for(int i = params + 1; i <= count; ++i)
+        {
+            QLineEdit *newItem = new QLineEdit;
+            newItem->setMinimumHeight(24);
+            newItem->setMaximumWidth(40);
+            newItem->setObjectName("item" + QString::number(i));
+            paramsGrid->addWidget(newItem, i, 0);
+
+            QWidget::setTabOrder(paramsGrid->itemAtPosition(i - 1, 0)->widget(), newItem);
+        }
     }
+    else
+    {
+        QList<QWidget*> remove_list;
+
+
+        for(int i = params; i > count; --i)
+        {
+            QLayoutItem *itemToRemove = paramsGrid->itemAtPosition(i, 0);
+            remove_list.append(itemToRemove->widget());
+        }
+
+        foreach (QWidget *item, remove_list) {
+            paramsGrid->removeWidget(item);
+            delete item;
+        }
+    }
+
+    params = count;
+}
+
+void EquationsSystemsFrame::on_matrixSizeSpin_valueChanged(int arg1)
+{
+    setColumns(arg1);
+    setRows(arg1);
+    setParams(arg1);
 }

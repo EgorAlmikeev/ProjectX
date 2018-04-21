@@ -43,7 +43,8 @@ SOURCES += main.cpp\
     Core/DiffEqEulerMethodThread.cpp \
     Frames/equationsSystemsFrame.cpp \
     Frames/sinCosFrame.cpp \
-    MathCore/Algorithms/Maclaurin.c
+    MathCore/Algorithms/Maclaurin.c \
+    Core/EquationsSystemsThread.cpp
 
 HEADERS  += mainwindow.h \
     MathCore/MathParser.h \
@@ -69,7 +70,8 @@ HEADERS  += mainwindow.h \
     Core/DiffEqEulerMethodThread.h \
     Frames/equationsSystemsFrame.h \
     Frames/sinCosFrame.h \
-    MathCore/Algorithms/Maclarin.h
+    MathCore/Algorithms/Maclarin.h \
+    Core/EquationsSystemsThread.h
 
 FORMS    += mainwindow.ui \
     Frames/helpDialogFrame.ui \
