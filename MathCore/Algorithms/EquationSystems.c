@@ -84,7 +84,6 @@ double Summ(int j, int n, TMat AnB, TMatt X)
 double Gauss(TMat m, TMatt M, int n, double epsilon, double* ans)
 {
     int k;
-    double X[n];
     
     if (Normalize(m, n, epsilon) == 0)
         return -1 ; // невозможно решить, обосрались на нормализации, юзер ввёл говнокоффициенты
@@ -93,9 +92,9 @@ double Gauss(TMat m, TMatt M, int n, double epsilon, double* ans)
         if (Calc(k, n, m, M) == 0)
             return -1; //невозможно решить, обосрались в вычислениях, юзер ввёл говнокоффициенты
     
-    X[n] = m[n][n+1] / m[n][n];
+    ans[n] = m[n][n+1] / m[n][n];
     for (k = n - 1; k <= 1; k--)
-        X[k] = Summ(k, n, m, M)/m[k][k];
+        ans[k] = Summ(k, n, m, M)/m[k][k];
     
-    return X[n]; //это массив с иксами, забирайте
+    return ans[n]; //это массив с иксами, забирайте
 }
