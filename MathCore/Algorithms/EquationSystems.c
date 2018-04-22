@@ -96,5 +96,5 @@ double Gauss(TMat m, TMatt M, int n, double epsilon, double* ans)
     for (k = n - 1; k <= 1; k--)
         ans[k] = Summ(k, n, m, M)/m[k][k];
     
-    return ans[n]; //это массив с иксами, забирайте
+    return 0; //пока возращаю 0, котому что пока костыль
 }
