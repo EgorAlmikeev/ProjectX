@@ -12,9 +12,9 @@ class EquationsSystemsFrame : public FrameThreadHelper
 {
     Q_OBJECT
 
-    int columnCount = 1;
-    int rowCount = 1;
-    int paramCount = 1;
+    int columnCount = 2;
+    int rowCount = 2;
+    int paramCount = 2;
 
     double ** matrixArray = nullptr;
     double * parametersArray = nullptr;

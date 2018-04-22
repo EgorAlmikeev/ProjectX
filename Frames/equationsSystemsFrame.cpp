@@ -7,9 +7,9 @@ EquationsSystemsFrame::EquationsSystemsFrame(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    columnCount = ui->matrixGrid->columnCount() - 1;
-    rowCount = ui->matrixGrid->rowCount() - 1;
-    paramCount = ui->parametersGrid->rowCount() - 1;
+//    columnCount = ui->matrixGrid->columnCount() - 1;
+//    rowCount = ui->matrixGrid->rowCount() - 1;
+//    paramCount = ui->parametersGrid->rowCount() - 1;
 }
 
 EquationsSystemsFrame::~EquationsSystemsFrame()
@@ -38,12 +38,11 @@ void EquationsSystemsFrame::change()
 void EquationsSystemsFrame::setRows(int count)
 {
     QGridLayout *matrixGrid = ui->matrixGrid;
-    count--;
 
     if(count > rowCount)
     {
-        for(int i = rowCount + 1; i <= count; ++i)
-            for(int j = 0; j <= columnCount; ++j)
+        for(int i = rowCount; i < count; ++i)
+            for(int j = 0; j < columnCount; ++j)
             {
                 QLineEdit *newItem = new QLineEdit;
                 newItem->setMinimumHeight(24);
@@ -51,16 +50,16 @@ void EquationsSystemsFrame::setRows(int count)
                 newItem->setObjectName("item" + QString::number(i) + "_" + QString::number(j));
                 matrixGrid->addWidget(newItem, i, j);
 
-                if(j != 0)
-                    QWidget::setTabOrder(matrixGrid->itemAtPosition(i, j - 1)->widget(), newItem);
+//                if(j != 0)
+//                    QWidget::setTabOrder(matrixGrid->itemAtPosition(i, j - 1)->widget(), newItem);
             }
     }
-    else
+    else if(count < rowCount) //count = 2 rowCount = 3
     {
         QList<QWidget*> remove_list;
 
-        for(int i = rowCount; i > count; --i)
-            for(int j = 0; j <= columnCount; ++j)
+        for(int i = rowCount - 1; i > count - 1; --i)
+            for(int j = 0; j < columnCount; ++j)
             {
                 QLayoutItem *itemToRemove = matrixGrid->itemAtPosition(i, j);
                 remove_list.append(itemToRemove->widget());
@@ -78,12 +77,11 @@ void EquationsSystemsFrame::setRows(int count)
 void EquationsSystemsFrame::setColumns(int count)
 {
     QGridLayout *matrixGrid = ui->matrixGrid;
-    count--;
 
     if(count > columnCount)
     {
-        for(int i = 0; i <= rowCount; ++i)
-            for(int j = columnCount + 1; j <= count; ++j)
+        for(int i = 0; i < rowCount; ++i)
+            for(int j = columnCount; j < count; ++j)
             {
                 QLineEdit *newItem = new QLineEdit;
                 newItem->setMinimumHeight(24);
@@ -91,15 +89,15 @@ void EquationsSystemsFrame::setColumns(int count)
                 newItem->setObjectName("item" + QString::number(i) + "_" + QString::number(j));
                 matrixGrid->addWidget(newItem, i, j);
 
-                QWidget::setTabOrder(matrixGrid->itemAtPosition(i, j - 1)->widget(), newItem);
+//                QWidget::setTabOrder(matrixGrid->itemAtPosition(i, j - 1)->widget(), newItem);
             }
     }
-    else
+    else if(count < columnCount)
     {
         QList<QWidget*> remove_list;
 
-        for(int i = 0; i <= rowCount; ++i)
-            for(int j = columnCount; j > count; --j)
+        for(int i = 0; i < rowCount; ++i)
+            for(int j = columnCount - 1; j > count - 1; --j)
             {
                 QLayoutItem *itemToRemove = matrixGrid->itemAtPosition(i, j);
                 remove_list.append(itemToRemove->widget());
@@ -119,11 +117,10 @@ void EquationsSystemsFrame::setColumns(int count)
 void EquationsSystemsFrame::setParams(int count)
 {
     QGridLayout *paramsGrid = ui->parametersGrid;
-    count--;
 
     if(count > paramCount)
     {
-        for(int i = paramCount + 1; i <= count; ++i)
+        for(int i = paramCount; i < count; ++i)
         {
             QLineEdit *newItem = new QLineEdit;
             newItem->setMinimumHeight(24);
@@ -131,15 +128,15 @@ void EquationsSystemsFrame::setParams(int count)
             newItem->setObjectName("item" + QString::number(i));
             paramsGrid->addWidget(newItem, i, 0);
 
-            QWidget::setTabOrder(paramsGrid->itemAtPosition(i - 1, 0)->widget(), newItem);
+//            QWidget::setTabOrder(paramsGrid->itemAtPosition(i - 1, 0)->widget(), newItem);
         }
     }
-    else
+    else if(count < paramCount)
     {
         QList<QWidget*> remove_list;
 
 
-        for(int i = paramCount; i > count; --i)
+        for(int i = paramCount - 1; i > count - 1; --i)
         {
             QLayoutItem *itemToRemove = paramsGrid->itemAtPosition(i, 0);
             remove_list.append(itemToRemove->widget());
@@ -204,7 +201,7 @@ void EquationsSystemsFrame::on_matrixSizeSpin_valueChanged(int arg1)
     setRows(arg1);
     setParams(arg1);
 
-    change();
+//    change();
 }
 
 void EquationsSystemsFrame::on_EpsilonEdit_textChanged(const QString &arg1)
