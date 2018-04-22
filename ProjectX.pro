@@ -44,7 +44,8 @@ SOURCES += main.cpp\
     Frames/equationsSystemsFrame.cpp \
     Frames/sinCosFrame.cpp \
     MathCore/Algorithms/Maclaurin.c \
-    Core/EquationsSystemsThread.cpp
+    Core/EquationsSystemsThread.cpp \
+    MathCore/Algorithms/EquationSystems.c
 
 HEADERS  += mainwindow.h \
     MathCore/MathParser.h \
@@ -71,7 +72,8 @@ HEADERS  += mainwindow.h \
     Frames/equationsSystemsFrame.h \
     Frames/sinCosFrame.h \
     MathCore/Algorithms/Maclarin.h \
-    Core/EquationsSystemsThread.h
+    Core/EquationsSystemsThread.h \
+    MathCore/Algorithms/EquationSystems.h
 
 FORMS    += mainwindow.ui \
     Frames/helpDialogFrame.ui \

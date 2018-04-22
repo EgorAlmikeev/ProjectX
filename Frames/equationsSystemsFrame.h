@@ -12,10 +12,12 @@ class EquationsSystemsFrame : public FrameThreadHelper
 {
     Q_OBJECT
 
-    int size = 0;
-    int columns = 1;
-    int rows = 1;
-    int params = 1;
+    int columnCount = 1;
+    int rowCount = 1;
+    int paramCount = 1;
+
+    double ** matrixArray = nullptr;
+    double * parametersArray = nullptr;
 
 public:
     explicit EquationsSystemsFrame(QWidget *parent = 0);
@@ -26,7 +28,13 @@ private slots:
     void setColumns(int count);
     void setParams(int count);
 
+    void getMatrixValues();
+    void getParamsValues();
+
     void on_matrixSizeSpin_valueChanged(int arg1);
+    void on_EpsilonEdit_textChanged(const QString &arg1);
+
+    void showAnswer(QString ans);
 
 private:
     Ui::EquationsSystemsFrame *ui;

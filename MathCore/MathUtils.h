@@ -1,12 +1,10 @@
-//
-//  experiment
-//
-
 #ifndef MathUtils_h
 #define MathUtils_h
 
 #include <math.h>
 #include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 // чем закончилось последнее вычисление
 // успешное завершение
@@ -66,5 +64,10 @@ int IsErrorCalc(void);
 // возвращает код, чем закончилось последнее вычисление
 ResultCode GetResultCode(void);
 
+// возвращает двумерный массив указанного размера
+double ** CreateMatrix(const int rows, const int columns);
+
+// освобождает память двумерного массива, с указанным количеством строк
+void DestroyMatrix(double **matrix, const int rows);
 
 #endif /* MathUtils_h */

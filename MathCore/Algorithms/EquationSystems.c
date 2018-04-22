@@ -1,4 +1,4 @@
-#include "Sole.h"
+#include "EquationSystems.h"
 #include "../MathParser.h"
 #include "../MathUtils.h"
 
