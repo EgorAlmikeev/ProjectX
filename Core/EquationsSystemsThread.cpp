@@ -1,6 +1,6 @@
 #include "EquationsSystemsThread.h"
 
-EquationsSystemsThread::EquationsSystemsThread(TMat matrix, TMatt params, int n, double e, ModeEqSys mode)
+EquationsSystemsThread::EquationsSystemsThread(TEqMatrix matrix, TEqArray params, int n, double e, ModeEqSys mode)
 {
     this->setObjectName("EquationsSystemsThread" + QString::number(mode));
     this->matrix = matrix;
@@ -19,11 +19,28 @@ void EquationsSystemsThread::run()
     switch(mode)
     {
     case ModeEqSysGauss:
-//        Gauss(matrix, params, n, e, result);
-        for(int i = 0; i < n; ++i)
+        Gauss(matrix, params, n, e, result);
+
+
+        for(int i = 0; i < n; i++)
         {
-            result[i] = i * i;
+            QString s;
+            for(int j = 0; j < n; j++)
+            {
+                s = s + QString::number(matrix[i][j]) + '    ';
+            }
+
+            s = s + ' = ' + QString::number(params[i]);
+
+            qDebug() << s;
         }
+
+
+        //qDebug() << n;
+//        for(int i = 0; i < n; ++i)
+//        {
+//            result[i] = 0;
+//        }
         break;
 
     case ModeEqSysJordan:

@@ -39,6 +39,8 @@
             return NAN; \
     }while(0)
 
+#define Swap(a, b, t) do{t = a; a = b; b = t;}while(0)
+
 // начало вычисления, необходимо вызвать перед циклом вычислений
 void BeginCalc(void);
 

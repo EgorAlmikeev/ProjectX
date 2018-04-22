@@ -20,8 +20,8 @@ EquationsSystemsFrame::~EquationsSystemsFrame()
 void EquationsSystemsFrame::change()
 {
     double e;
-    TMatt params;
-    TMat  matrix;
+    TEqArray params;
+    TEqMatrix  matrix;
     int n;
 
     cancel();
@@ -163,11 +163,11 @@ void EquationsSystemsFrame::setParams(int count)
     paramCount = count;
 }
 
-TMat EquationsSystemsFrame::getMatrixValues()
+TEqMatrix EquationsSystemsFrame::getMatrixValues()
 {
     QGridLayout *matrixGrid = ui->matrixGrid;
 
-    TMat matrixArray = nullptr;
+    TEqMatrix matrixArray = nullptr;
 
     matrixArray = CreateMatrix(rowCount, columnCount);
 
@@ -185,11 +185,11 @@ TMat EquationsSystemsFrame::getMatrixValues()
     return matrixArray;
 }
 
-TMatt EquationsSystemsFrame::getParamsValues()
+TEqArray EquationsSystemsFrame::getParamsValues()
 {
     QGridLayout *parametersGrid = ui->parametersGrid;
 
-    TMatt parametersArray = nullptr;
+    TEqArray parametersArray = nullptr;
 
     parametersArray = (double *) malloc(paramCount * sizeof(double));
 

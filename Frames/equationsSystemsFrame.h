@@ -27,8 +27,8 @@ private slots:
     void setColumns(int count);
     void setParams(int count);
 
-    TMat  getMatrixValues();
-    TMatt getParamsValues();
+    TEqMatrix  getMatrixValues();
+    TEqArray getParamsValues();
 
     void on_matrixSizeSpin_valueChanged(int arg1);
     void on_EpsilonEdit_textChanged(const QString &arg1);

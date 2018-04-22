@@ -10,8 +10,8 @@
 #define Sole_h
 #include "../MathUtils.h"
 
-typedef double* TMatt;
-typedef double** TMat;
-double Gauss(TMat m, TMatt M, int n, double epsilon, double* ans);
+typedef double* TEqArray;
+typedef double** TEqMatrix;
+double Gauss(TEqMatrix m, TEqArray r, int n, double epsilon, TEqArray ans);
 
 #endif /* Sole_h */

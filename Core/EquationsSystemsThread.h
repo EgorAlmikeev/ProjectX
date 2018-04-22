@@ -16,8 +16,8 @@ class EquationsSystemsThread : public BaseCalcThread
 
     ModeEqSys mode;
     double    e;
-    TMat      matrix;
-    TMatt     params;
+    TEqMatrix      matrix;
+    TEqArray     params;
     int       n;
 
 public:
@@ -27,7 +27,7 @@ signals:
     void sendResultSignal(double*, int);
 
 public:
-    EquationsSystemsThread(TMat matrix, TMatt params, int n, double e, ModeEqSys mode);
+    EquationsSystemsThread(TEqMatrix matrix, TEqArray params, int n, double e, ModeEqSys mode);
     void run();
 };
 
