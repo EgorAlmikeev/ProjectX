@@ -153,41 +153,41 @@ void EquationsSystemsFrame::setParams(int count)
 
 void EquationsSystemsFrame::getMatrixValues()
 {
-//    QGridLayout *matrixGrid = ui->matrixGrid;
+    QGridLayout *matrixGrid = ui->matrixGrid;
 
-//    if(matrixArray == nullptr)
-//    {
-//        matrixArray = CreateMatrix(rowCount + 1, columnCount + 1);
+    if(matrixArray == nullptr)
+    {
+        matrixArray = CreateMatrix(rowCount, columnCount);
 
-//        //темные силы не дают этому циклу нормально работать
+        //этот цикл не может работать нормально
 
-//        for(int i = 0; i < rowCount + 1; ++i)
-//            for(int j = 0; j < columnCount + 1; ++j)
-//                matrixArray[i][j] = ((QLineEdit*) matrixGrid->itemAtPosition(i, j)->widget())->text().toDouble();
-//    }
-//    else
-//    {
-//        DestroyMatrix(matrixArray, rowCount + 1);
-//        matrixArray = nullptr;
-//    }
+        for(int i = 0; i < rowCount; ++i)
+            for(int j = 0; j < columnCount; ++j)
+                matrixArray[i][j] = ((QLineEdit*) matrixGrid->itemAtPosition(i, j)->widget())->text().toDouble();
+    }
+    else
+    {
+        DestroyMatrix(matrixArray, rowCount);
+        matrixArray = nullptr;
+    }
 }
 
 void EquationsSystemsFrame::getParamsValues()
 {
-//    QGridLayout *parametersGrid = ui->parametersGrid;
+    QGridLayout *parametersGrid = ui->parametersGrid;
 
-//    if(parametersArray == nullptr)
-//    {
-//        parametersArray = (double *) malloc(paramsCount * sizeof(double));
+    if(parametersArray == nullptr)
+    {
+        parametersArray = (double *) malloc(paramCount * sizeof(double));
 
-//        for(int i = 0; i < paramsCount; ++i)
-//            parametersArray[i] = ((QLineEdit*) parametersGrid->itemAtPosition(i, 0)->widget())->text().toDouble();
-//    }
-//    else
-//    {
-//        free(parametersArray);
-//        parametersArray = nullptr;
-//    }
+        for(int i = 0; i < paramCount; ++i)
+            parametersArray[i] = ((QLineEdit*) parametersGrid->itemAtPosition(i, 0)->widget())->text().toDouble();
+    }
+    else
+    {
+        free(parametersArray);
+        parametersArray = nullptr;
+    }
 }
 
 void EquationsSystemsFrame::showAnswer(QString ans)
@@ -201,7 +201,7 @@ void EquationsSystemsFrame::on_matrixSizeSpin_valueChanged(int arg1)
     setRows(arg1);
     setParams(arg1);
 
-//    change();
+    change();
 }
 
 void EquationsSystemsFrame::on_EpsilonEdit_textChanged(const QString &arg1)
