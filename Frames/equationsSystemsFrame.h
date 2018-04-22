@@ -16,8 +16,8 @@ class EquationsSystemsFrame : public FrameThreadHelper
     int rowCount = 2;
     int paramCount = 2;
 
-    double ** matrixArray = nullptr;
-    double * parametersArray = nullptr;
+//    double ** matrixArray = nullptr;
+//    double * parametersArray = nullptr;
 
 public:
     explicit EquationsSystemsFrame(QWidget *parent = 0);
@@ -28,8 +28,8 @@ private slots:
     void setColumns(int count);
     void setParams(int count);
 
-    void getMatrixValues();
-    void getParamsValues();
+    double **getMatrixValues();
+    double *getParamsValues();
 
     void on_matrixSizeSpin_valueChanged(int arg1);
     void on_EpsilonEdit_textChanged(const QString &arg1);

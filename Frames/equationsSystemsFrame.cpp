@@ -6,10 +6,6 @@ EquationsSystemsFrame::EquationsSystemsFrame(QWidget *parent) :
     ui(new Ui::EquationsSystemsFrame)
 {
     ui->setupUi(this);
-
-//    columnCount = ui->matrixGrid->columnCount() - 1;
-//    rowCount = ui->matrixGrid->rowCount() - 1;
-//    paramCount = ui->parametersGrid->rowCount() - 1;
 }
 
 EquationsSystemsFrame::~EquationsSystemsFrame()
@@ -151,43 +147,38 @@ void EquationsSystemsFrame::setParams(int count)
     paramCount = count;
 }
 
-void EquationsSystemsFrame::getMatrixValues()
+double ** EquationsSystemsFrame::getMatrixValues()
 {
     QGridLayout *matrixGrid = ui->matrixGrid;
 
-    if(matrixArray == nullptr)
-    {
-        matrixArray = CreateMatrix(rowCount, columnCount);
+    double **matrixArray = nullptr;
 
-        //этот цикл не может работать нормально
+    matrixArray = CreateMatrix(rowCount, columnCount);
 
-        for(int i = 0; i < rowCount; ++i)
-            for(int j = 0; j < columnCount; ++j)
-                matrixArray[i][j] = ((QLineEdit*) matrixGrid->itemAtPosition(i, j)->widget())->text().toDouble();
-    }
-    else
+    //этот цикл не может работать нормально
+
+    for(int i = 0; i < rowCount; ++i)
     {
-        DestroyMatrix(matrixArray, rowCount);
-        matrixArray = nullptr;
+        for(int j = 0; j < columnCount; ++j)
+        {
+            QLineEdit *edit = (QLineEdit*) matrixGrid->itemAtPosition(i, j)->widget();
+            double digit = edit->text().toDouble();
+            matrixArray[i][j] = digit;
+            qDebug() << "matrix[" << i << "][" << j << "] = " << digit << "\t from object " << edit->objectName();
+        }
     }
 }
 
-void EquationsSystemsFrame::getParamsValues()
+double * EquationsSystemsFrame::getParamsValues()
 {
     QGridLayout *parametersGrid = ui->parametersGrid;
 
-    if(parametersArray == nullptr)
-    {
-        parametersArray = (double *) malloc(paramCount * sizeof(double));
+    double *parametersArray = nullptr;
 
-        for(int i = 0; i < paramCount; ++i)
-            parametersArray[i] = ((QLineEdit*) parametersGrid->itemAtPosition(i, 0)->widget())->text().toDouble();
-    }
-    else
-    {
-        free(parametersArray);
-        parametersArray = nullptr;
-    }
+    parametersArray = (double *) malloc(paramCount * sizeof(double));
+
+    for(int i = 0; i < paramCount; ++i)
+        parametersArray[i] = ((QLineEdit*) parametersGrid->itemAtPosition(i, 0)->widget())->text().toDouble();
 }
 
 void EquationsSystemsFrame::showAnswer(QString ans)

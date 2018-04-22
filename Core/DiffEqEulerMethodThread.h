@@ -19,7 +19,7 @@ class DiffEqEulerMethodThread : public BaseCalcThread
     double   xEnd;
     double   y0;
     double   h;
-    int n;
+    int      n;
     ModeDiff mode;
 
 public:
