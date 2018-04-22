@@ -2,6 +2,7 @@
 
 EquationsSystemsThread::EquationsSystemsThread(TMat matrix, TMatt params, int n, double e, ModeEqSys mode)
 {
+    this->setObjectName("EquationsSystemsThread" + QString::number(mode));
     this->matrix = matrix;
     this->params = params;
     this->n = n;
@@ -18,7 +19,11 @@ void EquationsSystemsThread::run()
     switch(mode)
     {
     case ModeEqSysGauss:
-        Gauss(matrix, params, n, e, result);
+//        Gauss(matrix, params, n, e, result);
+        for(int i = 0; i < n; ++i)
+        {
+            result[i] = i * i;
+        }
         break;
 
     case ModeEqSysJordan:

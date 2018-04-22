@@ -22,10 +22,12 @@ void EquationsSystemsFrame::change()
     double e;
     TMatt params;
     TMat  matrix;
+    int n;
 
     cancel();
 
     e = ui->EpsilonEdit->text().toDouble();
+    n = paramCount;
 
     if(e > 1 || e < 1e-99)
     {
@@ -36,7 +38,7 @@ void EquationsSystemsFrame::change()
     matrix = getMatrixValues();
     params = getParamsValues();
 
-    setThread(new EquationsSystemsThread(matrix, params, e, paramCount, mode));
+    setThread(new EquationsSystemsThread(matrix, params, n, e, mode));
     connect(getThread(), SIGNAL(sendResultSignal(double*, int)), SLOT(onResult(double*, int)));
     connect(getThread(), SIGNAL(sendErrorSignal(int)), SLOT(onError(int)));
 
@@ -228,7 +230,7 @@ void EquationsSystemsFrame::onResult(double *value, int n)
 
     for(int i = 0; i < n; i++)
     {
-        result_string.append(QString::number(i) + ": " + value[i] + "\n");
+        result_string.append(QString::number(i) + ": " + QString::number(value[i]) + "\n");
     }
 
     ui->answerEdit->appendPlainText(result_string);
