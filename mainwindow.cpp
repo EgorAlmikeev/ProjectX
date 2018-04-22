@@ -56,10 +56,10 @@ void MainWindow::createMenu()
     const int equationsSystemsItemsCount = 4;
     TMember equationsSystemsItems[equationsSystemsItemsCount] =
     {
-        {"Метод Гаусса",                        new EquationsSystemsFrame},
-        {"Метод оптимальных исключений",  new EquationsSystemsFrame},
-        {"Гаусса-Жордана",                      new EquationsSystemsFrame},
-        {"Метод наименьших квадратов",          new EquationsSystemsFrame},
+        {"Метод Гаусса",                        new EquationsSystemsFrame(this, ModeEqSysGauss)},
+        {"Метод оптимальных исключений",        new EquationsSystemsFrame(this, ModeEqSysOptimal)},
+        {"Гаусса-Жордана",                      new EquationsSystemsFrame(this, ModeEqSysJordan)},
+        {"Метод наименьших квадратов",          new EquationsSystemsFrame(this, ModeEqSysSquare)},
     };
 
     const int menuItemsCount = 5;

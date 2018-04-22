@@ -1,11 +1,15 @@
 #include "equationsSystemsFrame.h"
 #include "ui_equationsSystemsFrame.h"
 
-EquationsSystemsFrame::EquationsSystemsFrame(QWidget *parent) :
+#include "UIConsts.h"
+
+EquationsSystemsFrame::EquationsSystemsFrame(QWidget *parent, ModeEqSys mode) :
     FrameThreadHelper(parent),
     ui(new Ui::EquationsSystemsFrame)
 {
     ui->setupUi(this);
+
+    this->mode = mode;
 }
 
 EquationsSystemsFrame::~EquationsSystemsFrame()
@@ -16,6 +20,10 @@ EquationsSystemsFrame::~EquationsSystemsFrame()
 void EquationsSystemsFrame::change()
 {
     double e;
+    TMatt params;
+    TMat  matrix;
+
+    cancel();
 
     e = ui->EpsilonEdit->text().toDouble();
 
@@ -25,10 +33,16 @@ void EquationsSystemsFrame::change()
         return;
     }
 
-    getMatrixValues();
-    getParamsValues();
+    matrix = getMatrixValues();
+    params = getParamsValues();
 
-//    setThread(new EquationsSystemsThread());
+    setThread(new EquationsSystemsThread(matrix, params, e, paramCount, mode));
+    connect(getThread(), SIGNAL(sendResultSignal(double*, int)), SLOT(onResult(double*, int)));
+    connect(getThread(), SIGNAL(sendErrorSignal(int)), SLOT(onError(int)));
+
+    start();
+
+    showAnswer(sCalculating);
 }
 
 void EquationsSystemsFrame::setRows(int count)
@@ -147,15 +161,13 @@ void EquationsSystemsFrame::setParams(int count)
     paramCount = count;
 }
 
-double ** EquationsSystemsFrame::getMatrixValues()
+TMat EquationsSystemsFrame::getMatrixValues()
 {
     QGridLayout *matrixGrid = ui->matrixGrid;
 
-    double **matrixArray = nullptr;
+    TMat matrixArray = nullptr;
 
     matrixArray = CreateMatrix(rowCount, columnCount);
-
-    //этот цикл не может работать нормально
 
     for(int i = 0; i < rowCount; ++i)
     {
@@ -164,26 +176,31 @@ double ** EquationsSystemsFrame::getMatrixValues()
             QLineEdit *edit = (QLineEdit*) matrixGrid->itemAtPosition(i, j)->widget();
             double digit = edit->text().toDouble();
             matrixArray[i][j] = digit;
-            qDebug() << "matrix[" << i << "][" << j << "] = " << digit << "\t from object " << edit->objectName();
+//            qDebug() << "matrix[" << i << "][" << j << "] = " << digit << "\t from object " << edit->objectName();
         }
     }
+
+    return matrixArray;
 }
 
-double * EquationsSystemsFrame::getParamsValues()
+TMatt EquationsSystemsFrame::getParamsValues()
 {
     QGridLayout *parametersGrid = ui->parametersGrid;
 
-    double *parametersArray = nullptr;
+    TMatt parametersArray = nullptr;
 
     parametersArray = (double *) malloc(paramCount * sizeof(double));
 
     for(int i = 0; i < paramCount; ++i)
         parametersArray[i] = ((QLineEdit*) parametersGrid->itemAtPosition(i, 0)->widget())->text().toDouble();
+
+    return parametersArray;
 }
 
 void EquationsSystemsFrame::showAnswer(QString ans)
 {
-    ui->answerEdit->setText(ans);
+    ui->answerEdit->clear();
+    ui->answerEdit->appendPlainText(ans);
 }
 
 void EquationsSystemsFrame::on_matrixSizeSpin_valueChanged(int arg1)
@@ -198,4 +215,29 @@ void EquationsSystemsFrame::on_matrixSizeSpin_valueChanged(int arg1)
 void EquationsSystemsFrame::on_EpsilonEdit_textChanged(const QString &arg1)
 {
     change();
+}
+
+void EquationsSystemsFrame::onResult(double *value, int n)
+{
+    end();
+
+    qDebug() << "onResult";
+
+    ui->answerEdit->clear();
+    QString result_string;
+
+    for(int i = 0; i < n; i++)
+    {
+        result_string.append(QString::number(i) + ": " + value[i] + "\n");
+    }
+
+    ui->answerEdit->appendPlainText(result_string);
+    ui->answerEdit->moveCursor(QTextCursor::Start);
+
+    free(value);
+}
+
+void EquationsSystemsFrame::onError(int code)
+{
+
 }

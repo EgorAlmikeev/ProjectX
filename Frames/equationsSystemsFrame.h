@@ -16,11 +16,10 @@ class EquationsSystemsFrame : public FrameThreadHelper
     int rowCount = 2;
     int paramCount = 2;
 
-//    double ** matrixArray = nullptr;
-//    double * parametersArray = nullptr;
+    ModeEqSys mode;
 
 public:
-    explicit EquationsSystemsFrame(QWidget *parent = 0);
+    explicit EquationsSystemsFrame(QWidget *parent, ModeEqSys mode);
     ~EquationsSystemsFrame();
 
 private slots:
@@ -28,13 +27,16 @@ private slots:
     void setColumns(int count);
     void setParams(int count);
 
-    double **getMatrixValues();
-    double *getParamsValues();
+    TMat  getMatrixValues();
+    TMatt getParamsValues();
 
     void on_matrixSizeSpin_valueChanged(int arg1);
     void on_EpsilonEdit_textChanged(const QString &arg1);
 
     void showAnswer(QString ans);
+
+    void onResult(double *value, int n);
+    void onError(int code);
 
 private:
     Ui::EquationsSystemsFrame *ui;

@@ -29,7 +29,6 @@ private slots:
     void onError(int code);
 
     void on_xStartEdit_textChanged(const QString &arg1);
-
     void on_xEndEdit_textChanged(const QString &arg1);
 
 private:

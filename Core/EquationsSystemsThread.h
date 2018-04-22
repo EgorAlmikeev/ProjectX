@@ -16,11 +16,18 @@ class EquationsSystemsThread : public BaseCalcThread
 
     ModeEqSys mode;
     double    e;
-    double ** matrix;
-    double  * params;
+    TMat      matrix;
+    TMatt     params;
+    int       n;
 
 public:
-    EquationsSystemsThread(double **matrix, double *params, double e, ModeEqSys mode);
+    void sendResult(double *ans);
+
+signals:
+    void sendResultSignal(double*, int);
+
+public:
+    EquationsSystemsThread(TMat matrix, TMatt params, int n, double e, ModeEqSys mode);
     void run();
 };
 

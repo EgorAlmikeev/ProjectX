@@ -40,5 +40,6 @@
 #include "Algorithms/Equation.h"
 #include "Algorithms/Differential.h"
 #include "Algorithms/Maclarin.h"
+#include "Algorithms/EquationSystems.h"
 
 #endif // XMATH_H
