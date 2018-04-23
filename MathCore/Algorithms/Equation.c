@@ -90,3 +90,38 @@ double EqChord(char* func, double a, double b, double epsilon, int* countRef)
         *countRef = count;
     return a;
 }
+
+double EqNewton(char* func, char* derivative, double x0, double epsilon, int* countRef)
+{
+    double x1;
+    int count;
+    
+    count = 0;
+    x1  = x0 - FunctionX(func, x0) / FunctionX(derivative, x0); // первое приближение
+    CheckSyntax();
+    
+    if(fabs(x1-x0) < epsilon)
+    {
+        if(countRef != NULL)
+            *countRef = 0;
+        return NAN;
+    }
+
+    
+    while (fabs(x1-x0) > epsilon)
+    {
+        count++;
+        x0 = x1;
+        x1 = x1 - FunctionX(func, x1) / FunctionX(derivative, x1);
+        
+        
+        CheckSyntax();
+        CheckCancel();
+    }
+    
+    if(countRef != NULL)
+        *countRef = count;
+    
+    return x1;
+}
+
