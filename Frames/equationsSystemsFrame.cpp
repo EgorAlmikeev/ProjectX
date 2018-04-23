@@ -176,7 +176,6 @@ TEqMatrix EquationsSystemsFrame::getMatrixValues()
             if(!edit->text().isEmpty())
                  digit = edit->text().toDouble();
             matrixArray[i][j] = digit;
-//            qDebug() << "matrix[" << i << "][" << j << "] = " << digit << "\t from object " << edit->objectName();
         }
     }
 
@@ -264,11 +263,15 @@ QLineEdit * EquationsSystemsFrame::createNewMatrixItem()
 void EquationsSystemsFrame::setMatrixTabOrder()
 {
     QGridLayout * matrixGrid = ui->matrixGrid;
+    QGridLayout * parametersGrid = ui->parametersGrid;
     QList<QWidget*> list;
 
     for(int i = 0; i < columnCount; ++i)
+    {
         for(int j = 0; j < rowCount; ++j)
             list.append(matrixGrid->itemAtPosition(i, j)->widget());
+        list.append(parametersGrid->itemAtPosition(i, 0)->widget());
+    }
 
     for(int i = 1; i < list.size(); ++i)
         QWidget::setTabOrder(list.at(i - 1), list.at(i));
