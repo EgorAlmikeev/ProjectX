@@ -11,6 +11,9 @@ EquationsSystemsFrame::EquationsSystemsFrame(QWidget *parent, ModeEqSys mode) :
 
     this->mode = mode;
 
+    matrixItemValidator = new QRegExpValidator();
+    matrixItemValidator->setRegExp(QRegExp("^[+-]?[\\d]+($|[\\.][\\d]+|([\\.][\\d]+[Ee]|[Ee])[+-]?\\d+)$"));
+
     setColumns(2);
     setRows(2);
     setParams(2);
@@ -244,10 +247,12 @@ void EquationsSystemsFrame::onMatrixElementTextChanged()
 QLineEdit * EquationsSystemsFrame::createNewMatrixItem()
 {
     QLineEdit *newItem = new QLineEdit;
-    newItem->setMinimumHeight(24);
-    newItem->setMaximumWidth(40);
+//    newItem->setMinimumHeight(24);
+    newItem->setMinimumWidth(40);
     newItem->setAlignment(Qt::AlignCenter);
-    newItem->setText(0);
+    newItem->setText("0");
+    newItem->setValidator(matrixItemValidator);
+
     connect(newItem, SIGNAL(textChanged(QString)), SLOT(onMatrixElementTextChanged()));
 
     return newItem;
@@ -258,8 +263,8 @@ void EquationsSystemsFrame::setMatrixTabOrder()
     QGridLayout * matrixGrid = ui->matrixGrid;
     QList<QWidget*> list;
 
-    for(int i = 0; i < matrixGrid->columnCount(); ++i)
-        for(int j = 0; j < matrixGrid->rowCount(); ++j)
+    for(int i = 0; i < columnCount; ++i)
+        for(int j = 0; j < rowCount; ++j)
             list.append(matrixGrid->itemAtPosition(i, j)->widget());
 
     for(int i = 1; i < list.size(); ++i)

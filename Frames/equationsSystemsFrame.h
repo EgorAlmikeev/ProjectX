@@ -18,6 +18,8 @@ class EquationsSystemsFrame : public FrameThreadHelper
 
     ModeEqSys mode;
 
+    QRegExpValidator *matrixItemValidator;
+
 public:
     explicit EquationsSystemsFrame(QWidget *parent, ModeEqSys mode);
     ~EquationsSystemsFrame();
