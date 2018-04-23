@@ -67,7 +67,75 @@
         <property name="spacing">
          <number>6</number>
         </property>
-        <item row="1" column="2" colspan="4">
+        <item row="1" column="0">
+         <widget class="QLabel" name="derivativeLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Производная:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2" colspan="3">
+         <widget class="QLineEdit" name="equationEdit">
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>x^3-6*x^2+12*x-35</string>
+          </property>
+          <property name="frame">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="limitLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Пределы:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="iterationLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Точность:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2" colspan="3">
+         <widget class="QLineEdit" name="epsilonEdit">
+          <property name="text">
+           <string>0.00001</string>
+          </property>
+          <property name="maxLength">
+           <number>13</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2" colspan="3">
          <widget class="QLineEdit" name="derivativeEdit">
           <property name="text">
            <string>3*x^2-12*x+12</string>
@@ -76,8 +144,37 @@
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="x0Label">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string>x0:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="equationLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Уравнение:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2" colspan="3">
+         <widget class="QLineEdit" name="x0Edit">
+          <property name="text">
+           <string>-100</string>
           </property>
          </widget>
         </item>
@@ -97,118 +194,61 @@
           </property>
          </spacer>
         </item>
-        <item row="2" column="2" colspan="4">
-         <widget class="QLineEdit" name="x0Edit">
-          <property name="text">
-           <string>-100</string>
+        <item row="3" column="2" colspan="3">
+         <layout class="QGridLayout" name="gridLayout_4">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
           </property>
-         </widget>
-        </item>
-        <item row="3" column="5">
-         <widget class="QLineEdit" name="limitBEdit">
-          <property name="autoFillBackground">
-           <bool>false</bool>
+          <property name="leftMargin">
+           <number>0</number>
           </property>
-          <property name="text">
-           <string>100</string>
-          </property>
-          <property name="frame">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="equationLabel">
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Уравнение:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="derivativeLabel">
-          <property name="text">
-           <string>Производная:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="2">
-         <widget class="QLabel" name="bLabel">
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>от</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="3">
-         <widget class="QLineEdit" name="limitAEdit">
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>-100</string>
-          </property>
-          <property name="frame">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2" colspan="4">
-         <widget class="QLineEdit" name="equationEdit">
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>x^3-6*x^2+12*x-35</string>
-          </property>
-          <property name="frame">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="limitLabel">
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Пределы:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="4">
-         <widget class="QLabel" name="aLabel">
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>до</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="iterationLabel">
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Точность:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="2" colspan="4">
-         <widget class="QLineEdit" name="epsilonEdit">
-          <property name="text">
-           <string>0.00001</string>
-          </property>
-          <property name="maxLength">
-           <number>13</number>
-          </property>
-         </widget>
+          <item row="0" column="0">
+           <widget class="QLabel" name="bLabel">
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>от</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="limitAEdit">
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>-100</string>
+            </property>
+            <property name="frame">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="aLabel">
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>до</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLineEdit" name="limitBEdit">
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>100</string>
+            </property>
+            <property name="frame">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
@@ -269,8 +309,6 @@
   <tabstop>equationEdit</tabstop>
   <tabstop>derivativeEdit</tabstop>
   <tabstop>x0Edit</tabstop>
-  <tabstop>limitAEdit</tabstop>
-  <tabstop>limitBEdit</tabstop>
   <tabstop>epsilonEdit</tabstop>
   <tabstop>answerEdit</tabstop>
  </tabstops>

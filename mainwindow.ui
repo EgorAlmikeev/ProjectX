@@ -10,9 +10,15 @@
     <height>491</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="minimumSize">
    <size>
-    <width>230</width>
+    <width>0</width>
     <height>0</height>
    </size>
   </property>
@@ -20,7 +26,13 @@
    <string>ProjectX</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QGridLayout" name="gridLayout" columnstretch="0,0">
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <layout class="QGridLayout" name="gridLayout" columnstretch="0">
     <property name="leftMargin">
      <number>6</number>
     </property>
@@ -43,16 +55,22 @@
         <property name="enabled">
          <bool>true</bool>
         </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="minimumSize">
          <size>
-          <width>300</width>
+          <width>320</width>
           <height>0</height>
          </size>
         </property>
-        <property name="maximumSize">
+        <property name="baseSize">
          <size>
-          <width>235</width>
-          <height>16777215</height>
+          <width>0</width>
+          <height>0</height>
          </size>
         </property>
         <property name="autoFillBackground">
