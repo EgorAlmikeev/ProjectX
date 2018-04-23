@@ -10,6 +10,10 @@ EquationsSystemsFrame::EquationsSystemsFrame(QWidget *parent, ModeEqSys mode) :
     ui->setupUi(this);
 
     this->mode = mode;
+
+    setColumns(2);
+    setRows(2);
+    setParams(2);
 }
 
 EquationsSystemsFrame::~EquationsSystemsFrame()
@@ -56,12 +60,8 @@ void EquationsSystemsFrame::setRows(int count)
         for(int i = rowCount; i < count; ++i)
             for(int j = 0; j < columnCount; ++j)
             {
-                QLineEdit *newItem = new QLineEdit;
-                newItem->setMinimumHeight(24);
-                newItem->setMaximumWidth(40);
-                newItem->setObjectName("item" + QString::number(i) + "_" + QString::number(j));
+                QLineEdit *newItem = QLineEdit *newItem = createNewMatrixItem();
                 matrixGrid->addWidget(newItem, i, j);
-                connect(newItem, SIGNAL(textChanged(QString)), SLOT(onMatrixElementTextChanged()));
 
 //                if(j != 0)
 //                    QWidget::setTabOrder(matrixGrid->itemAtPosition(i, j - 1)->widget(), newItem);
@@ -78,7 +78,8 @@ void EquationsSystemsFrame::setRows(int count)
                 remove_list.append(itemToRemove->widget());
             }
 
-        foreach (QWidget *item, remove_list) {
+        foreach (QWidget *item, remove_list)
+        {
             matrixGrid->removeWidget(item);
             delete item;
         }
@@ -96,12 +97,9 @@ void EquationsSystemsFrame::setColumns(int count)
         for(int i = 0; i < rowCount; ++i)
             for(int j = columnCount; j < count; ++j)
             {
-                QLineEdit *newItem = new QLineEdit;
-                newItem->setMinimumHeight(24);
-                newItem->setMaximumWidth(40);
-                newItem->setObjectName("item" + QString::number(i) + "_" + QString::number(j));
+                QLineEdit *newItem = QLineEdit *newItem = createNewMatrixItem();
                 matrixGrid->addWidget(newItem, i, j);
-                connect(newItem, SIGNAL(textChanged(QString)), SLOT(onMatrixElementTextChanged()));
+
 
 //                QWidget::setTabOrder(matrixGrid->itemAtPosition(i, j - 1)->widget(), newItem);
             }
@@ -117,7 +115,8 @@ void EquationsSystemsFrame::setColumns(int count)
                 remove_list.append(itemToRemove->widget());
             }
 
-        foreach (QWidget *item, remove_list) {
+        foreach (QWidget *item, remove_list)
+        {
             matrixGrid->removeWidget(item);
             delete item;
         }
@@ -136,12 +135,8 @@ void EquationsSystemsFrame::setParams(int count)
     {
         for(int i = paramCount; i < count; ++i)
         {
-            QLineEdit *newItem = new QLineEdit;
-            newItem->setMinimumHeight(24);
-            newItem->setMaximumWidth(40);
-            newItem->setObjectName("item" + QString::number(i));
+            QLineEdit *newItem = createNewMatrixItem();
             paramsGrid->addWidget(newItem, i, 0);
-            connect(newItem, SIGNAL(textChanged(QString)), SLOT(onMatrixElementTextChanged()));
 
 //            QWidget::setTabOrder(paramsGrid->itemAtPosition(i - 1, 0)->widget(), newItem);
         }
@@ -157,7 +152,8 @@ void EquationsSystemsFrame::setParams(int count)
             remove_list.append(itemToRemove->widget());
         }
 
-        foreach (QWidget *item, remove_list) {
+        foreach (QWidget *item, remove_list)
+        {
             paramsGrid->removeWidget(item);
             delete item;
         }
@@ -250,4 +246,15 @@ void EquationsSystemsFrame::onError(int code)
 void EquationsSystemsFrame::onMatrixElementTextChanged()
 {
     change();
+}
+
+QLineEdit * EquationsSystemsFrame::createNewMatrixElement()
+{
+    QLineEdit *newItem = new QLineEdit;
+    newItem->setMinimumHeight(24);
+    newItem->setMaximumWidth(40);
+    newItem->setObjectName("item" + QString::number(i));
+    connect(newItem, SIGNAL(textChanged(QString)), SLOT(onMatrixElementTextChanged()));
+
+    return newItem;
 }

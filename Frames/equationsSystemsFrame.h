@@ -12,9 +12,9 @@ class EquationsSystemsFrame : public FrameThreadHelper
 {
     Q_OBJECT
 
-    int columnCount = 2;
-    int rowCount = 2;
-    int paramCount = 2;
+    int columnCount = 0;
+    int rowCount = 0;
+    int paramCount = 0;
 
     ModeEqSys mode;
 
@@ -43,6 +43,8 @@ private slots:
 private:
     Ui::EquationsSystemsFrame *ui;
     void change();
+
+    void createNewMatrixElement();
 };
 
 #endif // EQUATIONSSYSTEMSFRAME_H
