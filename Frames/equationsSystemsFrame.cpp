@@ -61,6 +61,7 @@ void EquationsSystemsFrame::setRows(int count)
                 newItem->setMaximumWidth(40);
                 newItem->setObjectName("item" + QString::number(i) + "_" + QString::number(j));
                 matrixGrid->addWidget(newItem, i, j);
+                connect(newItem, SIGNAL(textChanged(QString)), SLOT(onMatrixElementTextChanged()));
 
 //                if(j != 0)
 //                    QWidget::setTabOrder(matrixGrid->itemAtPosition(i, j - 1)->widget(), newItem);
@@ -100,6 +101,7 @@ void EquationsSystemsFrame::setColumns(int count)
                 newItem->setMaximumWidth(40);
                 newItem->setObjectName("item" + QString::number(i) + "_" + QString::number(j));
                 matrixGrid->addWidget(newItem, i, j);
+                connect(newItem, SIGNAL(textChanged(QString)), SLOT(onMatrixElementTextChanged()));
 
 //                QWidget::setTabOrder(matrixGrid->itemAtPosition(i, j - 1)->widget(), newItem);
             }
@@ -139,6 +141,7 @@ void EquationsSystemsFrame::setParams(int count)
             newItem->setMaximumWidth(40);
             newItem->setObjectName("item" + QString::number(i));
             paramsGrid->addWidget(newItem, i, 0);
+            connect(newItem, SIGNAL(textChanged(QString)), SLOT(onMatrixElementTextChanged()));
 
 //            QWidget::setTabOrder(paramsGrid->itemAtPosition(i - 1, 0)->widget(), newItem);
         }
@@ -242,4 +245,9 @@ void EquationsSystemsFrame::onResult(double *value, int n)
 void EquationsSystemsFrame::onError(int code)
 {
 
+}
+
+void EquationsSystemsFrame::onMatrixElementTextChanged()
+{
+    change();
 }

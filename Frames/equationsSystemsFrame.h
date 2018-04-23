@@ -38,6 +38,8 @@ private slots:
     void onResult(double *value, int n);
     void onError(int code);
 
+    void onMatrixElementTextChanged();
+
 private:
     Ui::EquationsSystemsFrame *ui;
     void change();

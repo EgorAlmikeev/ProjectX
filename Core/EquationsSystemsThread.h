@@ -16,8 +16,8 @@ class EquationsSystemsThread : public BaseCalcThread
 
     ModeEqSys mode;
     double    e;
-    TEqMatrix      matrix;
-    TEqArray     params;
+    TEqMatrix matrix;
+    TEqArray  params;
     int       n;
 
 public:
