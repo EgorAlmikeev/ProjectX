@@ -39,11 +39,12 @@ void MainWindow::createMenu()
         {"Метод Рунге-Кутты",   new DiffEqEulerMethodFrame(this, ModeDiffRunge)}
     };
 
-    const int nolinearItemsCount = 2;
+    const int nolinearItemsCount = 3;
     TMember nolinearItems[nolinearItemsCount] =
     {
         {"Метод Дихотомии", new NonlinearEquationsFrame(this, ModeEqHalfDiv)},
-        {"Метод Хорд",      new NonlinearEquationsFrame(this, ModeEqChord)}
+        {"Метод Хорд",      new NonlinearEquationsFrame(this, ModeEqChord)},
+        {"Метод Ньютона",   new NonlinearEquationsFrame(this, ModeEqNewton)}
     };
 
     const int simpleFunctionsItemsCount = 2;

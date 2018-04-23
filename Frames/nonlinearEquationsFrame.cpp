@@ -12,6 +12,22 @@ NonlinearEquationsFrame::NonlinearEquationsFrame(QWidget *parent, ModeEq mode) :
     validatorSetup();
     setTimeOutUse(true);
     //change();
+
+    if(mode != ModeEqNewton)
+    {
+        ui->derivativeEdit->setVisible(false);
+        ui->derivativeLabel->setVisible(false);
+        ui->x0Edit->setVisible(false);
+        ui->x0Label->setVisible(false);
+    }
+    else
+    {
+        ui->aLabel->setVisible(false);
+        ui->bLabel->setVisible(false);
+        ui->limitAEdit->setVisible(false);
+        ui->limitBEdit->setVisible(false);
+        ui->limitLabel->setVisible(false);
+    }
 }
 
 NonlinearEquationsFrame::~NonlinearEquationsFrame()
@@ -22,22 +38,37 @@ NonlinearEquationsFrame::~NonlinearEquationsFrame()
 void NonlinearEquationsFrame::change()
 {
     QString func;
-    double a, b, e;
+    QString derivative;
+    double a, b, e, x0;
 
     cancel();
 
-    a = Expression(QStrToCStr(ui->limitAEdit->text()));
-    if(IsNan(a))
+    if(mode != ModeEqNewton)
     {
-        showAnswer("Неверный параметр ""от""");
-        return;
-    }
+        a = Expression(QStrToCStr(ui->limitAEdit->text()));
+        if(IsNan(a))
+        {
+            showAnswer("Неверный параметр ""от""");
+            return;
+        }
 
-    b = Expression(QStrToCStr(ui->limitBEdit->text()));
-    if(IsNan(b))
+        b = Expression(QStrToCStr(ui->limitBEdit->text()));
+        if(IsNan(b))
+        {
+            showAnswer("Неверный параметр ""до""");
+            return;
+        }
+    }
+    else
     {
-        showAnswer("Неверный параметр ""до""");
-        return;
+        x0 = Expression(QStrToCStr(ui->x0Edit->text()));
+        if(IsNan(x0))
+        {
+            showAnswer("Неверный параметр ""x0""");
+            return;
+        }
+
+        derivative = ui->derivativeEdit->text();
     }
 
     e = ui->epsilonEdit->text().toDouble();
@@ -49,7 +80,10 @@ void NonlinearEquationsFrame::change()
 
     func = ui->equationEdit->text();
 
-    setThread(new EquationThread(func, a, b, e, mode));
+    if(mode != ModeEqNewton)
+        setThread(new EquationThread(func, a, b, e, mode));
+    else
+        setThread(new EquationThread(func, derivative, x0, e, mode));
 
     connect(getThread(), SIGNAL(sendResultSignal(double, int)), SLOT(onResult(double,int)));
     connect(getThread(), SIGNAL(sendErrorSignal(int)), SLOT(onError(int)));
@@ -112,6 +146,16 @@ void NonlinearEquationsFrame::on_limitBEdit_textChanged(const QString &arg1)
 }
 
 void NonlinearEquationsFrame::on_epsilonEdit_textChanged(const QString &arg1)
+{
+    change();
+}
+
+void NonlinearEquationsFrame::on_derivativeEdit_textChanged(const QString &arg1)
+{
+    change();
+}
+
+void NonlinearEquationsFrame::on_x0Edit_textChanged(const QString &arg1)
 {
     change();
 }
