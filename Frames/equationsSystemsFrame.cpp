@@ -299,14 +299,12 @@ void EquationsSystemsFrame::setDefaultValues()
     const int defaultRows = 3;
     const int defaultColumns = 4;
 
-    double arr[defaultRows][defaultColumns] =
+    const double arr[defaultRows][defaultColumns] =
     {
-        {1,2,3,4},
-        {1,2,3,4},
-        {1,2,3,4}
+        { 2,  1, -1,   8},
+        {-3, -1,  2, -11},
+        {-2,  1,  2,  -3}
     };
-
-    int i, j;
 
     QGridLayout * matrixGrid = ui->matrixGrid;
     QGridLayout * parametersGrid = ui->parametersGrid;
