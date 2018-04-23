@@ -42,12 +42,15 @@ private slots:
 
     void onMatrixElementTextChanged();
 
+    void on_clearButton_clicked();
+
 private:
     Ui::EquationsSystemsFrame *ui;
     void change();
 
     QLineEdit * createNewMatrixItem();
     void setMatrixTabOrder();
+    void setDefaultValues();
 };
 
 #endif // EQUATIONSSYSTEMSFRAME_H

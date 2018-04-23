@@ -14,10 +14,14 @@ EquationsSystemsFrame::EquationsSystemsFrame(QWidget *parent, ModeEqSys mode) :
     matrixItemValidator = new QRegExpValidator();
     matrixItemValidator->setRegExp(QRegExp("^[+-]?[\\d]+($|[\\.][\\d]+|([\\.][\\d]+[Ee]|[Ee])[+-]?\\d+)$"));
 
-    setColumns(2);
-    setRows(2);
-    setParams(2);
+    const int defaultSize = 3;
+
+    setColumns(defaultSize);
+    setRows(defaultSize);
+    setParams(defaultSize);
     setMatrixTabOrder();
+
+    setDefaultValues();
 }
 
 EquationsSystemsFrame::~EquationsSystemsFrame()
@@ -275,4 +279,42 @@ void EquationsSystemsFrame::setMatrixTabOrder()
 
     for(int i = 1; i < list.size(); ++i)
         QWidget::setTabOrder(list.at(i - 1), list.at(i));
+}
+
+void EquationsSystemsFrame::on_clearButton_clicked()
+{
+    QGridLayout * matrixGrid = ui->matrixGrid;
+    QGridLayout * parametersGrid = ui->parametersGrid;
+
+    for(int i = 0; i < columnCount; ++i)
+    {
+        for(int j = 0; j < rowCount; ++j)
+            ((QLineEdit*) matrixGrid->itemAtPosition(i, j)->widget())->clear();
+        ((QLineEdit*) parametersGrid->itemAtPosition(i, 0)->widget())->clear();
+    }
+}
+
+void EquationsSystemsFrame::setDefaultValues()
+{
+    const int defaultRows = 3;
+    const int defaultColumns = 4;
+
+    double arr[defaultRows][defaultColumns] =
+    {
+        {1,2,3,4},
+        {1,2,3,4},
+        {1,2,3,4}
+    };
+
+    int i, j;
+
+    QGridLayout * matrixGrid = ui->matrixGrid;
+    QGridLayout * parametersGrid = ui->parametersGrid;
+
+    for(int i = 0; i < defaultRows; ++i)
+        for(int j = 0; j < defaultColumns - 1; ++j)
+            ((QLineEdit*) matrixGrid->itemAtPosition(i, j)->widget())->setText(QString::number(arr[i][j]));
+
+    for(int i = 0; i < defaultRows; ++i)
+        ((QLineEdit*) parametersGrid->itemAtPosition(i, 0)->widget())->setText(QString::number(arr[i][defaultColumns - 1]));
 }
