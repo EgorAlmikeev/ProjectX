@@ -44,7 +44,6 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_menu_itemClicked(QTreeWidgetItem *item, int column);
     void on_menu_expanded(const QModelIndex &index);
     void on_menu_collapsed(const QModelIndex &index);
     void on_helpButton_clicked();

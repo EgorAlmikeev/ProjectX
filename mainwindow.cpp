@@ -131,19 +131,6 @@ void MainWindow::selectFirstFrame()
 {
     QTreeWidgetItem *item = ui->menu->topLevelItem(0)->child(0);
     item->setSelected(true);
-    on_menu_itemClicked(item, 0);
-}
-
-void MainWindow::on_menu_itemClicked(QTreeWidgetItem *item, int column)
-{
-    QMap<QTreeWidgetItem *, QWidget *>::iterator currentWidgetIterator = itemWidgetMapping->find(item);
-    if(currentWidgetIterator != itemWidgetMapping->end())
-    {
-        ui->stackedWidget->setCurrentWidget(currentWidgetIterator.value());
-        ui->frameName->setText(item->parent()->text(0) + ": " + item->text(0));
-        if(dynamic_cast<FrameThreadHelper*>(currentWidgetIterator.value()))
-            static_cast<FrameThreadHelper*>(currentWidgetIterator.value())->change();
-    }
 }
 
 void MainWindow::on_menu_expanded(const QModelIndex &index)
