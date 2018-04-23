@@ -30,6 +30,10 @@ private slots:
     void onResult(double value, int iterations);
     void onError(int code);
 
+    void on_derivativeEdit_textChanged(const QString &arg1);
+
+    void on_x0Edit_textChanged(const QString &arg1);
+
 private:
     Ui::NonlinearEquationsFrame *ui;
     void change();

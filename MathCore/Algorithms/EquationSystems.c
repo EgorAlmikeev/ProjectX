@@ -82,7 +82,7 @@ double Gauss(TEqMatrix A, TEqArray B, int n, double epsilon, TEqArray X)
         }
     }
     else
-        return NAN;// fail
+        return NAN;
 
     return 0;// ok
 }
