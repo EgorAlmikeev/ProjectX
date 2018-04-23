@@ -37,21 +37,32 @@ void EquationsSystemsThread::run()
 
 
         //qDebug() << n;
-//        for(int i = 0; i < n; ++i)
-//        {
-//            result[i] = 0;
-//        }
         break;
 
     case ModeEqSysJordan:
+
+        for(int i = 0; i < n; ++i)
+        {
+            result[i] = i * i;
+        }
 
         break;
 
     case ModeEqSysOptimal:
 
+        for(int i = 0; i < n; ++i)
+        {
+            result[i] = i * i;
+        }
+
         break;
 
     case ModeEqSysSquare:
+
+        for(int i = 0; i < n; ++i)
+        {
+            result[i] = i * i;
+        }
 
         break;
     default:

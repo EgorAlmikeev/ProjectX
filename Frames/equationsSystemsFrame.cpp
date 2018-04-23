@@ -172,7 +172,9 @@ TEqMatrix EquationsSystemsFrame::getMatrixValues()
         for(int j = 0; j < columnCount; ++j)
         {
             QLineEdit *edit = (QLineEdit*) matrixGrid->itemAtPosition(i, j)->widget();
-            double digit = edit->text().toDouble();
+            double digit = 0.0;
+            if(!edit->text().isEmpty())
+                 digit = edit->text().toDouble();
             matrixArray[i][j] = digit;
 //            qDebug() << "matrix[" << i << "][" << j << "] = " << digit << "\t from object " << edit->objectName();
         }
@@ -247,10 +249,9 @@ void EquationsSystemsFrame::onMatrixElementTextChanged()
 QLineEdit * EquationsSystemsFrame::createNewMatrixItem()
 {
     QLineEdit *newItem = new QLineEdit;
-//    newItem->setMinimumHeight(24);
     newItem->setMinimumWidth(40);
     newItem->setAlignment(Qt::AlignCenter);
-    newItem->setText("0");
+    newItem->setPlaceholderText("0");
     newItem->setValidator(matrixItemValidator);
 
     connect(newItem, SIGNAL(textChanged(QString)), SLOT(onMatrixElementTextChanged()));
