@@ -227,7 +227,8 @@ void EquationsSystemsFrame::onResult(double *value, int n)
 
     for(int i = 0; i < n; i++)
     {
-        result_string.append(QString::number(i) + ": " + QString::number(value[i]) + "\n");
+        result_string = result_string + "x" + QString::number(i + 1).append(" = ").leftJustified(2);
+        result_string = result_string + QString::number(value[i]) + "\n";
     }
 
     showAnswer(result_string);
