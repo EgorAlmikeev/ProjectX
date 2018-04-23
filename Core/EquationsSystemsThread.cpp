@@ -32,7 +32,7 @@ void EquationsSystemsThread::run()
 
             s = s + ' = ' + QString::number(params[i]);
 
-            qDebug() << s;
+//            qDebug() << s;
         }
 
 

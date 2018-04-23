@@ -44,7 +44,8 @@ private:
     Ui::EquationsSystemsFrame *ui;
     void change();
 
-    void createNewMatrixElement();
+    QLineEdit * createNewMatrixItem();
+    void setMatrixTabOrder();
 };
 
 #endif // EQUATIONSSYSTEMSFRAME_H
