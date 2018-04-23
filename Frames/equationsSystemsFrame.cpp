@@ -201,6 +201,7 @@ void EquationsSystemsFrame::showAnswer(QString ans)
 {
     ui->answerEdit->clear();
     ui->answerEdit->appendPlainText(ans);
+    ui->answerEdit->moveCursor(QTextCursor::Start);
 }
 
 void EquationsSystemsFrame::on_matrixSizeSpin_valueChanged(int arg1)
@@ -222,7 +223,6 @@ void EquationsSystemsFrame::onResult(double *value, int n)
 {
     end();
 
-    ui->answerEdit->clear();
     QString result_string;
 
     for(int i = 0; i < n; i++)
@@ -230,15 +230,16 @@ void EquationsSystemsFrame::onResult(double *value, int n)
         result_string.append(QString::number(i) + ": " + QString::number(value[i]) + "\n");
     }
 
-    ui->answerEdit->appendPlainText(result_string);
-    ui->answerEdit->moveCursor(QTextCursor::Start);
+    showAnswer(result_string);
 
     free(value);
 }
 
 void EquationsSystemsFrame::onError(int code)
 {
+    end();
 
+    showAnswer("Невозможно найти решения!");
 }
 
 void EquationsSystemsFrame::onMatrixElementTextChanged()

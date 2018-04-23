@@ -25,41 +25,60 @@ void EquationsSystemsThread::run()
 
         case ModeEqSysJordan:
 
-        for(int i = 0; i < n; ++i)
-        {
-            result[i] = i * i;
-        }
-
             break;
 
         case ModeEqSysOptimal:
-
-        for(int i = 0; i < n; ++i)
-        {
-            result[i] = i * i;
-        }
 
             break;
 
         case ModeEqSysSquare:
 
+<<<<<<< origin/master
+        //qDebug() << n;
+        break;
+
+    case ModeEqSysJordan:
+
         for(int i = 0; i < n; ++i)
         {
             result[i] = i * i;
         }
 
+        break;
+
+    case ModeEqSysOptimal:
+
+        for(int i = 0; i < n; ++i)
+        {
+            result[i] = i * i;
+        }
+
+        break;
+=======
             break;
 
         default:
             return;
     }
+>>>>>>> local
 
     DestroyMatrix(matrix, n);
     free(params);
 
+<<<<<<< origin/master
+        for(int i = 0; i < n; ++i)
+        {
+            result[i] = i * i;
+        }
+
+        break;
+    default:
+        return;
+=======
     if(IsNan(resultCode))
     {
         ErrorCalc();
+>>>>>>> local
     }
 
     if(IsErrorCalc())
