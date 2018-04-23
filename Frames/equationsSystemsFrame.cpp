@@ -258,16 +258,10 @@ void EquationsSystemsFrame::setMatrixTabOrder()
     QGridLayout * matrixGrid = ui->matrixGrid;
     QList<QWidget*> list;
 
-    qDebug() << "\n\n\n";
-
     for(int i = 0; i < matrixGrid->columnCount(); ++i)
         for(int j = 0; j < matrixGrid->rowCount(); ++j)
             list.append(matrixGrid->itemAtPosition(i, j)->widget());
 
     for(int i = 1; i < list.size(); ++i)
-    {
-        qDebug() << list.at(i)->objectName();
-//        qDebug() << list.at(i - 1)->objectName() << " than " << list.at(i)->objectName();
         QWidget::setTabOrder(list.at(i - 1), list.at(i));
-    }
 }
