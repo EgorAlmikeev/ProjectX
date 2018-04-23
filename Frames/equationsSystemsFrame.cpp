@@ -63,7 +63,7 @@ void EquationsSystemsFrame::setRows(int count)
             {
                 QLineEdit *newItem = createNewMatrixItem();
                 matrixGrid->addWidget(newItem, i, j);
-                newItem->setObjectName("item" + QString::number(i) + "_" + QString::number(j));
+                newItem->setObjectName(QString::number(i) + QString::number(j) + "item");
             }
     }
     else if(count < rowCount)
@@ -98,7 +98,7 @@ void EquationsSystemsFrame::setColumns(int count)
             {
                 QLineEdit *newItem = createNewMatrixItem();
                 matrixGrid->addWidget(newItem, i, j);
-                newItem->setObjectName("item" + QString::number(i) + "_" + QString::number(j));
+                newItem->setObjectName(QString::number(i) + QString::number(j) + "item");
             }
     }
     else if(count < columnCount)
@@ -120,8 +120,6 @@ void EquationsSystemsFrame::setColumns(int count)
     }
 
     columnCount = count;
-
-    //TODO:пофиксить баг с таб ордером последнего элемента второй строки
 }
 
 void EquationsSystemsFrame::setParams(int count)
@@ -134,7 +132,7 @@ void EquationsSystemsFrame::setParams(int count)
         {
             QLineEdit *newItem = createNewMatrixItem();
             paramsGrid->addWidget(newItem, i, 0);
-            newItem->setObjectName("item" + QString::number(i));
+            newItem->setObjectName(QString::number(i) + "item");
         }
     }
     else if(count < paramCount)
@@ -258,11 +256,18 @@ QLineEdit * EquationsSystemsFrame::createNewMatrixItem()
 void EquationsSystemsFrame::setMatrixTabOrder()
 {
     QGridLayout * matrixGrid = ui->matrixGrid;
+    QList<QWidget*> list;
 
     qDebug() << "\n\n\n";
 
-    for(int i = 0; i < matrixGrid->count(); ++i)
+    for(int i = 0; i < matrixGrid->columnCount(); ++i)
+        for(int j = 0; j < matrixGrid->rowCount(); ++j)
+            list.append(matrixGrid->itemAtPosition(i, j)->widget());
+
+    for(int i = 1; i < list.size(); ++i)
     {
-        qDebug() << matrixGrid->itemAt(i)->widget()->objectName();
+        qDebug() << list.at(i)->objectName();
+//        qDebug() << list.at(i - 1)->objectName() << " than " << list.at(i)->objectName();
+        QWidget::setTabOrder(list.at(i - 1), list.at(i));
     }
 }
