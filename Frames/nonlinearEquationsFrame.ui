@@ -267,6 +267,8 @@
  </widget>
  <tabstops>
   <tabstop>equationEdit</tabstop>
+  <tabstop>derivativeEdit</tabstop>
+  <tabstop>x0Edit</tabstop>
   <tabstop>limitAEdit</tabstop>
   <tabstop>limitBEdit</tabstop>
   <tabstop>epsilonEdit</tabstop>
