@@ -55,6 +55,31 @@ static int ToTriangleMatrix(TEqMatrix A, TEqArray B, int n, double epsilon)
 
     return 1;
 }
+static int ToDiagonalMatrix(TEqMatrix A, TEqArray B, int n, double epsilon) //обратный ход
+{
+    double k; //{ Переменная для обмена элементов }
+    int i, j, x;   //{ Счетчики циклов }
+    
+    for (j = n; j >= 1; j--)
+    {
+        
+        // зануляем вышестоящие элементы, преобразованиями
+        for(i = 1; i > j; i--)
+        {
+            k = -A[i][j] / A[j][j];
+            
+            for(x = 0; x < n; x++)
+            {
+                A[i][x] = A[i][x] + A[j][x] * k;
+            }
+            B[i] = B[i] + B[j] * k;
+        }
+        
+    }
+    
+    return 1;
+
+}
 
 static double SummRow(TEqMatrix A, TEqArray X, int n, int row)
 {
