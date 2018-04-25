@@ -45,6 +45,7 @@ private slots:
     void on_clearButton_clicked();
 
 private:
+    bool isLoading = true;
     Ui::EquationsSystemsFrame *ui;
     void change();
 

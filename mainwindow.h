@@ -51,6 +51,7 @@ private slots:
     void on_menu_itemSelectionChanged();
 
 private:
+    bool isLoading = true;
     Ui::MainWindow *ui;
     HelpDialogFrame *helpDialogFrame = nullptr;
 };

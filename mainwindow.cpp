@@ -7,11 +7,13 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    setMinimumWidth(ui->menu->minimumWidth() + layout()->margin());
+    //setMinimumWidth(ui->menu->minimumWidth() + layout()->margin());
 
     createMenu();
     stackedWidgetSetup();
+
+    isLoading = false;
+
     selectFirstFrame();
 }
 
@@ -131,16 +133,7 @@ void MainWindow::stackedWidgetSetup()
 void MainWindow::selectFirstFrame()
 {
     QTreeWidgetItem *item = ui->menu->topLevelItem(0)->child(0);
-    item->setSelected(true);
-
-    QMap<QTreeWidgetItem *, QWidget *>::iterator currentWidgetIterator = itemWidgetMapping->find(item);
-    if(currentWidgetIterator != itemWidgetMapping->end())
-    {
-        ui->stackedWidget->setCurrentWidget(currentWidgetIterator.value());
-        ui->frameName->setText(item->parent()->text(0) + ": " + item->text(0));
-        if(dynamic_cast<FrameThreadHelper*>(currentWidgetIterator.value()))
-            static_cast<FrameThreadHelper*>(currentWidgetIterator.value())->change();
-    }
+    ui->menu->setCurrentItem(item);
 }
 
 void MainWindow::on_menu_expanded(const QModelIndex &index)
@@ -168,6 +161,9 @@ void MainWindow::createHelpDialog()
 
 void MainWindow::on_menu_itemSelectionChanged()
 {
+    if(isLoading)
+        return;
+
     QTreeWidgetItem *item = ui->menu->currentItem();
 
     QMap<QTreeWidgetItem *, QWidget *>::iterator currentWidgetIterator = itemWidgetMapping->find(item);

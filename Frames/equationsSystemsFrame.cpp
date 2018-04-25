@@ -22,6 +22,8 @@ EquationsSystemsFrame::EquationsSystemsFrame(QWidget *parent, ModeEqSys mode) :
     setMatrixTabOrder();
 
     setDefaultValues();
+
+    isLoading = false;
 }
 
 EquationsSystemsFrame::~EquationsSystemsFrame()
@@ -35,6 +37,9 @@ void EquationsSystemsFrame::change()
     TEqArray params;
     TEqMatrix  matrix;
     int n;
+
+    if(isLoading)
+        return;
 
     cancel();
 
