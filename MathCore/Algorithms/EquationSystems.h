@@ -12,6 +12,9 @@
 
 typedef double* TEqArray;
 typedef double** TEqMatrix;
-double Gauss(TEqMatrix m, TEqArray r, int n, double epsilon, TEqArray ans);
+
+double GaussNoOptimal(TEqMatrix A, TEqArray B, int n, double epsilon, TEqArray X);
+double Gauss(TEqMatrix A, TEqArray B, int n, double epsilon, TEqArray X);
+double GaussJordan(TEqMatrix A, TEqArray B, int n, double epsilon, TEqArray X);
 
 #endif /* Sole_h */

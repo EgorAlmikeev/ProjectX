@@ -3,10 +3,10 @@
 
 #include "XCore.h"
 
-#define ModeEqSysGauss      0
-#define ModeEqSysOptimal    1
-#define ModeEqSysJordan     2
-#define ModeEqSysSquare     3
+#define ModeEqSysGauss        0
+#define ModeEqSysGaussOptimal 1
+#define ModeEqSysGaussJordan  2
+#define ModeEqSysSquare       3
 
 typedef int ModeEqSys;
 

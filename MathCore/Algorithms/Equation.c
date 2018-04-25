@@ -59,6 +59,7 @@ double EqHalfDiv(char* func, double a, double b, double epsilon, int* countRef)
     
     if(countRef != NULL)
         *countRef = count;
+
     return c;
 }
 

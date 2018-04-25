@@ -20,26 +20,25 @@ void EquationsSystemsThread::run()
     switch(mode)
     {
         case ModeEqSysGauss:
+            resultCode = GaussNoOptimal(matrix, params, n, e, result);
+            break;
+
+        case ModeEqSysGaussOptimal:
             resultCode = Gauss(matrix, params, n, e, result);
             break;
 
-        case ModeEqSysJordan:
-
-        for(int i = 0; i < n; ++i)
-        {
-            result[i] = i * i;
-        }
-
-            break;
-
-        case ModeEqSysOptimal:
-
-        for(int i = 0; i < n; ++i)
-        {
-            result[i] = i * i;
-        }
-
-            break;
+        case ModeEqSysGaussJordan:
+           resultCode = GaussJordan(matrix, params, n, e, result);
+//           for(int i = 0; i < n; i++)
+//           {
+//               QString s = "";
+//               for(int j = 0; j < n; j++)
+//               {
+//                   s = s + QString::number(matrix[i][j]) + ",  ";
+//               }
+//               qDebug() << s;
+//           }
+           break;
 
         case ModeEqSysSquare:
 
