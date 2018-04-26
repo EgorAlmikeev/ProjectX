@@ -12,9 +12,7 @@ class EquationsSystemsFrame : public FrameThreadHelper
 {
     Q_OBJECT
 
-    int columnCount = 0;
-    int rowCount = 0;
-    int paramCount = 0;
+    int size = 0;
 
     ModeEqSys mode;
 
@@ -25,9 +23,6 @@ public:
     ~EquationsSystemsFrame();
 
 private slots:
-    void setRows(int count);
-    void setColumns(int count);
-    void setParams(int count);
 
     TEqMatrix  getMatrixValues();
     TEqArray getParamsValues();
@@ -43,6 +38,8 @@ private slots:
     void onMatrixElementTextChanged();
 
     void on_clearButton_clicked();
+
+    void createMatrixUI(int new_size);
 
 private:
     bool isLoading = true;

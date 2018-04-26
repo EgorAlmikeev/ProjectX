@@ -123,33 +123,13 @@
        </layout>
       </item>
       <item>
-       <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,0,0,0,0">
-        <item row="1" column="4">
-         <spacer name="horizontalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="1" column="3">
-         <layout class="QGridLayout" name="parametersGrid">
+       <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,0,0">
+        <item row="1" column="1">
+         <layout class="QGridLayout" name="matrixGrid">
           <property name="spacing">
            <number>5</number>
           </property>
          </layout>
-        </item>
-        <item row="1" column="2">
-         <widget class="Line" name="line">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-         </widget>
         </item>
         <item row="1" column="0">
          <spacer name="horizontalSpacer_3">
@@ -164,12 +144,18 @@
           </property>
          </spacer>
         </item>
-        <item row="1" column="1">
-         <layout class="QGridLayout" name="matrixGrid">
-          <property name="spacing">
-           <number>5</number>
+        <item row="1" column="2">
+         <spacer name="horizontalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
-         </layout>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>

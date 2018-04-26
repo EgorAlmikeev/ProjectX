@@ -14,13 +14,6 @@ EquationsSystemsFrame::EquationsSystemsFrame(QWidget *parent, ModeEqSys mode) :
     matrixItemValidator = new QRegExpValidator();
     matrixItemValidator->setRegExp(QRegExp("^[+-]?[\\d]+($|[\\.][\\d]+|([\\.][\\d]+[Ee]|[Ee])[+-]?\\d+)$"));
 
-    const int defaultSize = 3;
-
-    setColumns(defaultSize);
-    setRows(defaultSize);
-    setParams(defaultSize);
-    setMatrixTabOrder();
-
     setDefaultValues();
 
     isLoading = false;
@@ -44,7 +37,7 @@ void EquationsSystemsFrame::change()
     cancel();
 
     e = ui->EpsilonEdit->text().toDouble();
-    n = paramCount;
+    n = size;
 
     if(e > 1 || e < 1e-99)
     {
@@ -64,143 +57,89 @@ void EquationsSystemsFrame::change()
     showAnswer(sCalculating);
 }
 
-void EquationsSystemsFrame::setRows(int count)
+void EquationsSystemsFrame::createMatrixUI(int new_size)
 {
     QGridLayout *matrixGrid = ui->matrixGrid;
 
-    if(count > rowCount)
-    {
-        for(int i = rowCount; i < count; ++i)
-            for(int j = 0; j < columnCount; ++j)
-            {
-                QLineEdit *newItem = createNewMatrixItem();
-                matrixGrid->addWidget(newItem, i, j);
-                newItem->setObjectName(QString::number(i) + QString::number(j) + "item");
-            }
-    }
-    else if(count < rowCount)
-    {
-        QList<QWidget*> remove_list;
+    int rows = size;
+    int columns = size + 2; //line + params
 
-        for(int i = rowCount - 1; i > count - 1; --i)
-            for(int j = 0; j < columnCount; ++j)
+    QList<QWidget*> itemsList;
+
+    //deleting old elements
+    if(size != 0)
+        for(int i = 0; i < rows; ++i)
+            for(int j = 0; j < columns; ++j)
             {
-                QLayoutItem *itemToRemove = matrixGrid->itemAtPosition(i, j);
-                remove_list.append(itemToRemove->widget());
+                if(i > 0 && j == size)
+                    continue;
+
+                QLineEdit *edit = (QLineEdit*) matrixGrid->itemAtPosition(i, j)->widget();
+                itemsList.append(edit);
             }
 
-        foreach (QWidget *item, remove_list)
-        {
-            matrixGrid->removeWidget(item);
-            delete item;
-        }
-    }
-
-    rowCount = count;
-}
-
-void EquationsSystemsFrame::setColumns(int count)
-{
-    QGridLayout *matrixGrid = ui->matrixGrid;
-
-    if(count > columnCount)
+    foreach (QWidget *widget, itemsList)
     {
-        for(int i = 0; i < rowCount; ++i)
-            for(int j = columnCount; j < count; ++j)
+        delete widget;
+    }
+    itemsList.clear();
+    //deleted
+
+    size = new_size;
+    rows = size;
+    columns = size + 2;
+
+    for(int i = 0; i < rows; ++i)
+        for(int j = 0; j < columns; ++j)
+        {
+            if(j != size) //if line place – skip it
             {
-                QLineEdit *newItem = createNewMatrixItem();
-                matrixGrid->addWidget(newItem, i, j);
-                newItem->setObjectName(QString::number(i) + QString::number(j) + "item");
+                QWidget *item = createNewMatrixItem();
+                item->setObjectName("item" + QString::number(i) + "-" + QString::number(j));
+                matrixGrid->addWidget(item, i, j);
             }
-    }
-    else if(count < columnCount)
-    {
-        QList<QWidget*> remove_list;
-
-        for(int i = 0; i < rowCount; ++i)
-            for(int j = columnCount - 1; j > count - 1; --j)
-            {
-                QLayoutItem *itemToRemove = matrixGrid->itemAtPosition(i, j);
-                remove_list.append(itemToRemove->widget());
-            }
-
-        foreach (QWidget *item, remove_list)
-        {
-            matrixGrid->removeWidget(item);
-            delete item;
-        }
-    }
-
-    columnCount = count;
-}
-
-void EquationsSystemsFrame::setParams(int count)
-{
-    QGridLayout *paramsGrid = ui->parametersGrid;
-
-    if(count > paramCount)
-    {
-        for(int i = paramCount; i < count; ++i)
-        {
-            QLineEdit *newItem = createNewMatrixItem();
-            paramsGrid->addWidget(newItem, i, 0);
-            newItem->setObjectName(QString::number(i) + "item");
-        }
-    }
-    else if(count < paramCount)
-    {
-        QList<QWidget*> remove_list;
-
-
-        for(int i = paramCount - 1; i > count - 1; --i)
-        {
-            QLayoutItem *itemToRemove = paramsGrid->itemAtPosition(i, 0);
-            remove_list.append(itemToRemove->widget());
         }
 
-        foreach (QWidget *item, remove_list)
-        {
-            paramsGrid->removeWidget(item);
-            delete item;
-        }
-    }
 
-    paramCount = count;
+    QFrame *line = new QFrame;
+    line->setFrameShape(QFrame::VLine);
+    line->setFrameShadow(QFrame::Sunken);
+    line->setObjectName("line");
+
+    matrixGrid->addWidget(line, 0, size, rows, 1);
 }
 
 TEqMatrix EquationsSystemsFrame::getMatrixValues()
 {
     QGridLayout *matrixGrid = ui->matrixGrid;
-
     TEqMatrix matrixArray = nullptr;
 
-    matrixArray = CreateMatrix(rowCount, columnCount);
+    matrixArray = CreateMatrix(size, size);
 
-    for(int i = 0; i < rowCount; ++i)
-    {
-        for(int j = 0; j < columnCount; ++j)
+    for(int i = 0; i < size; ++i)
+        for(int j = 0; j < size; ++j)
         {
             QLineEdit *edit = (QLineEdit*) matrixGrid->itemAtPosition(i, j)->widget();
             double digit = 0.0;
             if(!edit->text().isEmpty())
-                 digit = edit->text().toDouble();
+                digit = edit->text().toDouble();
             matrixArray[i][j] = digit;
         }
-    }
 
     return matrixArray;
 }
 
 TEqArray EquationsSystemsFrame::getParamsValues()
 {
-    QGridLayout *parametersGrid = ui->parametersGrid;
-
+    QGridLayout *matrixGrid = ui->matrixGrid;
     TEqArray parametersArray = nullptr;
 
-    parametersArray = (double *) malloc(paramCount * sizeof(double));
+    int params_column = size + 1;
 
-    for(int i = 0; i < paramCount; ++i)
-        parametersArray[i] = ((QLineEdit*) parametersGrid->itemAtPosition(i, 0)->widget())->text().toDouble();
+    parametersArray = (double *) malloc(size * sizeof(double));
+
+    for(int i = 0; i < size; ++i)
+        parametersArray[i] = ((QLineEdit*) matrixGrid->itemAtPosition(i, params_column)->widget())->text().toDouble();
 
     return parametersArray;
 }
@@ -214,11 +153,8 @@ void EquationsSystemsFrame::showAnswer(QString ans)
 
 void EquationsSystemsFrame::on_matrixSizeSpin_valueChanged(int arg1)
 {
-    setColumns(arg1);
-    setRows(arg1);
-    setParams(arg1);
+    createMatrixUI(arg1);
     setMatrixTabOrder();
-
     change();
 }
 
@@ -272,15 +208,15 @@ QLineEdit * EquationsSystemsFrame::createNewMatrixItem()
 void EquationsSystemsFrame::setMatrixTabOrder()
 {
     QGridLayout * matrixGrid = ui->matrixGrid;
-    QGridLayout * parametersGrid = ui->parametersGrid;
     QList<QWidget*> list;
 
-    for(int i = 0; i < columnCount; ++i)
-    {
-        for(int j = 0; j < rowCount; ++j)
-            list.append(matrixGrid->itemAtPosition(i, j)->widget());
-        list.append(parametersGrid->itemAtPosition(i, 0)->widget());
-    }
+    int rows = size;
+    int columns = size + 2;
+
+    for(int i = 0; i < rows; ++i)
+        for(int j = 0; j < columns; ++j)
+            if(j != size)
+                list.append(matrixGrid->itemAtPosition(i, j)->widget());
 
     for(int i = 1; i < list.size(); ++i)
         QWidget::setTabOrder(list.at(i - 1), list.at(i));
@@ -289,35 +225,37 @@ void EquationsSystemsFrame::setMatrixTabOrder()
 void EquationsSystemsFrame::on_clearButton_clicked()
 {
     QGridLayout * matrixGrid = ui->matrixGrid;
-    QGridLayout * parametersGrid = ui->parametersGrid;
 
-    for(int i = 0; i < columnCount; ++i)
-    {
-        for(int j = 0; j < rowCount; ++j)
-            ((QLineEdit*) matrixGrid->itemAtPosition(i, j)->widget())->clear();
-        ((QLineEdit*) parametersGrid->itemAtPosition(i, 0)->widget())->clear();
-    }
+    if(size != 0)
+        for(int i = 0; i < size; ++i)
+            for(int j = 0; j < size + 2; ++j)
+            {
+                if(j != size)
+                {
+                    QLineEdit *edit = (QLineEdit*) matrixGrid->itemAtPosition(i, j)->widget();
+                    edit->clear();
+                }
+            }
 }
 
 void EquationsSystemsFrame::setDefaultValues()
 {
-    const int defaultRows = 3;
-    const int defaultColumns = 4;
+    const int defaultSize = 3;
+    on_matrixSizeSpin_valueChanged(defaultSize);
 
-    const double arr[defaultRows][defaultColumns] =
+    const double arr[defaultSize][defaultSize + 1] =
     {
         { 2,  1, -1,   8},
         {-3, -1,  2, -11},
         {-2,  1,  2,  -3}
     };
 
-    QGridLayout * matrixGrid = ui->matrixGrid;
-    QGridLayout * parametersGrid = ui->parametersGrid;
+    QGridLayout *matrixGrid = ui->matrixGrid;
 
-    for(int i = 0; i < defaultRows; ++i)
-        for(int j = 0; j < defaultColumns - 1; ++j)
+    for(int i = 0; i < defaultSize; ++i)
+        for(int j = 0; j < defaultSize; ++j)
             ((QLineEdit*) matrixGrid->itemAtPosition(i, j)->widget())->setText(QString::number(arr[i][j]));
 
-    for(int i = 0; i < defaultRows; ++i)
-        ((QLineEdit*) parametersGrid->itemAtPosition(i, 0)->widget())->setText(QString::number(arr[i][defaultColumns - 1]));
+    for(int i = 0; i < defaultSize; ++i)
+        ((QLineEdit*) matrixGrid->itemAtPosition(i, defaultSize + 1)->widget())->setText(QString::number(arr[i][defaultSize]));
 }
