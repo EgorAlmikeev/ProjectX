@@ -21,7 +21,6 @@ void EquationsSystemsThread::run()
     {
         case ModeEqSysGauss:
             resultCode = GaussNoOptimal(matrix, params, n, e, result);
-            qDebug() << "WHAT";
             break;
 
         case ModeEqSysGaussOptimal:

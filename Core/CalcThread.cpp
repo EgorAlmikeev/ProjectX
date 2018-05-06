@@ -57,7 +57,6 @@ void FrameThreadHelper::cancel(void)
 void FrameThreadHelper::start(void)
 {
     connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
-    connect(thread, SIGNAL(destroyed(QObject*)), SLOT(onThreadDeleted()));
     timeoutTimer->start(TIME_OUT_MS);
     thread->start();
 }
@@ -87,9 +86,4 @@ void FrameThreadHelper::hideEvent(QHideEvent *event)
 {
     cancel();
     end();
-}
-
-void FrameThreadHelper::onThreadDeleted()
-{
-    qDebug() << "deleted : " + sender()->objectName();
 }

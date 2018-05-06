@@ -47,9 +47,6 @@ public:
     void setTimeOutUse(bool isUse);
     void setThread(BaseCalcThread *thread);
 
-private slots:
-    void onThreadDeleted();
-
 protected slots:
     void onTimeout();
 };
