@@ -12,34 +12,35 @@
 typedef int boolean;
 #define true 1
 #define false 0
+#define MaxTokenLength 32
 
 typedef enum
 {
-    tokenUndefined,// !!!
-    tokenEnd,// \0
-    tokenNumber,// ###.###
-    tokenAdd,// +
-    tokenSub,// -
-    tokenMul,// *
-    tokenDiv,// /
-    tokenPower,// ^
-    tokenFactorial,// !
-    tokenLB,// (
-    tokenRB,// )
-    tokenValue,// aaa
-    tokenFunction,// aaa()
+    tokenUndefined,
+    tokenEnd,
+    tokenNumber,
+    tokenAdd,
+    tokenSub,
+    tokenMul,
+    tokenDiv,
+    tokenPower,
+    tokenFactorial,
+    tokenLB,
+    tokenRB,
+    tokenValue,
+    tokenFunction,
 } tokens;
 
 // parser variables
-const char *eq;// указатель на формулу
-const char *p;// указатель на текущий символ
-const char *prevToken;// указатель на предидущий токен
-tokens token;// тип текущего токена
-double doubleValue;// последнее считанное значение
-char stringValue[33];// последнее считанное значение
-jmp_buf saveState;// используеться для восстановления состояния после ошибки
-double x = 0, y = 0;
-int isSyntaxError;
+static char *eq;// указатель на формулу
+static char *p;// указатель на текущий символ
+static char *prevToken;// указатель на предидущий токен
+static tokens token;// тип текущего токена
+static double doubleValue;// последнее считанное значение
+static char stringValue[MaxTokenLength + 1];// последнее считанное значение
+static jmp_buf saveState;// используеться для восстановления состояния после ошибки
+static double x = 0, y = 0;
+static int isSyntaxError;
 
 static void error(int isSyntaxErr, const char *str)
 {
@@ -53,10 +54,10 @@ static void nextToken(void)
 
     prevToken = p;
 
-    while(*p == ' ')
+    while(*p == ' ' || *p == '\t')
       p++;
 
-    switch(*(p))
+    switch(*p)
     {
         case '+':
             p++;
@@ -109,21 +110,28 @@ static void nextToken(void)
             break;
 
         default:
-            //error("Unexpected symbol");
-            if((('a' <= *p) && ('z' >= *p)) || (('A' <= *p) && ('Z' >= *p)) || (*p == '_'))
+            if((('a' <= *p) && ('z' >= *p)) ||
+               (('A' <= *p) && ('Z' >= *p)) ||
+               (*p == '_'))
             {
                 i = 0;
                 stringValue[i] = *p;
-                for(; (('a' <= *p) && ('z' >= *p)) || (('A' <= *p) && ('Z' >= *p)) ||
-                      (*p == '_') || (('0' <= *p) && ('9' >= *p)); i++, p++)
+                while((('a' <= *p) && ('z' >= *p)) ||
+                      (('A' <= *p) && ('Z' >= *p)) ||
+                      (*p == '_') ||
+                      (('0' <= *p) && ('9' >= *p)))
                 {
                     stringValue[i] = *p;
-                    if(i == 31)
+
+                    if(i > MaxTokenLength)
                     {
-                        i++;
-                        break;
+                        error(1, "Too long token");
                     }
+
+                    i++;
+                    p++;
                 }
+
                 stringValue[i] = 0;
                 token = tokenValue;
                 if(*p == '(')
@@ -148,13 +156,7 @@ static int factorial(int n)
     return r;
 }
 
-static void bracketTest(void)
-{
-    if(token == tokenLB)
-        error(1, "Unexpected symbol");
-}
-
-static boolean compStr(const char *s1, const char *s2)
+static boolean compName(const char *s1, const char *s2)
 {
     char c1, c2;
     for(;;)
@@ -175,7 +177,6 @@ static boolean compStr(const char *s1, const char *s2)
 static double tryPrim(void)
 {
     double left, t;
-    const char *temp;
 
     nextToken();
     left = doubleValue;
@@ -183,9 +184,7 @@ static double tryPrim(void)
     switch (token)
     {
         case tokenNumber:
-            //temp = prevToken;
             nextToken();
-            //prevToken = temp;
             if(token == tokenLB)
                 error(1, "Unexpected symbol");
             return left;
@@ -194,90 +193,84 @@ static double tryPrim(void)
             return -tryPow();
 
         case tokenLB:
-            //temp = prevToken;
             left = tryAdd();
             if(token != tokenRB)
                 error(1, "Expected right bracket");
             nextToken();
-            //prevToken = temp;
-            //if((token == tokenNumber) || (token == tokenLB) || (token == tokenValue) || (token == tokenFunction))
-            //    error("Unexpected symbol");
             return left;
 
         case tokenValue:
-            //temp = prevToken;
-            if(compStr(stringValue, "pi"))
+            if(compName(stringValue, "pi"))
                 left = M_PI;
-            else if(compStr(stringValue, "e"))
+            else if(compName(stringValue, "e"))
                 left = M_E;
-            else if(compStr(stringValue, "x"))
+            else if(compName(stringValue, "x"))
                 left = x;
-            else if(compStr(stringValue, "y"))
+            else if(compName(stringValue, "y"))
                 left = y;
             else
                 error(1, "Identifier not found");
             nextToken();
-            //prevToken = temp;
             if((token == tokenNumber) || (token == tokenLB) || (token == tokenValue) || (token == tokenFunction))
                 error(1, "Unexpected symbol");
             return left;
 
         case tokenFunction:
-            if(compStr(stringValue, "sin"))
+            if(compName(stringValue, "sin"))
             {
                 left = sin(tryAdd());
             }
-            else if(compStr(stringValue, "cos"))
+            else if(compName(stringValue, "cos"))
             {
                 left = cos(tryAdd());
             }
-            else if(compStr(stringValue, "asin"))
+            else if(compName(stringValue, "asin"))
             {
                 t = tryAdd();
                 if(fabs(t) > 1.0)
                     error(0, "Bad angle");
                 left = asin(t);
             }
-            else if(compStr(stringValue, "acos"))
+            else if(compName(stringValue, "acos"))
             {
                 t = tryAdd();
                 if(fabs(t) > 1.0)
                     error(0, "Bad angle");
                 left = acos(t);
             }
-            else if(compStr(stringValue, "atan"))
+            else if(compName(stringValue, "atan"))
             {
                 left = atan(tryAdd());
             }
-            else if(compStr(stringValue, "abs"))
+            else if(compName(stringValue, "abs"))
             {
                 left = fabs(tryAdd());
             }
-            else if(compStr(stringValue, "tan"))
+            else if(compName(stringValue, "tan"))
             {
                 left = tan(tryAdd());
             }
-            else if(compStr(stringValue, "ctan"))
+            else if(compName(stringValue, "ctan"))
             {
                 t = tryAdd();
                 if((sin(t) == 0.0))
                     error(0, "Bad angle");
                 left = cos(t) / sin(t);
             }
-            else if(compStr(stringValue, "actan"))
+            else if(compName(stringValue, "actan"))
             {
                 t = tryAdd();
                 left = M_PI / 2.0 - atan(t);
             }
-            else if(compStr(stringValue, "log"))
+            else if(compName(stringValue, "log"))
             {
                 left = log(tryAdd());
             }
-            else if(compStr(stringValue, "exp"))
+            else if(compName(stringValue, "exp"))
             {
                 left = exp(tryAdd());
             }
-            else if(compStr(stringValue, "sqrt"))
+            else if(compName(stringValue, "sqrt"))
             {
                 t = tryAdd();
                 if(t >= 0.0)
