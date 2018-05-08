@@ -47,20 +47,20 @@ ResultCode GetResultCode(void)
     return resultCode;
 }
 
-double ** CreateMatrix(const int rows, const int columns)
+double** CreateMatrix(const int rows, const int columns)
 {
     double **matrix;
     int i;
 
-    matrix = (double **) malloc(rows * sizeof(double *));
+    matrix = (double**)malloc(rows * sizeof(double *));
 
     for (i = 0; i < rows; ++i)
-        matrix[i] = (double *) malloc(columns * sizeof(double));
+        matrix[i] = (double*)malloc(columns * sizeof(double));
 
     return matrix;
 }
 
-void DestroyMatrix(double **matrix, const int rows)
+void DestroyMatrix(double** matrix, const int rows)
 {
     int i;
 

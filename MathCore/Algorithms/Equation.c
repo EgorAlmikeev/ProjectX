@@ -25,7 +25,7 @@ double EqHalfDiv(char* func, double a, double b, double epsilon, int* countRef)
     
     count = 0;
 
-    if (fabs(FunctionX(func, a)) < epsilon)
+    if(fabs(FunctionX(func, a)) < epsilon)
     {
         CheckSyntax();
         
@@ -34,7 +34,7 @@ double EqHalfDiv(char* func, double a, double b, double epsilon, int* countRef)
         return a;
     }
     
-    if (fabs(FunctionX(func, b)) < epsilon)
+    if(fabs(FunctionX(func, b)) < epsilon)
     {
         CheckSyntax();
 
@@ -43,7 +43,7 @@ double EqHalfDiv(char* func, double a, double b, double epsilon, int* countRef)
         return b;
     }
 
-    while (fabs(b - a) > epsilon)
+    while(fabs(b - a) > epsilon)
     {
         count++;
     
@@ -109,7 +109,7 @@ double EqNewton(char* func, char* derivative, double x0, double epsilon, int* co
     }
 
     
-    while (fabs(x1-x0) > epsilon)
+    while(fabs(x1-x0) > epsilon)
     {
         count++;
         x0 = x1;
