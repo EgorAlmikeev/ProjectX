@@ -49,11 +49,10 @@ void MainWindow::createMenu()
         {"Метод Ньютона",   new NonlinearEquationsFrame(this, ModeEqNewton)}
     };
 
-    const int simpleFunctionsItemsCount = 2;
+    const int simpleFunctionsItemsCount = 1;
     TMember simpleFunctionsItems[simpleFunctionsItemsCount] =
     {
-        {"Метод Маклорена",         new SinCosFrame(this, MaclaurinMode)},
-        {"Метод Цифра за цифрой",   new SinCosFrame(this, CordicMode)}
+        {"Метод Маклорена", new SinCosFrame(this, MaclaurinMode)}
     };
 
     const int equationsSystemsItemsCount = 4;
