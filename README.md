@@ -20,4 +20,5 @@
 
 ### Скачать
 [MacOS](https://github.com/EgorAlmikeev/ProjectX/raw/master/Releases/MacOS/ProjectX.app.zip)
+
 [Windows](https://github.com/EgorAlmikeev/ProjectX/raw/master/Releases/Windows/ProjectXWindowsWithDlls.rar)
