@@ -17,3 +17,7 @@
 Компилятор C |  MinGW 5.3.0 32bit for C
 Компилятор C++ | MinGW 5.3.0 32bit for C++
 Библиотека Qt | Qt 5.8.0
+
+### Скачать
+[MacOS](https://github.com/EgorAlmikeev/ProjectX/raw/master/Releases/MacOS/ProjectX.app.zip)
+[Windows](https://github.com/EgorAlmikeev/ProjectX/raw/master/Releases/Windows/ProjectXWindowsWithDlls.rar)
