@@ -42,6 +42,12 @@ static jmp_buf saveState;// используеться для восстанов
 static double x = 0, y = 0;
 static int isSyntaxError;
 
+//static double get_null(void) {
+//    double fake_a = 0.0,
+//            fake_b = 0.0;
+//    return fake_a / fake_b;
+//}
+
 static void error(int isSyntaxErr, const char *str)
 {
     isSyntaxError = isSyntaxErr;
@@ -410,7 +416,7 @@ double Expression(char *exp)
         return result;
     }
     else
-        return 0.0/0.0;
+        return 0.0 / 0.0;
 }
 
 double FunctionX(char *exp, double x_val)
